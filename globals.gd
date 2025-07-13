@@ -65,3 +65,10 @@ func shake(dir : Vector2):
 
 func _on_shake_timeout() -> void:
 	$Camera2D.position = Vector2.ZERO
+
+
+func change_hunger(amount : float):
+	$hungerbar.hunger += amount
+	
+func set_hunger(amount : float):
+	$hungerbar.hunger = amount

@@ -34,9 +34,16 @@ func _handle_throw():
 func throw(target : Node2D):
 	if(not plate.canthrow()):
 		return
-	
+
+	var dir = global_position.direction_to(target.global_position)
+	if(dir.length() == 0):
+		Globals.shake(Vector2(10,10))
+	else:
+		Globals.shake(dir * 20)
+		Globals.change_hunger(-10)
 	target.get_thrown(plate.get_count())
 	plate.clear()
+	$break.play()
 	Partmanager.summon("break",target.global_position)
 	draw_throw(target.global_position,plate.av_color())
 
@@ -52,11 +59,12 @@ func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("ui_accept")):
 		pass
 
+func get_thrown(ammount : int):
+	Globals.set_hunger(100)
+
 func _physics_process(delta: float) -> void:
 	Globals.player = self
 	_handle_move()
-	
-
 	
 	if(get_global_mouse_position().distance_to(global_position) < 200):
 		$range.color.a = lerp($range.color.a,0.0,0.3)

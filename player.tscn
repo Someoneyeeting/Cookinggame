@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=9 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_hqtel"]
 
 [sub_resource type="Shader" id="Shader_onrkg"]
 code = "shader_type canvas_item;
@@ -80,9 +81,13 @@ width = 30.0
 [node name="plate" parent="." instance=ExtResource("2_onrkg")]
 position = Vector2(30, -11)
 
-[node name="Targetable" parent="." instance=ExtResource("3_i3pqv")]
+[node name="click" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_i3pqv")]
+target = NodePath("..")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Targetable"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="click"]
 shape = SubResource("CircleShape2D_hqtel")
+
+[node name="break" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hqtel")
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

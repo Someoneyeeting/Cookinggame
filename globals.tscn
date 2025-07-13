@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsd34n3og4bsj"]
+[gd_scene load_steps=6 format=3 uid="uid://bsd34n3og4bsj"]
 
 [ext_resource type="Script" uid="uid://hfqbrglml7cf" path="res://globals.gd" id="1_f6yec"]
 [ext_resource type="Texture2D" uid="uid://df0y7an1ba47y" path="res://pngwing.com.png" id="2_ic2bg"]
 [ext_resource type="PackedScene" uid="uid://de32jgkwu06x5" path="res://target.tscn" id="3_pw6g4"]
+[ext_resource type="PackedScene" uid="uid://5jam7adsxlun" path="res://hungerbar.tscn" id="4_3o0v4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eoq6h"]
 
@@ -38,6 +39,9 @@ anchor_mode = 0
 [node name="shake" type="Timer" parent="."]
 wait_time = 0.06
 one_shot = true
+
+[node name="hungerbar" parent="." instance=ExtResource("4_3o0v4")]
+position = Vector2(262, 26)
 
 [connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
 [connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]

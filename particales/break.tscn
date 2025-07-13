@@ -6,14 +6,16 @@ point_count = 2
 
 [node name="GPUParticles2D" type="CPUParticles2D"]
 emitting = false
-amount = 40
+amount = 10
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
 spread = 180.0
-initial_velocity_min = 212.12
-initial_velocity_max = 383.84
-scale_amount_min = 4.0
-scale_amount_max = 5.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 272.73
+initial_velocity_max = 525.25
+damping_min = 46.465
+damping_max = 46.465
+scale_amount_min = 10.0
+scale_amount_max = 13.0
 scale_amount_curve = SubResource("Curve_pxjs2")
-color = Color(0.54099, 0.54099, 0.54099, 1)
