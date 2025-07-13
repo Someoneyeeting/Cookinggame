@@ -1,7 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6xss2pyvosu0"]
+[gd_scene load_steps=4 format=3 uid="uid://b6xss2pyvosu0"]
 
 [ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
+[ext_resource type="PackedScene" uid="uid://6nbo85ja31eo" path="res://player.tscn" id="2_612pj"]
+[ext_resource type="PackedScene" uid="uid://bfrxi0adyk11w" path="res://obst.tscn" id="3_612pj"]
 
 [node name="testscene" type="Node2D"]
 
 [node name="CustomerManager" parent="." instance=ExtResource("1_jotil")]
+
+[node name="Player" parent="." instance=ExtResource("2_612pj")]
+position = Vector2(571, 569)
+scale = Vector2(1.65049, 1.65049)
+
+[node name="obst" parent="." instance=ExtResource("3_612pj")]
+position = Vector2(38, 523)
+scale = Vector2(3.95786, 12.5361)
+
+[node name="obst3" parent="." instance=ExtResource("3_612pj")]
+position = Vector2(1116, 523)
+scale = Vector2(3.95786, 12.5361)
+
+[node name="obst2" parent="." instance=ExtResource("3_612pj")]
+position = Vector2(573, 418)
+scale = Vector2(57.9051, -3.26479)
+
+[node name="obst4" parent="." instance=ExtResource("3_612pj")]
+position = Vector2(573, 686)
+scale = Vector2(57.5451, -3.26479)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(580, 323)
+rotation = -3.14159
