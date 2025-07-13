@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwohtwje5aorg"]
-
-[ext_resource type="Texture2D" uid="uid://dcbhpgiirecd4" path="res://dq2jsn7k.png" id="1_8txok"]
+[gd_scene load_steps=2 format=3 uid="uid://dwohtwje5aorg"]
 
 [sub_resource type="GDScript" id="GDScript_8txok"]
 script/source = "extends Sprite2D
@@ -9,11 +7,11 @@ script/source = "extends Sprite2D
 var ind = 0
 var startpos = 0
 var t = 0
+@export var item : ItemRes
 	
 func _physics_process(delta: float) -> void:
-	pass
+	texture = item.texture
 "
 
 [node name="food" type="Sprite2D"]
-texture = ExtResource("1_8txok")
 script = SubResource("GDScript_8txok")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6xss2pyvosu0"]
+[gd_scene load_steps=6 format=3 uid="uid://b6xss2pyvosu0"]
 
 [ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
 [ext_resource type="PackedScene" uid="uid://6nbo85ja31eo" path="res://player.tscn" id="2_612pj"]
 [ext_resource type="PackedScene" uid="uid://bfrxi0adyk11w" path="res://obst.tscn" id="3_612pj"]
 [ext_resource type="PackedScene" uid="uid://cts1uyl7lbf1g" path="res://podium.tscn" id="4_asog6"]
+[ext_resource type="Resource" uid="uid://bfdiey5ohixnn" path="res://foods/chicken.tres" id="5_mawog"]
 
 [node name="testscene" type="Node2D"]
 
@@ -38,6 +39,7 @@ position = Vector2(336, 410)
 
 [node name="podium2" parent="." instance=ExtResource("4_asog6")]
 position = Vector2(741, 410)
+item = ExtResource("5_mawog")
 
 [node name="podium3" parent="." instance=ExtResource("4_asog6")]
 position = Vector2(553, 410)

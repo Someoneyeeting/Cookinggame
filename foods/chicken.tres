@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemRes" load_steps=3 format=3 uid="uid://bfdiey5ohixnn"]
+
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_nfxot"]
+[ext_resource type="Texture2D" uid="uid://mkyyac08qs4d" path="res://pngtree-chicken-hen-png-image_14965893.png" id="2_b1rgb"]
+
+[resource]
+script = ExtResource("1_nfxot")
+id = 1
+texture = ExtResource("2_b1rgb")
+color = Color(0.643137, 0.247059, 0.0156863, 1)
+metadata/_custom_type_script = ExtResource("1_nfxot")

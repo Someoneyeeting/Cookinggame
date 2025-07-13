@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 		if(event.is_action_released("leftc")):
 			if(hovering):
 				if(hovering.is_in_group("podium")):
-					player.add_food()
+					player.add_food(hovering.get_parent())
 				
 
 func _process(delta: float) -> void:

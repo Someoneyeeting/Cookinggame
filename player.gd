@@ -2,9 +2,12 @@ extends CharacterBody2D
 class_name Player
 
 @export var move_speed : float = 200
+@export var plate : Plate
 
-func add_food():
-	$plate.add_ingridiant()
+func add_food(pod : Podium):
+	if(pod.global_position.distance_to(global_position) > 100):
+		return
+	plate.add_ingridiant(pod.item)
 
 func _handle_move():
 	var dir : Vector2 = Vector2.ZERO
@@ -29,17 +32,18 @@ func _handle_throw():
 	$Line2D.visible = Input.is_action_pressed("left?c")
 
 func throw(target : Node2D):
-	if(not $plate.canthrow()):
+	if(not plate.canthrow()):
 		return
 	
 	target.out()
-	$plate.clear()
+	plate.clear()
 	Partmanager.summon("break",target.global_position)
-	draw_throw(target.global_position)
+	draw_throw(target.global_position,plate.av_color())
 
-func draw_throw(target : Vector2):
+func draw_throw(target : Vector2,clr : Color):
 	$Line2D.points[0] = global_position
 	$Line2D.points[1] = target
+	$Line2D.default_color = clr
 	
 	$Line2D.show()
 	$timers/line.start()
