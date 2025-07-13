@@ -17,6 +17,8 @@ func is_matching(ids : Array):
 
 func matching_so_far(ids : Array):
 	var cids = get_as_ids()
+	if(ids.size() >= cids.size()):
+		return false
 	for i in range(ids.size()):
 		if(ids[i] != cids[i]):
 			return false

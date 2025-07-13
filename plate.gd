@@ -36,6 +36,15 @@ func av_color():
 	return clr
 	
 
+func get_as_ids():
+	var ids = []
+	
+	for i in items:
+		ids.append(i.id)
+	
+	return ids
+	
+
 func clear():
 	for i in $ingridiatns.get_children():
 		i.queue_free()

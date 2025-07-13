@@ -3,9 +3,11 @@ class_name Customer
 
 var serving := false
 
+@export var recipe : RecipeRes
 func enter():
 	serving = true
 	z_index = 1
+	$RecipeDisplay.recp = recipe
 
 func out():
 	$AudioStreamPlayer2D.play()
@@ -23,7 +25,15 @@ func enter_line():
 	$AnimationPlayer.play("enter_line")
 
 func _physics_process(delta: float) -> void:
-	$ColorRect.color = lerp($ColorRect.color,Color.WHITE if serving else Color.DARK_GRAY,0.01)
+	#$ColorRect.color = lerp($ColorRect.color,Color.WHITE if serving else Color.DARK_GRAY,0.01)
+	
+	var playerhas = Globals.player.plate.get_as_ids()
+	if(recipe.is_matching(playerhas)):
+		$ColorRect.color = Color.GOLD
+	elif(recipe.matching_so_far(playerhas)):
+		$ColorRect.color = Color.GREEN
+	else:
+		$ColorRect.color = Color.RED
 
 
 func _on_outanimation_timeout() -> void:

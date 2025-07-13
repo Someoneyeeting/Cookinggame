@@ -5,7 +5,7 @@ class_name Player
 @export var plate : Plate
 
 func add_food(pod : Podium):
-	if(pod.global_position.distance_to(global_position) > 100):
+	if(pod.global_position.distance_to(global_position) > 200):
 		return
 	plate.add_ingridiant(pod.item)
 
@@ -55,6 +55,11 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	Globals.player = self
 	_handle_move()
+	
+	if(get_global_mouse_position().distance_to(global_position) < 200):
+		$range.color.a = lerp($range.color.a,0.0,0.3)
+	else:
+		$range.color.a = lerp($range.color.a,0.4,0.3)
 	
 	$Line2D.points[0] =  lerp($Line2D.points[0],$Line2D.points[1],0.4)
 

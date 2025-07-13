@@ -9,9 +9,11 @@ script/source = "extends Node2D
 @export var recp : RecipeRes
 
 func _ready() -> void:
-	for i in recp.items:
+	var items := recp.items
+	items.reverse()
+	for i in items:
 		var sp := Sprite2D.new()
-		sp.position.y = get_child_count() * 50
+		sp.position.y = -get_child_count() * 50
 		sp.texture = i.texture
 		sp.scale *= 0.3
 		add_child(sp)
