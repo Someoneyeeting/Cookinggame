@@ -56,6 +56,8 @@ func _physics_process(delta: float) -> void:
 	Globals.player = self
 	_handle_move()
 	
+
+	
 	if(get_global_mouse_position().distance_to(global_position) < 200):
 		$range.color.a = lerp($range.color.a,0.0,0.3)
 	else:

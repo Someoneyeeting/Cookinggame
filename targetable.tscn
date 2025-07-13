@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyfq1svoocqic"]
+
+[ext_resource type="Script" uid="uid://dpu8i0lr4fal7" path="res://targetable.gd" id="1_q1vgp"]
+
+[node name="Targetable" type="Area2D" groups=["targetable"]]
+script = ExtResource("1_q1vgp")

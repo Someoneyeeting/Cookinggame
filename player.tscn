@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=8 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="3_i3pqv"]
 
 [sub_resource type="Shader" id="Shader_onrkg"]
 code = "shader_type canvas_item;
@@ -26,6 +27,9 @@ void fragment() {
 shader = SubResource("Shader_onrkg")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
+radius = 25.0799
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("plate") groups=["targetable"]]
 script = ExtResource("1_4flbx")
@@ -75,5 +79,10 @@ width = 30.0
 
 [node name="plate" parent="." instance=ExtResource("2_onrkg")]
 position = Vector2(30, -11)
+
+[node name="Targetable" parent="." instance=ExtResource("3_i3pqv")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Targetable"]
+shape = SubResource("CircleShape2D_hqtel")
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

@@ -27,7 +27,7 @@ func _input(event: InputEvent) -> void:
 		if(event.is_action_released("rightc")):
 			if(hovering):
 				if(hovering.is_in_group("targetable")):
-					player.throw(hovering.get_parent())
+					player.throw(hovering.target)
 					
 			isaiming = false
 	else:
@@ -52,5 +52,8 @@ func _process(delta: float) -> void:
 		Engine.time_scale = 1
 	
 	$target.visible = isaiming
+	
+	if(hovering and hovering.is_in_group("targetable")):
+		$target.global_position = hovering.global_position
 	
 	$dark.color.a = lerp($dark.color.a, 0.3 if isaiming else 0.,0.08)
