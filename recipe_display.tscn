@@ -13,7 +13,7 @@ func _ready() -> void:
 	items.reverse()
 	for i in items:
 		var sp := Sprite2D.new()
-		sp.position.y = -get_child_count() * 10
+		sp.position.y = -get_child_count() * 20
 		sp.texture = i.texture
 		sp.scale *= 1.2
 		add_child(sp)

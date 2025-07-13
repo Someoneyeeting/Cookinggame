@@ -34,6 +34,14 @@ func _physics_process(delta: float) -> void:
 		$ColorRect.color = Color.GREEN
 	else:
 		$ColorRect.color = Color.RED
+	
+	var count = Globals.player.plate.get_count()
+	if(count < 35):
+		$ColorRect.position.x = -61.0
+		$GPUParticles2D.emitting = false
+	else:
+		$ColorRect.position.x = -61.0 + (randf_range(count,-count) - 35) / 32
+		$GPUParticles2D.emitting = true
 
 
 func _on_outanimation_timeout() -> void:
