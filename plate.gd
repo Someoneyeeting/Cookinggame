@@ -7,8 +7,10 @@ var items : Array[ItemRes]
 func add_ingridiant(item):
 	if(is_empty() and (item.id != 0 and item.id != -1)):
 		return
+	if(not is_empty() and items[0].id == -1):
+		return
 	var plate :Sprite2D= PLATE.instantiate()
-	plate.position.y = $ingridiatns.get_child_count() * -40
+	plate.position.y = $ingridiatns.get_child_count() * -4.32 / scale.x
 	plate.ind = $ingridiatns.get_child_count()
 	plate.item = item
 	items.push_back(item)
@@ -35,6 +37,8 @@ func av_color():
 		clr.h += i.color.h / items.size()
 	return clr
 	
+func get_count():
+	return items.size()
 
 func get_as_ids():
 	var ids = []

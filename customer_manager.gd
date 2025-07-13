@@ -8,13 +8,6 @@ var cserving :Array[Customer]= []
 var customerind = 0
 
 
-func serve_customer():
-	if(cserving.is_empty()):
-		return
-	var cus :Customer= cserving.pop_front()
-	cus.out()
-	_on_newcustomer_timeout()
-	
 
 func _on_newcustomer_timeout() -> void:
 	if($customers.get_child_count() == 3):

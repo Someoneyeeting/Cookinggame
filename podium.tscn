@@ -17,8 +17,8 @@ scale = Vector2(0.168784, 0.168784)
 texture = ExtResource("1_hqaaq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
-scale = Vector2(0.208093, 0.208093)
+position = Vector2(0, -1)
+scale = Vector2(1.29529, 1.29529)
 texture = ExtResource("3_ybcbc")
 
 [node name="click" type="Area2D" parent="." groups=["podium"]]
