@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6xss2pyvosu0"]
+
+[ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
+
+[node name="testscene" type="Node2D"]
+
+[node name="CustomerManager" parent="." instance=ExtResource("1_jotil")]

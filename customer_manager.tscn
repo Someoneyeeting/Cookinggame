@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0lyfd8pu4t2a"]
+
+[ext_resource type="Script" uid="uid://tb8afmqxqklb" path="res://customer_manager.gd" id="1_uxglp"]
+
+[node name="CustomerManager" type="Node2D"]
+script = ExtResource("1_uxglp")
+
+[node name="customers" type="Node2D" parent="."]
+
+[node name="newcustomer" type="Timer" parent="."]
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(557, 329)
+
+[connection signal="timeout" from="newcustomer" to="." method="_on_newcustomer_timeout"]
