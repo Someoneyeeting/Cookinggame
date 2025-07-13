@@ -57,3 +57,11 @@ func _process(delta: float) -> void:
 		$target.global_position = hovering.global_position
 	
 	$dark.color.a = lerp($dark.color.a, 0.3 if isaiming else 0.,0.08)
+
+func shake(dir : Vector2):
+	$Camera2D.position += dir
+	$shake.start()
+
+
+func _on_shake_timeout() -> void:
+	$Camera2D.position = Vector2.ZERO

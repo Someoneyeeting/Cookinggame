@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1ohlx3f6q1r7"
+path="res://.godot/imported/Plate Breaking Sound Effect.mp3-e89706d9108fabe60f2b762c172d2b27.mp3str"
+
+[deps]
+
+source_file="res://Plate Breaking Sound Effect.mp3"
+dest_files=["res://.godot/imported/Plate Breaking Sound Effect.mp3-e89706d9108fabe60f2b762c172d2b27.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

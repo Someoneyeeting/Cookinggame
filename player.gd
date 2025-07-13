@@ -35,7 +35,7 @@ func throw(target : Node2D):
 	if(not plate.canthrow()):
 		return
 	
-	target.out(plate.get_count())
+	target.get_thrown(plate.get_count())
 	plate.clear()
 	Partmanager.summon("break",target.global_position)
 	draw_throw(target.global_position,plate.av_color())

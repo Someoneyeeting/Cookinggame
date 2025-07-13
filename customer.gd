@@ -9,16 +9,17 @@ func enter():
 	z_index = 1
 	$RecipeDisplay.recp = recipe
 
-func out(size : float):
+func get_thrown(size : float):
 	$AudioStreamPlayer2D.play()
 	$outanimation.start()
 	var tween = get_tree().create_tween()
 	var dir = Globals.player.global_position - global_position
 	global_rotation = sign(dir.x) * 0.1
 	dir = dir.normalized()
+	Globals.shake(dir * 20)
 	global_position -= dir * 40 * (size / 4)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.6).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.9).set_trans(Tween.TRANS_CIRC)
 	tween.tween_callback(queue_free)
 
 func enter_line():

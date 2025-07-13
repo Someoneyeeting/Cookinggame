@@ -32,5 +32,13 @@ color = Color(0, 0, 0, 0)
 [node name="target" parent="." instance=ExtResource("3_pw6g4")]
 position = Vector2(-113, 56)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="shake" type="Timer" parent="."]
+wait_time = 0.06
+one_shot = true
+
 [connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
 [connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]
+[connection signal="timeout" from="shake" to="." method="_on_shake_timeout"]
