@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu8x5k10nnpnb"]
+
+[ext_resource type="Resource" uid="uid://t2e4d80gjvjk" path="res://recipes/plates.tres" id="1_8y815"]
+
+[sub_resource type="GDScript" id="GDScript_depl0"]
+script/source = "extends Node2D
+
+
+@export var recp : RecipeRes
+
+func _ready() -> void:
+	for i in recp.items:
+		var sp := Sprite2D.new()
+		sp.position.y = get_child_count() * 50
+		sp.texture = i.texture
+		sp.scale *= 0.3
+		add_child(sp)
+"
+
+[node name="RecipeDisplay" type="Node2D"]
+script = SubResource("GDScript_depl0")
+recp = ExtResource("1_8y815")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RecipeRes" load_steps=4 format=3 uid="uid://t2e4d80gjvjk"]
+
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_06ojl"]
+[ext_resource type="Script" uid="uid://byh0p0n6nwwah" path="res://recipes/RecipeRes.gd" id="2_0qp0n"]
+[ext_resource type="Resource" uid="uid://8orrvogpxwmb" path="res://foods/plate.tres" id="2_i2fre"]
+
+[resource]
+script = ExtResource("2_0qp0n")
+items = Array[ExtResource("1_06ojl")]([ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre")])
+metadata/_custom_type_script = ExtResource("2_0qp0n")
