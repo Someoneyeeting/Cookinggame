@@ -7,6 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_eoq6h"]
 
 [node name="Globals" type="Node2D"]
+z_index = 170
 script = ExtResource("1_f6yec")
 
 [node name="mouse" type="Area2D" parent="."]
@@ -20,6 +21,13 @@ offset = Vector2(341.019, 525.687)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mouse"]
 shape = SubResource("CircleShape2D_eoq6h")
+
+[node name="dark" type="ColorRect" parent="."]
+offset_left = -24.0
+offset_top = -13.0
+offset_right = 1227.0
+offset_bottom = 685.0
+color = Color(0, 0, 0, 1)
 
 [node name="target" parent="." instance=ExtResource("3_pw6g4")]
 position = Vector2(-113, 56)

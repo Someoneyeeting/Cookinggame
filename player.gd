@@ -26,7 +26,23 @@ func _handle_throw():
 	$Line2D.points[0] = global_position
 	$Line2D.points[1] = get_global_mouse_position()
 
-	$Line2D.visible = Input.is_action_pressed("leftc")
+	$Line2D.visible = Input.is_action_pressed("left?c")
+
+func throw(target : Node2D):
+	if(not $plate.canthrow()):
+		return
+	
+	target.out()
+	$plate.clear()
+	Partmanager.summon("break",target.global_position)
+	draw_throw(target.global_position)
+
+func draw_throw(target : Vector2):
+	$Line2D.points[0] = global_position
+	$Line2D.points[1] = target
+	
+	$Line2D.show()
+	$timers/line.start()
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("ui_accept")):
@@ -35,4 +51,9 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	Globals.player = self
 	_handle_move()
-	_handle_throw()
+	
+	$Line2D.points[0] =  lerp($Line2D.points[0],$Line2D.points[1],0.4)
+
+
+func _on_line_timeout() -> void:
+	$Line2D.hide()

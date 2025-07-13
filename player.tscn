@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["targetable"]]
 script = ExtResource("1_4flbx")
 move_speed = 400.0
 
@@ -32,9 +32,16 @@ unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
 
+[node name="line" type="Timer" parent="timers"]
+wait_time = 0.1
+one_shot = true
+
 [node name="Line2D" type="Line2D" parent="."]
 top_level = true
 points = PackedVector2Array(0, 0, 0, 0)
+width = 30.0
 
 [node name="plate" parent="." instance=ExtResource("2_onrkg")]
 position = Vector2(30, -11)
+
+[connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

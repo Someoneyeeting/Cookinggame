@@ -17,12 +17,12 @@ func serve_customer():
 	
 
 func _on_newcustomer_timeout() -> void:
-	if(cserving.size() == 3):
+	if($customers.get_child_count() == 3):
 		return
 	var customer :Customer= CUSTOMER.instantiate()
 	customer.global_position = $Marker2D.global_position
 	customer.global_position.x += (customerind - 1) * 250 + randf_range(-50,50)
-	customer.global_position.y -= waiting.size() * 10
+	customer.global_position.y -= $customers.get_child_count() * 10
 	customerind += 1
 	customerind %= 3
 	customer.enter_line()
