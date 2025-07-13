@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu8x5k10nnpnb"]
-
-[ext_resource type="Resource" uid="uid://t2e4d80gjvjk" path="res://recipes/plates.tres" id="1_8y815"]
+[gd_scene load_steps=2 format=3 uid="uid://cu8x5k10nnpnb"]
 
 [sub_resource type="GDScript" id="GDScript_depl0"]
 script/source = "extends Node2D
@@ -8,17 +6,35 @@ script/source = "extends Node2D
 
 @export var recp : RecipeRes
 
-func _ready() -> void:
+func set_recp(rec : RecipeRes) -> void:
+	recp = rec
+	for i in get_children():
+		i.queue_free()
 	var items := recp.items
-	items.reverse()
+	items
 	for i in items:
 		var sp := Sprite2D.new()
 		sp.position.y = -get_child_count() * 20
 		sp.texture = i.texture
 		sp.scale *= 1.2
 		add_child(sp)
+	
+func _physics_process(delta: float) -> void:
+	var curitem = Globals.player.plate.get_count()
+	for i in get_child_count():
+		var targcolor : Color
+		if(curitem > get_child_count()):
+			targcolor = Color(0.6,0.2,0.2)
+		elif(i < curitem):
+			targcolor = Color(0.4,0.4,0.4)
+		elif(i == curitem):
+			targcolor = Color(1,1,1)
+		else:
+			targcolor = Color(0.6,0.6,0.6)
+			
+		get_children()[i].modulate = lerp(get_children()[i].modulate,targcolor,0.3)
+			
 "
 
 [node name="RecipeDisplay" type="Node2D"]
 script = SubResource("GDScript_depl0")
-recp = ExtResource("1_8y815")

@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://8orrvogpxwmb" path="res://foods/plate.tres" id="2_i2fre"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_0qp0n")
 items = Array[ExtResource("1_06ojl")]([ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre"), ExtResource("2_i2fre")])
 metadata/_custom_type_script = ExtResource("2_0qp0n")

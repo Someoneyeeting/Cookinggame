@@ -28,4 +28,3 @@ func _physics_process(delta: float) -> void:
 		var nextcus :Customer = waiting.pop_front()
 		cserving.push_back(nextcus)
 		nextcus.global_position.y = $Marker2D.global_position.y
-		nextcus.enter()

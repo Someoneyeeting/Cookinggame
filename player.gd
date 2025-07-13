@@ -47,7 +47,7 @@ func throw(target : Node2D):
 	draw_throw(target.global_position,plate.av_color())
 
 func draw_throw(target : Vector2,clr : Color):
-	$Line2D.points[0] = global_position
+	$Line2D.points[0] = plate.global_position
 	$Line2D.points[1] = target
 	$Line2D.default_color = clr
 	

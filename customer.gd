@@ -2,22 +2,27 @@ extends Node2D
 class_name Customer
 
 var serving := false
+var plate := preload("res://foods/plate.tres")
+var chicken := preload("res://foods/chicken.tres")
 
 @export var recipe : RecipeRes
 
 func _ready() -> void:
+	recipe = recipe.duplicate()
 	Globals.eat.connect(check_eat)
-	
-	
-func enter():
+	recipe.items.clear()
+	recipe.items.append(plate)
+	for i in range(randi_range(4,7)):
+		recipe.items.append(plate)
 	serving = true
 	z_index = 1
-	$RecipeDisplay.recp = recipe
+	$RecipeDisplay.set_recp(recipe)
+	
 
 func check_eat(ids):
 	if(recipe.is_matching(ids)):
 		#print("yes")
-		Globals.set_hunger(100)
+		Globals.change_hunger(20)
 		$outanimation.start()
 		$ColorRect.color = Color.BLUE
 		get_tree().create_timer(0.4).timeout.connect(queue_free)

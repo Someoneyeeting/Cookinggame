@@ -11,10 +11,11 @@ func add_ingridiant(item):
 		return
 	var plate :Sprite2D= PLATE.instantiate()
 	var targpos := $ingridiatns.get_child_count() * -4.32 / scale.x
-	plate.position.y = targpos - 100
+	plate.position.y = targpos - 350
 	var tween = get_tree().create_tween()
 	
-	tween.tween_property(plate,"position",Vector2(0,targpos),0.25)
+	tween.tween_property(plate,"position",Vector2(0,targpos),0.3)
+	#tween.set_ease(Tween.EASE_OUT)
 	plate.ind = $ingridiatns.get_child_count()
 	plate.item = item
 	items.push_back(item)
