@@ -1,17 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cts1uyl7lbf1g"]
+[gd_scene load_steps=4 format=3 uid="uid://cts1uyl7lbf1g"]
 
 [ext_resource type="Texture2D" uid="uid://cre1nvg2axkc1" path="res://80188e8a8488c4773c0ec41842a3c830_t-removebg-preview.png" id="1_hqaaq"]
+[ext_resource type="Script" uid="uid://dbkgpfxpw1ftp" path="res://podium.gd" id="1_pxmsk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqaaq"]
 radius = 21.2132
 
 [node name="podium" type="Node2D"]
+script = ExtResource("1_pxmsk")
 
 [node name="sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.168784, 0.168784)
 texture = ExtResource("1_hqaaq")
 
-[node name="click" type="Area2D" parent="."]
+[node name="click" type="Area2D" parent="." groups=["podium"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="click"]
 shape = SubResource("CircleShape2D_hqaaq")
+
+[connection signal="mouse_entered" from="click" to="." method="_on_click_mouse_entered"]
+[connection signal="mouse_exited" from="click" to="." method="_on_click_mouse_exited"]

@@ -13,9 +13,12 @@ func serve_customer():
 		return
 	var cus :Customer= cserving.pop_front()
 	cus.out()
+	_on_newcustomer_timeout()
 	
 
 func _on_newcustomer_timeout() -> void:
+	if(cserving.size() == 3):
+		return
 	var customer :Customer= CUSTOMER.instantiate()
 	customer.global_position = $Marker2D.global_position
 	customer.global_position.x += (customerind - 1) * 250 + randf_range(-50,50)
@@ -26,8 +29,6 @@ func _on_newcustomer_timeout() -> void:
 	waiting.append(customer)
 	customer.z_index = -waiting.size()
 	$customers.add_child(customer)
-	if(waiting.size() > 8):
-		$newcustomer.stop()
 
 func _physics_process(delta: float) -> void:
 	while(cserving.size() < 3 and not waiting.is_empty()):

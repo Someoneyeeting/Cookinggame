@@ -1,10 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsd34n3og4bsj"]
+[gd_scene load_steps=5 format=3 uid="uid://bsd34n3og4bsj"]
+
+[ext_resource type="Script" uid="uid://hfqbrglml7cf" path="res://globals.gd" id="1_f6yec"]
+[ext_resource type="Texture2D" uid="uid://df0y7an1ba47y" path="res://pngwing.com.png" id="2_ic2bg"]
+[ext_resource type="PackedScene" uid="uid://de32jgkwu06x5" path="res://target.tscn" id="3_pw6g4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eoq6h"]
 
 [node name="Globals" type="Node2D"]
+script = ExtResource("1_f6yec")
 
 [node name="mouse" type="Area2D" parent="."]
 
+[node name="cursor" type="Sprite2D" parent="mouse"]
+z_index = 4096
+position = Vector2(-5.96046e-08, 2.38419e-07)
+scale = Vector2(0.0250131, 0.0250131)
+texture = ExtResource("2_ic2bg")
+offset = Vector2(341.019, 525.687)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mouse"]
 shape = SubResource("CircleShape2D_eoq6h")
+
+[node name="target" parent="." instance=ExtResource("3_pw6g4")]
+position = Vector2(-113, 56)
+
+[connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
+[connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://de32jgkwu06x5"]
+
+[sub_resource type="GDScript" id="GDScript_3hr3o"]
+script/source = "extends Node2D
+
+
+
+func _physics_process(delta: float) -> void:
+	rotation += 0.01
+"
+
+[sub_resource type="Shader" id="Shader_3hr3o"]
+code = "shader_type canvas_item;
+
+
+uniform float crossize = 0.1;
+uniform float squaresize = 0.1;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if(UV.x > crossize && UV.x < 1. - crossize || UV.y > crossize && UV.y < 1. - crossize){
+		COLOR.a = 0.0;
+	}
+	if(UV.x > squaresize && UV.x < 1. - squaresize && UV.y > squaresize && UV.y < 1. - squaresize){
+		COLOR.a = 0.0;
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2jmu"]
+shader = SubResource("Shader_3hr3o")
+shader_parameter/crossize = 0.22
+shader_parameter/squaresize = 0.07
+
+[node name="target" type="Node2D"]
+script = SubResource("GDScript_3hr3o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 145
+material = SubResource("ShaderMaterial_t2jmu")
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 18.0
+scale = Vector2(2.32639, 2.32639)
+pivot_offset = Vector2(20, 22)
+color = Color(0.839456, 0.174948, 0, 1)
