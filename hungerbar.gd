@@ -10,3 +10,4 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	$bar.size.x = lerp(0,ogsize,hunger / 100)
 	hunger -= delta
+	hunger = clamp(hunger,0,100)

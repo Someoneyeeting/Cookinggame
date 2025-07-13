@@ -4,10 +4,24 @@ class_name Customer
 var serving := false
 
 @export var recipe : RecipeRes
+
+func _ready() -> void:
+	Globals.eat.connect(check_eat)
+	
+	
 func enter():
 	serving = true
 	z_index = 1
 	$RecipeDisplay.recp = recipe
+
+func check_eat(ids):
+	if(recipe.is_matching(ids)):
+		#print("yes")
+		Globals.set_hunger(100)
+		$outanimation.start()
+		$ColorRect.color = Color.BLUE
+		get_tree().create_timer(0.4).timeout.connect(queue_free)
+		
 
 func get_thrown(size : float):
 	#$AudioStreamPlayer2D.play()
@@ -28,12 +42,13 @@ func _physics_process(delta: float) -> void:
 	#$ColorRect.color = lerp($ColorRect.color,Color.WHITE if serving else Color.DARK_GRAY,0.01)
 	
 	var playerhas = Globals.player.plate.get_as_ids()
-	if(recipe.is_matching(playerhas)):
-		$ColorRect.color = Color.GOLD
-	elif(recipe.matching_so_far(playerhas)):
-		$ColorRect.color = Color.GREEN
-	else:
-		$ColorRect.color = Color.RED
+	if($outanimation.time_left == 0):
+		if(recipe.is_matching(playerhas)):
+			$ColorRect.color = Color.GOLD
+		elif(recipe.matching_so_far(playerhas)):
+			$ColorRect.color = Color.GREEN
+		else:
+			$ColorRect.color = Color.RED
 	
 	var count = Globals.player.plate.get_count()
 	if(count < 35):

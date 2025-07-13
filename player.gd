@@ -21,15 +21,14 @@ func _handle_move():
 	else:
 		var sprint = Input.is_action_pressed("sprint")
 		velocity = lerp(velocity,dir * move_speed * (1.6 if sprint else 1),0.09)
+		
+		if(sprint):
+			Globals.change_hunger(-0.1)
+		else:
+			Globals.change_hunger(-0.05)
 	
 	
 	move_and_slide()
-
-func _handle_throw():
-	$Line2D.points[0] = global_position
-	$Line2D.points[1] = get_global_mouse_position()
-
-	$Line2D.visible = Input.is_action_pressed("left?c")
 
 func throw(target : Node2D):
 	if(not plate.canthrow()):
@@ -59,8 +58,8 @@ func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("ui_accept")):
 		pass
 
-func get_thrown(ammount : int):
-	Globals.set_hunger(100)
+func get_thrown(amount : int):
+	Globals._eat(plate.get_as_ids())
 
 func _physics_process(delta: float) -> void:
 	Globals.player = self

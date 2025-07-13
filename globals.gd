@@ -1,5 +1,6 @@
 extends Node2D
 
+signal eat(ids)
 
 var player : Player
 var hovering : Area2D
@@ -72,3 +73,7 @@ func change_hunger(amount : float):
 	
 func set_hunger(amount : float):
 	$hungerbar.hunger = amount
+	
+func _eat(ids):
+	eat.emit(ids)
+	change_hunger(10)
