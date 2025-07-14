@@ -24,6 +24,7 @@ Partmanager="*res://partmanager.tscn"
 
 window/size/viewport_width=1270
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [global_group]
 

@@ -62,6 +62,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		$ColorRect.position.x = -61.0 + (randf_range(count,-count) - 35) / 32
 		$GPUParticles2D.emitting = true
+	
+	$customertimer.set_timer($waittime.time_left / $waittime.wait_time)
 
 
 func _on_outanimation_timeout() -> void:
