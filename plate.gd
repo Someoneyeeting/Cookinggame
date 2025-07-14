@@ -10,11 +10,13 @@ func add_ingridiant(item):
 	if(not is_empty() and items[0].id == -1):
 		return
 	var plate :Sprite2D= PLATE.instantiate()
-	var targpos := $ingridiatns.get_child_count() * -4.32 / scale.x
+	var targpos := $ingridiatns.get_child_count() * -7 / scale.x
 	plate.position.y = targpos - 350
 	var tween = get_tree().create_tween()
-	
 	tween.tween_property(plate,"position",Vector2(0,targpos),0.3)
+	tween.finished.connect($land.play)
+	$pick.pitch_scale = randf_range(0.3,1)
+	$pick.play()
 	#tween.set_ease(Tween.EASE_OUT)
 	plate.ind = $ingridiatns.get_child_count()
 	plate.item = item
