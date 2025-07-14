@@ -24,3 +24,7 @@ shape = SubResource("RectangleShape2D_my181")
 
 [node name="close" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_i66py")
+
+[node name="cooking" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i66py")
+volume_db = 24.0

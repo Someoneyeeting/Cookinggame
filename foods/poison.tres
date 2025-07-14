@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemRes" load_steps=3 format=3 uid="uid://c2tkft0bdjcie"]
+
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_vbnhx"]
+[ext_resource type="Texture2D" uid="uid://dvy24rw4gb1ba" path="res://assets/sprites/poison.png" id="2_3l7tt"]
+
+[resource]
+script = ExtResource("1_vbnhx")
+id = -1
+texture = ExtResource("2_3l7tt")
+metadata/_custom_type_script = ExtResource("1_vbnhx")

@@ -8,7 +8,7 @@ var has_chicken := false
 func add_ingridiant(item : ItemRes):
 	if(is_empty() and (item.id != 0 and item.id != -1)):
 		return
-	if(not is_empty() and items[0].id == -1):
+	if(is_poison()):
 		return
 	if(item.id == 2):
 		has_chicken = true
@@ -67,3 +67,6 @@ func clear():
 		i.queue_free()
 	items.clear()
 	has_chicken = false
+
+func is_poison():
+	return not is_empty() and items[0].id == -1

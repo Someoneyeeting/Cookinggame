@@ -4,7 +4,8 @@
 script/source = "extends Node2D
 
 const parts = {
-	\"break\" : preload(\"res://particales/break.tscn\")
+	\"break\" : preload(\"res://particales/break.tscn\"),
+	\"poison\" : preload(\"res://particales/poison.tscn\")
 }
 
 

@@ -49,9 +49,15 @@ func throw(target : Node2D):
 			$chicken.play()
 		
 	target.get_thrown(plate.get_count())
+	if(plate.is_poison()):
+		Partmanager.summon("poison",target.global_position)
+	else:
+		Partmanager.summon("break",target.global_position)
+	
+	
 	plate.clear()
+	$break.pitch_scale = randf_range(0.6,1.4)
 	$break.play()
-	Partmanager.summon("break",target.global_position)
 	draw_throw(target.global_position,plate.av_color())
 	
 
