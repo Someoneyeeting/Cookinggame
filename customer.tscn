@@ -128,7 +128,7 @@ shape = SubResource("RectangleShape2D_7tiyv")
 stream = ExtResource("4_eas7q")
 
 [node name="RecipeDisplay" parent="." instance=ExtResource("3_f7asb")]
-position = Vector2(3, -54)
+position = Vector2(0, -54)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
