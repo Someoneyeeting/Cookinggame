@@ -5,10 +5,9 @@ script/source = "extends Node2D
 
 
 @export var recp : RecipeRes
-
 func set_recp(rec : RecipeRes) -> void:
 	recp = rec
-	for i in get_children():
+	for i in $items.get_children():
 		i.queue_free()
 	var items := recp.items
 	items
@@ -16,17 +15,28 @@ func set_recp(rec : RecipeRes) -> void:
 		var sp := Sprite2D.new()
 		
 		sp.offset.y = -12
-		sp.position.y = -get_child_count() * 20
+		sp.position.y = -$items.get_child_count() * 20
 		sp.texture = i.texture
 		sp.scale *= 1.2
-		add_child(sp)
+		$items.add_child(sp)
 	
 func _physics_process(delta: float) -> void:
 	var curitem = Globals.player.plate.get_count()
-	for i in get_child_count():
+	if(is_matching() and curitem >= 1):
+		$items.position.y = lerp($items.position.y,20. * (curitem - 1),0.3)
+		#print(curitem)
+	else:
+		$items.position.y = lerp($items.position.y,0.,0.3)
+		
+	
+	for i in $items.get_child_count():
+		if(i < curitem - 3 and is_matching()):
+			$items.get_children()[i].hide()
+			continue
+		$items.get_children()[i].show()
 		var targcolor : Color
 		var targscale : float = 1.
-		if(curitem > get_child_count()):
+		if(not is_matching()):
 			targcolor = Color(0.6,0.2,0.2)
 			targscale = 1.
 		elif(i < curitem):
@@ -39,10 +49,16 @@ func _physics_process(delta: float) -> void:
 			targcolor = Color(0.6,0.6,0.6)
 			targscale = 0.9
 		
-		get_children()[i].modulate = lerp(get_children()[i].modulate,targcolor,0.3)
-		get_children()[i].scale = lerp(get_children()[i].scale,Vector2(targscale,targscale),0.3)
-			
+		$items.get_children()[i].modulate = lerp($items.get_children()[i].modulate,targcolor,0.3)
+		$items.get_children()[i].scale = lerp($items.get_children()[i].scale,Vector2(targscale,targscale),0.3)
+
+func is_matching():
+	var curitem = Globals.player.plate.get_count()
+	
+	return curitem <= recp.items.size()
 "
 
 [node name="RecipeDisplay" type="Node2D"]
 script = SubResource("GDScript_depl0")
+
+[node name="items" type="Node2D" parent="."]

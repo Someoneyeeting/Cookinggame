@@ -57,7 +57,7 @@ func throw(target : Node2D):
 	
 	
 	plate.clear()
-	$break.pitch_scale = randf_range(0.6,1.4)
+	$break.pitch_scale = randf_range(0.85,1.2)
 	$break.play()
 	draw_throw(target.global_position,plate.av_color())
 	

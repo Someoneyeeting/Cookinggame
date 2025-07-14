@@ -40,6 +40,9 @@ func get_thrown(size : float):
 	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.6).set_trans(Tween.TRANS_CIRC)
 	tween.tween_callback(queue_free)
 
+func time_out():
+	pass
+
 func enter_line():
 	$AnimationPlayer.play("enter_line")
 
@@ -68,3 +71,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_outanimation_timeout() -> void:
 	visible = not visible
+
+
+func _on_waittime_timeout() -> void:
+	time_out()
