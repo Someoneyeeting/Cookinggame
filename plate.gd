@@ -3,12 +3,15 @@ class_name Plate
 
 var PLATE := preload("res://food.tscn")
 var items : Array[ItemRes]
+var has_chicken := false
 
-func add_ingridiant(item):
+func add_ingridiant(item : ItemRes):
 	if(is_empty() and (item.id != 0 and item.id != -1)):
 		return
 	if(not is_empty() and items[0].id == -1):
 		return
+	if(item.id == 2):
+		has_chicken = true
 	var plate :Sprite2D= PLATE.instantiate()
 	var targpos := $ingridiatns.get_child_count() * -7 / scale.x
 	plate.position.y = targpos - 350
@@ -16,7 +19,10 @@ func add_ingridiant(item):
 	tween.tween_property(plate,"position",Vector2(0,targpos),0.3)
 	tween.finished.connect($land.play)
 	$pick.pitch_scale = randf_range(0.3,1)
-	$pick.play()
+	if(item.id == 2):
+		$chicken.play()
+	else:
+		$pick.play()
 	#tween.set_ease(Tween.EASE_OUT)
 	plate.ind = $ingridiatns.get_child_count()
 	plate.item = item
@@ -54,9 +60,10 @@ func get_as_ids():
 		ids.append(i.id)
 	
 	return ids
-	
+
 
 func clear():
 	for i in $ingridiatns.get_children():
 		i.queue_free()
 	items.clear()
+	has_chicken = false

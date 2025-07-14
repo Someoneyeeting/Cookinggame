@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://8wj5cic12r67"]
+[gd_scene load_steps=4 format=3 uid="uid://8wj5cic12r67"]
 
 [ext_resource type="Script" uid="uid://bxhqgsifho4ko" path="res://plate.gd" id="1_uw33f"]
 [ext_resource type="AudioStream" uid="uid://qp8n6hhqp1o6" path="res://assets/audio/laserShoot.wav" id="2_g4jty"]
+[ext_resource type="AudioStream" uid="uid://d24lxqvl0vqpc" path="res://assets/audio/chicken_pick.wav" id="3_g4jty"]
 
 [node name="plate" type="Node2D"]
 script = ExtResource("1_uw33f")
@@ -14,3 +15,6 @@ stream = ExtResource("2_g4jty")
 
 [node name="land" type="AudioStreamPlayer2D" parent="."]
 volume_db = -8.825
+
+[node name="chicken" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g4jty")

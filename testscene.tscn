@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6xss2pyvosu0"]
+[gd_scene load_steps=8 format=3 uid="uid://b6xss2pyvosu0"]
 
 [ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
 [ext_resource type="PackedScene" uid="uid://6nbo85ja31eo" path="res://player.tscn" id="2_612pj"]
 [ext_resource type="PackedScene" uid="uid://bfrxi0adyk11w" path="res://obst.tscn" id="3_612pj"]
 [ext_resource type="PackedScene" uid="uid://cts1uyl7lbf1g" path="res://podium.tscn" id="4_asog6"]
 [ext_resource type="Resource" uid="uid://bfdiey5ohixnn" path="res://foods/chicken.tres" id="5_mawog"]
+[ext_resource type="Resource" uid="uid://tt1jd2gvppb2" path="res://foods/live_chicken.tres" id="5_scc5w"]
+[ext_resource type="PackedScene" uid="uid://dpi66gi61howo" path="res://oven.tscn" id="6_b56k5"]
 
 [node name="testscene" type="Node2D"]
 
@@ -36,6 +38,7 @@ rotation = -3.14159
 
 [node name="podium" parent="." instance=ExtResource("4_asog6")]
 position = Vector2(336, 410)
+item = ExtResource("5_scc5w")
 
 [node name="podium2" parent="." instance=ExtResource("4_asog6")]
 position = Vector2(741, 410)
@@ -43,3 +46,6 @@ item = ExtResource("5_mawog")
 
 [node name="podium3" parent="." instance=ExtResource("4_asog6")]
 position = Vector2(553, 410)
+
+[node name="oven" parent="." instance=ExtResource("6_b56k5")]
+position = Vector2(133, 443)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemRes" load_steps=5 format=3 uid="uid://tt1jd2gvppb2"]
+
+[ext_resource type="Resource" uid="uid://bfdiey5ohixnn" path="res://foods/chicken.tres" id="1_3hcbx"]
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_k8ufd"]
+[ext_resource type="Texture2D" uid="uid://d050wm47v6j0i" path="res://assets/sprites/chicken.png" id="3_3hcbx"]
+[ext_resource type="Texture2D" uid="uid://b3w7eunsjo2qu" path="res://assets/sprites/chicken_pickup.png" id="3_j1gx1"]
+
+[resource]
+script = ExtResource("1_k8ufd")
+id = 2
+texture = ExtResource("3_3hcbx")
+cooked = ExtResource("1_3hcbx")
+picktexture = ExtResource("3_j1gx1")
+metadata/_custom_type_script = ExtResource("1_k8ufd")

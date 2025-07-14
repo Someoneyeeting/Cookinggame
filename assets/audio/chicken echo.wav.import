@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d22c60gjkc3oe"
+path="res://.godot/imported/chicken echo.wav-9037d319e7223befed3dc9684b582bd5.sample"
+
+[deps]
+
+source_file="res://assets/audio/chicken echo.wav"
+dest_files=["res://.godot/imported/chicken echo.wav-9037d319e7223befed3dc9684b582bd5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

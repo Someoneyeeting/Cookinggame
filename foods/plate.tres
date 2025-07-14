@@ -1,11 +1,10 @@
 [gd_resource type="Resource" script_class="ItemRes" load_steps=3 format=3 uid="uid://8orrvogpxwmb"]
 
 [ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_qld3r"]
-[ext_resource type="Texture2D" uid="uid://ctc20deidrgca" path="res://plate.png" id="2_bfm3c"]
+[ext_resource type="Texture2D" uid="uid://blwfeyull8o50" path="res://assets/sprites/plate.png" id="2_bfm3c"]
 
 [resource]
 script = ExtResource("1_qld3r")
 id = 0
 texture = ExtResource("2_bfm3c")
-color = Color(1, 1, 1, 1)
 metadata/_custom_type_script = ExtResource("1_qld3r")

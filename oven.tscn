@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpi66gi61howo"]
+
+[ext_resource type="Script" uid="uid://d0q0qw8vnyl65" path="res://oven.gd" id="1_3n55h"]
+[ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="1_my181"]
+[ext_resource type="Texture2D" uid="uid://be5qsc2x881h5" path="res://oven.png" id="2_3n55h"]
+[ext_resource type="AudioStream" uid="uid://bon08qh1g8bc0" path="res://assets/audio/oven.wav" id="4_i66py"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_my181"]
+size = Vector2(111, 111)
+
+[node name="oven" type="Node2D"]
+script = ExtResource("1_3n55h")
+
+[node name="Oven" type="Sprite2D" parent="."]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_3n55h")
+
+[node name="Targetable" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_my181")]
+target = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Targetable"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_my181")
+
+[node name="close" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i66py")

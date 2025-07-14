@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Globals="*res://globals.tscn"
 Partmanager="*res://partmanager.tscn"
 
+[display]
+
+window/size/viewport_width=1270
+window/size/viewport_height=720
+
 [global_group]
 
 podium=""

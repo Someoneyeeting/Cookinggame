@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=11 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://cnsqrjxlklv3k" path="res://assets/audio/chicken_throw.wav" id="5_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://r7wia6rowagv" path="res://assets/audio/chicken_die.wav" id="5_sweqy"]
 
 [sub_resource type="Shader" id="Shader_onrkg"]
 code = "shader_type canvas_item;
@@ -89,5 +91,13 @@ shape = SubResource("CircleShape2D_hqtel")
 
 [node name="break" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_hqtel")
+
+[node name="chicken" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2hs0m")
+volume_db = 3.0
+
+[node name="chicken_echo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_sweqy")
+volume_db = 3.0
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

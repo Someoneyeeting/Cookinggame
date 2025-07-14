@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ci8yx1ctab0pc"
+path="res://.godot/imported/Minecraft Chicken Sounds - SquishyMain.mp3-ba7a54520156e5c6ce9b990ea55b633c.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Minecraft Chicken Sounds - SquishyMain.mp3"
+dest_files=["res://.godot/imported/Minecraft Chicken Sounds - SquishyMain.mp3-ba7a54520156e5c6ce9b990ea55b633c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

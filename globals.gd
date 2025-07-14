@@ -40,9 +40,9 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	var mousemovedir = get_global_mouse_position() - mouseprevpos
+	$mouse.global_position = get_global_mouse_position()
 	$mouse/cursor.rotation = lerp_angle($mouse/cursor.rotation,mousemovedir.angle() + 3.14/2,0.6 * mousemovedir.length() / 30)
 	$mouse/cursor.rotation = lerp_angle($mouse/cursor.rotation,0,0.2)
-	$mouse.global_position = get_global_mouse_position()
 	mouseprevpos = $mouse.global_position
 	
 	if(Input.is_action_pressed("rightc")):

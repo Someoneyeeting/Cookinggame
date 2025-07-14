@@ -41,11 +41,19 @@ func throw(target : Node2D):
 	else:
 		Globals.shake(dir * 20)
 		Globals.change_hunger(-10)
+		
+	if(plate.has_chicken):
+		if(target is Oven):
+			$chicken_echo.play()
+		else:
+			$chicken.play()
+		
 	target.get_thrown(plate.get_count())
 	plate.clear()
 	$break.play()
 	Partmanager.summon("break",target.global_position)
 	draw_throw(target.global_position,plate.av_color())
+	
 
 func draw_throw(target : Vector2,clr : Color):
 	$Line2D.points[0] = plate.global_position
