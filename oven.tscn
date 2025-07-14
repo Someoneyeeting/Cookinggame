@@ -1,9 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpi66gi61howo"]
+[gd_scene load_steps=10 format=3 uid="uid://dpi66gi61howo"]
 
 [ext_resource type="Script" uid="uid://d0q0qw8vnyl65" path="res://oven.gd" id="1_3n55h"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="1_my181"]
 [ext_resource type="Texture2D" uid="uid://cvcxylv61np1i" path="res://assets/sprites/oven.png" id="2_i66py"]
+[ext_resource type="Texture2D" uid="uid://beaf72ax4mrv" path="res://assets/sprites/oven on.png" id="3_7fonb"]
 [ext_resource type="AudioStream" uid="uid://bon08qh1g8bc0" path="res://assets/audio/oven.wav" id="4_i66py"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j351"]
+atlas = ExtResource("3_7fonb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyjja"]
+atlas = ExtResource("3_7fonb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_visjk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i66py")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_8j351")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyjja")
+}],
+"loop": true,
+"name": &"cooking",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_my181"]
 size = Vector2(111, 111)
@@ -11,9 +47,12 @@ size = Vector2(111, 111)
 [node name="oven" type="Node2D"]
 script = ExtResource("1_3n55h")
 
-[node name="Oven" type="Sprite2D" parent="."]
+[node name="Oven" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.5, 3.5)
-texture = ExtResource("2_i66py")
+sprite_frames = SubResource("SpriteFrames_visjk")
+animation = &"cooking"
+autoplay = "closed"
+frame_progress = 0.0855886
 
 [node name="Targetable" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_my181")]
 target = NodePath("..")
@@ -28,3 +67,10 @@ stream = ExtResource("4_i66py")
 [node name="cooking" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_i66py")
 volume_db = 24.0
+
+[node name="cooktime" type="Timer" parent="."]
+wait_time = 1.6
+one_shot = true
+
+[connection signal="finished" from="cooking" to="." method="_on_cooking_finished"]
+[connection signal="timeout" from="cooktime" to="." method="_on_cooktime_timeout"]
