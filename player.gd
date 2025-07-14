@@ -52,7 +52,8 @@ func throw(target : Node2D):
 	if(plate.is_poison()):
 		Partmanager.summon("poison",target.global_position)
 	else:
-		Partmanager.summon("break",target.global_position)
+		if(target is not Oven):
+			Partmanager.summon("break",target.global_position)
 	
 	
 	plate.clear()

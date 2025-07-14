@@ -48,4 +48,4 @@ item = ExtResource("6_scc5w")
 position = Vector2(553, 410)
 
 [node name="oven" parent="." instance=ExtResource("6_b56k5")]
-position = Vector2(133, 443)
+position = Vector2(133, 394)
