@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpi66gi61howo"]
+[gd_scene load_steps=11 format=3 uid="uid://dpi66gi61howo"]
 
 [ext_resource type="Script" uid="uid://d0q0qw8vnyl65" path="res://oven.gd" id="1_3n55h"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="1_my181"]
 [ext_resource type="Texture2D" uid="uid://cvcxylv61np1i" path="res://assets/sprites/oven.png" id="2_i66py"]
 [ext_resource type="Texture2D" uid="uid://beaf72ax4mrv" path="res://assets/sprites/oven on.png" id="3_7fonb"]
+[ext_resource type="Texture2D" uid="uid://brbbcmhnd2eqx" path="res://assets/sprites/oven open.png" id="4_8j351"]
 [ext_resource type="AudioStream" uid="uid://bon08qh1g8bc0" path="res://assets/audio/oven.wav" id="4_i66py"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j351"]
@@ -33,9 +34,12 @@ animations = [{
 }],
 "loop": true,
 "name": &"cooking",
-"speed": 2.0
+"speed": 3.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8j351")
+}],
 "loop": true,
 "name": &"open",
 "speed": 5.0
@@ -48,11 +52,12 @@ size = Vector2(111, 111)
 script = ExtResource("1_3n55h")
 
 [node name="Oven" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 49)
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_visjk")
-animation = &"cooking"
-autoplay = "closed"
-frame_progress = 0.0855886
+animation = &"open"
+autoplay = "open"
+offset = Vector2(0.285714, -14)
 
 [node name="Targetable" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_my181")]
 target = NodePath("..")

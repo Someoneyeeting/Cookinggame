@@ -10,6 +10,8 @@ func add_ingridiant(item : ItemRes):
 		return
 	if(is_poison()):
 		return
+	if(not is_empty() and item.id == -1):
+		return
 	if(item.id == 2):
 		has_chicken = true
 	var plate :Sprite2D= PLATE.instantiate()

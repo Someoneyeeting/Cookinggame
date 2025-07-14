@@ -1,6 +1,7 @@
 extends Node2D
 class_name Oven
 
+var rot :float= 0.0
 
 func get_thrown(ids):
 	$Oven.play("cooking")
