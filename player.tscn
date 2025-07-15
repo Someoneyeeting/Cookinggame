@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=16 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
@@ -56,6 +56,29 @@ shader = SubResource("Shader_onrkg")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 
+[sub_resource type="Shader" id="Shader_1jxqw"]
+code = "shader_type canvas_item;
+
+uniform float skew = 0.0;
+
+void vertex() {
+	VERTEX.x += -skew * (1.- UV.y);
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dw050"]
+shader = SubResource("Shader_1jxqw")
+shader_parameter/skew = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 25.0799
 
@@ -87,6 +110,7 @@ scale = Vector2(1.46767, 1.46767)
 shape = SubResource("CircleShape2D_onrkg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dw050")
 offset_left = -14.0
 offset_top = -14.0
 offset_right = 6.0

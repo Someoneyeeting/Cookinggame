@@ -4,6 +4,7 @@ class_name Customer
 var serving := false
 var plate := preload("res://foods/plate.tres")
 var chicken := preload("res://foods/chicken.tres")
+@onready var waittime :float= $waittime.wait_time
 
 @export var recipe : RecipeRes
 
@@ -27,6 +28,11 @@ func check_eat(ids):
 		$ColorRect.color = Color.BLUE
 		get_tree().create_timer(0.4).timeout.connect(queue_free)
 		Globals.lose_star()
+	else:
+		if($waittime.time_left <= 0.8):
+			time_out()
+		else:
+			$waittime.start(max(0,$waittime.time_left - 0.8))
 		
 
 func get_thrown(items : Array[ItemRes]):
@@ -52,7 +58,8 @@ func get_thrown(items : Array[ItemRes]):
 	tween.tween_callback(queue_free)
 
 func time_out():
-	pass
+	Globals.lose_star()
+	queue_free()
 
 func enter_line():
 	$AnimationPlayer.play("enter_line")
@@ -77,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		$ColorRect.position.x = -61.0 + (randf_range(count,-count) - 35) / 32
 		$GPUParticles2D.emitting = true
 	
-	$customertimer.set_timer($waittime.time_left / $waittime.wait_time)
+	$customertimer.set_timer($waittime.time_left / waittime)
 
 
 func _on_outanimation_timeout() -> void:

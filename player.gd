@@ -37,12 +37,14 @@ func _handle_move():
 		velocity = lerp(velocity,Vector2.ZERO,0.2)
 	else:
 		var sprint = Input.is_action_pressed("sprint")
-		velocity = lerp(velocity,dir * move_speed * (1.6 if sprint else 1),0.09)
+		velocity = lerp(velocity,dir * move_speed * (1.3 if sprint else 1),0.12)
 		
 		if(sprint):
 			Globals.change_hunger(-0.1)
 		else:
 			Globals.change_hunger(-0.05)
+	
+	$ColorRect.material.set_shader_parameter("skew",velocity.x / 150)
 	
 	
 	move_and_slide()

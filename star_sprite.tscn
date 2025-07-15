@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://di11wr21q4u5w"]
+[gd_scene load_steps=12 format=3 uid="uid://di11wr21q4u5w"]
 
 [ext_resource type="Texture2D" uid="uid://bp44dmw6xpnsv" path="res://assets/sprites/star_off.png" id="1_l6opp"]
 [ext_resource type="Texture2D" uid="uid://dq3f447tk8ka6" path="res://assets/sprites/star_on.png" id="2_fi8ru"]
@@ -19,21 +19,21 @@ func _physics_process(delta: float) -> void:
 	if(mode == 0):
 		speedfact = 0
 	elif(mode == 1):
-		speedfact = 3
+		speedfact = 6
 	elif(mode == 2):
-		speedfact = 5
+		speedfact = 7
 	$Sprite2D.frame = mode
 	
 	$Sprite2D.material.set_shader_parameter(\"hype\",mode == 2);
 	if(mode == 2):
 		#$Sprite2D.rotation_degrees = sin(t * 3) * 2
 		$Sprite2D.position.x = randf_range(-2,2)
-		$Sprite2D.position.y += randf_range(-4,4)
+		$Sprite2D.position.y += randf_range(-10,10)
 		#$Sprite2D.modulate = Color.from_hsv($Sprite2D.modulate.h + 0.01,$Sprite2D.modulate.s,$Sprite2D.modulate.v)
 		var clrval = Time.get_unix_time_from_system()
 	else:
 		$Sprite2D.rotation_degrees = 0
-		$Sprite2D.position.x = 0
+		$Sprite2D.position.y = 0
 		
 	if(mode == 1):
 		clr = goldclr
@@ -42,19 +42,26 @@ func _physics_process(delta: float) -> void:
 	
 	$Sprite2D.modulate = lerp($Sprite2D.modulate,clr,0.5)
 	
-	$Sprite2D.position.y = sin(t + global_position.x * global_position.x ) * speedfact
+	$Sprite2D.position.y = sin(t + global_position.y * global_position.y ) * speedfact
 
 func deactivate():
 	mode = 0
 	clr = Color(0.3,0.3,0.3)
+	%glow.hide()
 
 func activate():
 	mode = 1
 	clr = goldclr
+	%glow.show()
+	%glow.color = goldclr
+	%glow.material.set_shader_parameter(\"strength\",0.3)
 
 func hype():
 	mode = 2
 	clr = Color(1,1,1)
+	%glow.show()
+	%glow.color = Color(\"002fff\")
+	%glow.material.set_shader_parameter(\"strength\",1.4)
 "
 
 [sub_resource type="Gradient" id="Gradient_l6opp"]
@@ -110,6 +117,31 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Shader" id="Shader_fi8ru"]
+code = "shader_type canvas_item;
+
+uniform float strength = 1.;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR.a = 0.5 - distance(UV,vec2(0.5,0.5));
+	COLOR.a *= strength;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfnq7"]
+resource_local_to_scene = true
+shader = SubResource("Shader_fi8ru")
+shader_parameter/strength = 0.5
+
 [node name="StarSprite" type="Node2D"]
 script = SubResource("GDScript_yoar7")
 grad = SubResource("Gradient_l6opp")
@@ -119,3 +151,13 @@ goldclr = Color(0.988783, 0.650817, 0.260293, 1)
 material = SubResource("ShaderMaterial_fi8ru")
 scale = Vector2(2.98417, 2.98417)
 sprite_frames = SubResource("SpriteFrames_4m2w3")
+
+[node name="glow" type="ColorRect" parent="Sprite2D"]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+material = SubResource("ShaderMaterial_xfnq7")
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 20.0
+offset_bottom = 22.0

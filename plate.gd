@@ -23,7 +23,7 @@ func add_ingridiant(item : ItemRes):
 	var tween = get_tree().create_tween()
 	tween.tween_property(plate,"position",Vector2(0,targpos),0.3)
 	tween.finished.connect($land.play)
-	$pick.pitch_scale = randf_range(0.3,1)
+	$pick.pitch_scale = randf_range(0.1,0.3)
 	if(item.id == 2):
 		$chicken.play()
 	else:
