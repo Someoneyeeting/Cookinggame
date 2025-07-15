@@ -12,7 +12,7 @@ func _physics_process(delta: float) -> void:
 func _ready() -> void:
 	for i in range(5):
 		var star = STAR.instantiate()
-		star.position.x = i * 80
+		star.position.y = i * -80
 		if(i >= starcount):
 			star.deactivate()
 		else:
@@ -50,9 +50,9 @@ func add_stars(amount : int):
 
 func add_hype():
 	var star = STAR.instantiate()
-	star.position.x = (starcount + hypecount - 2) * 80
+	star.position.y = (starcount + hypecount - 2) * -80
 	var tween = get_tree().create_tween()
-	tween.tween_property(star,"position:x",(starcount + hypecount - 1) * 80,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.tween_property(star,"position:y",(starcount + hypecount - 1) * -80,0.1).set_trans(Tween.TRANS_CIRC) 
 	star.hype()
 	$hype.add_child(star)
 	hypecount += 1
@@ -62,7 +62,7 @@ func lose_hype():
 	hypecount = 0
 	for i in $hype.get_children():
 		var tween = get_tree().create_tween()
-		tween.tween_property(i,"position:x",4 * 80,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(i,"position:y",4 * -80,0.1).set_trans(Tween.TRANS_CIRC)
 		tween.finished.connect(i.queue_free)
 	
 

@@ -130,7 +130,7 @@ stream = ExtResource("4_eas7q")
 
 [node name="RecipeDisplay" parent="." instance=ExtResource("3_f7asb")]
 position = Vector2(0, -54)
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.28028, 1.28028)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false

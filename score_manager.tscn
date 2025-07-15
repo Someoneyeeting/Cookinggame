@@ -8,9 +8,12 @@
 script = ExtResource("1_vublb")
 
 [node name="StarsUI" parent="." instance=ExtResource("2_dlkr7")]
+position = Vector2(82, 601)
+scale = Vector2(0.678614, 0.678614)
 
 [node name="hungerbar" parent="." instance=ExtResource("3_t00u6")]
-position = Vector2(317, 31)
+position = Vector2(4.00003, 693)
+rotation = -1.5708
 scale = Vector2(2.10697, 2.10697)
 
 [node name="Timer" type="Timer" parent="."]

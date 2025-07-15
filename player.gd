@@ -16,6 +16,8 @@ func add_food_pod(pod : Podium):
 	if(plate.can_add_item(pod.item)):
 		plate.add_ingridiant(pod.item)
 		pod.pick_up()
+	else:
+		$cantpick.play()
 
 func take_food_oven(oven : Oven):
 	if(plate.items.size() > 0):

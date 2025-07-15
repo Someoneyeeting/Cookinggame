@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=14 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_hqtel"]
 [ext_resource type="AudioStream" uid="uid://cnsqrjxlklv3k" path="res://assets/audio/chicken_throw.wav" id="5_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://r7wia6rowagv" path="res://assets/audio/chicken_die.wav" id="5_sweqy"]
+[ext_resource type="AudioStream" uid="uid://bahrftis21h06" path="res://assets/audio/cantpick.wav" id="7_1jxqw"]
 
 [sub_resource type="Shader" id="Shader_2hs0m"]
 code = "shader_type canvas_item;
@@ -16,6 +17,10 @@ void vertex() {
 
 void fragment() {
 	COLOR.a = 1. - UV.y - 0.2;
+	float dist = distance(0.5,UV.x);
+	if(dist * 5. + 1. - UV.y - 2.56 > 0.){
+		COLOR.a *= (0.5 - dist) * 5. + 1. - UV.y - 2.56;
+	}
 }
 
 //void light() {
@@ -59,12 +64,12 @@ script = ExtResource("1_4flbx")
 move_speed = 400.0
 plate = NodePath("plate")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="reflect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_1jxqw")
-offset_left = -14.0
+offset_left = -22.0
 offset_top = 14.0
-offset_right = 6.0
-offset_bottom = 34.0
+offset_right = 9.0
+offset_bottom = 40.0
 scale = Vector2(1.41244, 1.41244)
 color = Color(0.927686, 0.927686, 0.927686, 1)
 
@@ -128,5 +133,8 @@ volume_db = 3.0
 [node name="chicken_echo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_sweqy")
 volume_db = -2.0
+
+[node name="cantpick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1jxqw")
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

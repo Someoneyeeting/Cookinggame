@@ -6,6 +6,7 @@
 script = ExtResource("1_uxglp")
 
 [node name="customers" type="Node2D" parent="."]
+position = Vector2(60, 0)
 
 [node name="newcustomer" type="Timer" parent="."]
 autostart = true

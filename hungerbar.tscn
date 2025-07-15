@@ -5,29 +5,39 @@
 [sub_resource type="Shader" id="Shader_y4dqk"]
 code = "shader_type canvas_item;
 
-uniform int val = 100;
+uniform float val = 0.;
 uniform sampler2D grad;
+uniform float decrease = 0.;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	int xind = int(UV.x * 33.);
-
-
-	int yind = int(UV.y * 3.);
-
-	int ind = yind + xind * 3;
-
-	if(ind > val){
+	COLOR.rgb = texture(grad,vec2(UV.x,0.)).rgb;
+	float light = UV.x;
+	if(light >= val - decrease){
+		COLOR.rgb += vec3(1.6,-.1,-.1);
+	}
+	//COLOR.rgb -= light * 0.3;
+	if(UV.x > val){
 		COLOR.a = 0.;
 	}
-	else{
-		float light = float(ind % 33) / (99.) * 0.6 - 0.1;
-		light -= (1. - float(yind) / 33.) * 0.05;
-		COLOR.rgb = texture(grad,vec2(float(xind) / 33.,0.)).rgb + vec3(light);
-	}
+	//int xind = int(UV.x * 33.);
+//
+//
+	//int yind = int(UV.y * 3.);
+//
+	//int ind = yind + xind * 3;
+//
+	//if(ind > val){
+		//COLOR.a = 0.;
+	//}
+	//else{
+		//float light = float(ind % 33) / (99.) * 0.6 - 0.1;
+		//light -= (1. - float(yind) / 33.) * 0.05;
+		//COLOR.rgb = texture(grad,vec2(float(xind) / 33.,0.)).rgb + vec3(light);
+	//}
 }
 
 //void light() {
@@ -38,7 +48,7 @@ void fragment() {
 
 [sub_resource type="Gradient" id="Gradient_y4dqk"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.32, 0.65)
+offsets = PackedFloat32Array(0, 0.333, 0.667)
 colors = PackedColorArray(0.561098, 0.0418201, 0.014864, 1, 0.832644, 0.40457, 0.257521, 1, 1, 0.762868, 0.5, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_clw42"]
@@ -46,8 +56,9 @@ gradient = SubResource("Gradient_y4dqk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_clw42"]
 shader = SubResource("Shader_y4dqk")
-shader_parameter/val = 163
+shader_parameter/val = 0.305
 shader_parameter/grad = SubResource("GradientTexture1D_clw42")
+shader_parameter/decrease = 0.125
 
 [node name="hungerbar" type="Node2D"]
 script = ExtResource("1_5ec5r")
@@ -55,33 +66,33 @@ script = ExtResource("1_5ec5r")
 [node name="base" type="ColorRect" parent="."]
 offset_left = -2.0
 offset_top = -2.0
-offset_right = 288.0
-offset_bottom = 28.0
+offset_right = 316.0
+offset_bottom = 19.0
 pivot_offset = Vector2(156.5, 13)
 color = Color(0, 0, 0, 1)
 
 [node name="background" type="ColorRect" parent="."]
-offset_right = 286.0
-offset_bottom = 26.0
+offset_right = 314.0
+offset_bottom = 17.0
 color = Color(0.160567, 0.160567, 0.160567, 1)
 
 [node name="bar" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_clw42")
-offset_right = 286.0
-offset_bottom = 26.0
+offset_right = 313.0
+offset_bottom = 17.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 94.4805
-offset_top = -0.792
-offset_right = 96.4805
-offset_bottom = 26.208
+offset_left = 94.0
+offset_top = -1.0
+offset_right = 96.0
+offset_bottom = 19.0
 pivot_offset = Vector2(1, 0)
 color = Color(0, 0, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 189.978
-offset_top = -0.522274
-offset_right = 191.978
-offset_bottom = 26.4777
+offset_left = 190.0
+offset_top = -1.0
+offset_right = 192.0
+offset_bottom = 19.0
 pivot_offset = Vector2(1, 0)
 color = Color(0, 0, 0, 1)

@@ -13,6 +13,7 @@ func _input(event: InputEvent) -> void:
 
 func change_hunger(amount : float):
 	$hungerbar.hunger += amount
+	$hungerbar.decrease = -amount
 	
 func set_hunger(amount : float):
 	$hungerbar.hunger = amount
