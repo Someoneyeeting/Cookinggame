@@ -17,7 +17,7 @@ void fragment() {
 	COLOR.rgb = texture(grad,vec2(UV.x,0.)).rgb;
 	float light = UV.x;
 	if(light >= val - decrease){
-		COLOR.rgb += vec3(1.6,-.1,-.1);
+		COLOR.rgb += vec3(1.6,-.4,-.4);
 	}
 	//COLOR.rgb -= light * 0.3;
 	if(UV.x > val){

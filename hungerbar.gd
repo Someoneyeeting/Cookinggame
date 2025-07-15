@@ -15,10 +15,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	#$bar.size.x = lerp($bar.size.x,lerp(0,ogsize,hunger / 160),0.4)
-	decreaselerp = lerp(decreaselerp,decrease,0.5)
+	decreaselerp = lerp(decreaselerp,sqrt(decrease / 2.),0.5)
 	decrease = max(decrease,0.)
-	decrease = lerp(decrease,delta,0.1)
-	hunger -= delta
+	decrease = lerp(decrease,delta * 0.5,0.1)
+	hunger -= delta * 0.5
 	hunger = clamp(hunger,0,maxhunger)
 	hungerlerp = lerp(hungerlerp,hunger,0.3)
 	

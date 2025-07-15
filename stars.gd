@@ -28,6 +28,8 @@ func change_by(amount : int):
 func lose_stars(amount : int):
 	if(hypecount > 0):
 		lose_hype()
+		return
+	$losestar.play()
 	for i in amount:
 		starcount -= 1
 		var ind = starcount
@@ -46,6 +48,9 @@ func add_stars(amount : int):
 			add_hype()
 			continue
 		$stars.get_children()[ind].activate()
+	
+	if(hypecount == 0):
+		$gainstar.play()
 	starcount = min(starcount,5)
 
 func add_hype():
@@ -57,11 +62,15 @@ func add_hype():
 	tween.parallel().tween_property($stars,"position:y",(hypecount) * 80 / 2,0.1).set_trans(Tween.TRANS_CIRC) 
 	star.hype()
 	$hype.add_child(star)
+	$gainhype.play()
 	hypecount += 1
+	$gainhype.pitch_scale = 1 + (hypecount * 0.1)
 
 
 func lose_hype():
 	hypecount = 0
+	$losehype.play()
+	$crowd.play()
 	for i in $hype.get_children():
 		var tween = get_tree().create_tween()
 		tween.tween_property(i,"position:y",4 * -80,0.1).set_trans(Tween.TRANS_CIRC)
