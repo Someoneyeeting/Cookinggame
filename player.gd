@@ -90,7 +90,10 @@ func _input(event: InputEvent) -> void:
 		pass
 
 func get_thrown(items : Array[ItemRes]):
-	Globals._eat(items)
+	var ids = []
+	for i in items:
+		ids.push_back(i.id)
+	Globals._eat(ids)
 
 func _physics_process(delta: float) -> void:
 	Globals.player = self

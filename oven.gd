@@ -46,5 +46,5 @@ func replace_content(newcontent : Array[ItemRes]):
 
 func _on_cooktime_timeout() -> void:
 	$Targetable/CollisionShape2D.disabled = false
-	$pickup/CollisionShape2D.disabled = false
 	$Oven.play("closed")
+	$pickup/CollisionShape2D.disabled = false

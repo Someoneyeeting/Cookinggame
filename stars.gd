@@ -15,6 +15,8 @@ func _ready() -> void:
 		star.position.x = i * 80
 		if(i >= starcount):
 			star.deactivate()
+		else:
+			star.activate()
 		$stars.add_child(star)
 
 func change_by(amount : int):
@@ -48,7 +50,9 @@ func add_stars(amount : int):
 
 func add_hype():
 	var star = STAR.instantiate()
-	star.position.x = (starcount + hypecount - 1) * 80
+	star.position.x = (starcount + hypecount - 2) * 80
+	var tween = get_tree().create_tween()
+	tween.tween_property(star,"position:x",(starcount + hypecount - 1) * 80,0.1).set_trans(Tween.TRANS_CIRC) 
 	star.hype()
 	$hype.add_child(star)
 	hypecount += 1
@@ -57,7 +61,10 @@ func add_hype():
 func lose_hype():
 	hypecount = 0
 	for i in $hype.get_children():
-		i.queue_free()
+		var tween = get_tree().create_tween()
+		tween.tween_property(i,"position:x",4 * 80,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.finished.connect(i.queue_free)
+	
 
 func _death():
 	$death.show()

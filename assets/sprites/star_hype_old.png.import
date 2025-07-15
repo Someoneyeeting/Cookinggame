@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jrnyuby7h8oe"
-path="res://.godot/imported/star_hype.png-9657fcfdfb99097e7d6aed6656958b56.ctex"
+uid="uid://cp7ebhpjvqev7"
+path="res://.godot/imported/star_hype_old.png-c5e447afb5f945db9a1a8d2ea6fc89e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/star_hype.png"
-dest_files=["res://.godot/imported/star_hype.png-9657fcfdfb99097e7d6aed6656958b56.ctex"]
+source_file="res://assets/sprites/star_hype_old.png"
+dest_files=["res://.godot/imported/star_hype_old.png-c5e447afb5f945db9a1a8d2ea6fc89e7.ctex"]
 
 [params]
 
