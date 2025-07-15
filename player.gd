@@ -102,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	if(get_global_mouse_position().distance_to(global_position) < 200):
 		$range.color.a = lerp($range.color.a,0.0,0.3)
 	else:
-		$range.color.a = lerp($range.color.a,0.4,0.3)
+		$range.color.a = lerp($range.color.a,0.2,0.3)
 	
 	$Line2D.points[0] =  lerp($Line2D.points[0],$Line2D.points[1],0.4)
 
