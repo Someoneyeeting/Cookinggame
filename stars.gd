@@ -53,6 +53,8 @@ func add_hype():
 	star.position.y = (starcount + hypecount - 2) * -80
 	var tween = get_tree().create_tween()
 	tween.tween_property(star,"position:y",(starcount + hypecount - 1) * -80,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.parallel().tween_property($hype,"position:y",(hypecount) * 80 / 2,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.parallel().tween_property($stars,"position:y",(hypecount) * 80 / 2,0.1).set_trans(Tween.TRANS_CIRC) 
 	star.hype()
 	$hype.add_child(star)
 	hypecount += 1
@@ -63,6 +65,8 @@ func lose_hype():
 	for i in $hype.get_children():
 		var tween = get_tree().create_tween()
 		tween.tween_property(i,"position:y",4 * -80,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.parallel().tween_property($stars,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.parallel().tween_property($hype,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
 		tween.finished.connect(i.queue_free)
 	
 

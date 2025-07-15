@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	if(mode == 2):
 		#$Sprite2D.rotation_degrees = sin(t * 3) * 2
 		$Sprite2D.position.x = randf_range(-2,2)
-		$Sprite2D.position.y += randf_range(-2,2)
+		$Sprite2D.position.y += randf_range(-4,4)
 		#$Sprite2D.modulate = Color.from_hsv($Sprite2D.modulate.h + 0.01,$Sprite2D.modulate.s,$Sprite2D.modulate.v)
 		var clrval = Time.get_unix_time_from_system()
 	else:
