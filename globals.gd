@@ -84,10 +84,10 @@ func _on_shake_timeout() -> void:
 
 
 func change_hunger(amount : float):
-	$hungerbar.hunger += amount
+	$ScoreManager.change_hunger(amount)
 	
 func set_hunger(amount : float):
-	$hungerbar.hunger = amount
+	$ScoreManager.set_hunger(amount)
 	
 func _eat(ids):
 	eat.emit(ids)
