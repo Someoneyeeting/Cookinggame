@@ -90,5 +90,8 @@ func set_hunger(amount : float):
 	$ScoreManager.set_hunger(amount)
 	
 func _eat(ids):
-	eat.emit(ids)
-	change_hunger(10)
+	if(ids == [-1]):
+		change_hunger(50)
+	else:
+		eat.emit(ids)
+		change_hunger(10)

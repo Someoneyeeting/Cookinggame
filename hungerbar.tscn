@@ -25,7 +25,7 @@ void fragment() {
 	}
 	else{
 		float light = float(ind % 33) / (99.) * 0.6 - 0.1;
-		light -= (1. - float(yind) / 33.) * 0.1;
+		light -= (1. - float(yind) / 33.) * 0.05;
 		COLOR.rgb = texture(grad,vec2(float(xind) / 33.,0.)).rgb + vec3(light);
 	}
 }
@@ -39,7 +39,7 @@ void fragment() {
 [sub_resource type="Gradient" id="Gradient_y4dqk"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.32, 0.65)
-colors = PackedColorArray(1, 0, 0.0613041, 1, 1, 0.910421, 0, 1, 0.175116, 1, 0, 1)
+colors = PackedColorArray(0.561098, 0.0418201, 0.014864, 1, 0.832644, 0.40457, 0.257521, 1, 1, 0.762868, 0.5, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_clw42"]
 gradient = SubResource("Gradient_y4dqk")
@@ -53,12 +53,35 @@ shader_parameter/grad = SubResource("GradientTexture1D_clw42")
 script = ExtResource("1_5ec5r")
 
 [node name="base" type="ColorRect" parent="."]
-visible = false
-offset_right = 603.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 288.0
+offset_bottom = 28.0
+pivot_offset = Vector2(156.5, 13)
+color = Color(0, 0, 0, 1)
+
+[node name="background" type="ColorRect" parent="."]
+offset_right = 286.0
 offset_bottom = 26.0
-color = Color(0.210938, 0.210938, 0.210938, 1)
+color = Color(0.160567, 0.160567, 0.160567, 1)
 
 [node name="bar" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_clw42")
-offset_right = 313.0
+offset_right = 286.0
 offset_bottom = 26.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 94.4805
+offset_top = -0.792
+offset_right = 96.4805
+offset_bottom = 26.208
+pivot_offset = Vector2(1, 0)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 189.978
+offset_top = -0.522274
+offset_right = 191.978
+offset_bottom = 26.4777
+pivot_offset = Vector2(1, 0)
+color = Color(0, 0, 0, 1)

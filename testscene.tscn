@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6xss2pyvosu0"]
+[gd_scene load_steps=19 format=3 uid="uid://b6xss2pyvosu0"]
 
 [ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
 [ext_resource type="PackedScene" uid="uid://6nbo85ja31eo" path="res://player.tscn" id="2_612pj"]
@@ -6,46 +6,97 @@
 [ext_resource type="PackedScene" uid="uid://cts1uyl7lbf1g" path="res://podium.tscn" id="4_asog6"]
 [ext_resource type="Resource" uid="uid://tt1jd2gvppb2" path="res://foods/live_chicken.tres" id="5_scc5w"]
 [ext_resource type="PackedScene" uid="uid://dpi66gi61howo" path="res://oven.tscn" id="6_b56k5"]
+[ext_resource type="Texture2D" uid="uid://dnxq6si7fa57m" path="res://assets/sprites/ceramic.png" id="6_egudy"]
 [ext_resource type="Resource" uid="uid://c2tkft0bdjcie" path="res://foods/poison.tres" id="6_scc5w"]
+[ext_resource type="Texture2D" uid="uid://dgl5fldr5f8s3" path="res://assets/sprites/cermaictest.png" id="7_01clm"]
+[ext_resource type="Texture2D" uid="uid://bw1rf7hbw0xvg" path="res://assets/sprites/counter_front.png" id="8_hkdkl"]
+[ext_resource type="Texture2D" uid="uid://bpuii6wa4evbk" path="res://assets/sprites/counter_diagonal.png" id="9_egudy"]
+[ext_resource type="Texture2D" uid="uid://c36ossevy4eet" path="res://assets/sprites/counter_side.png" id="10_01clm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hkdkl"]
+texture = ExtResource("9_egudy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egudy"]
+texture = ExtResource("8_hkdkl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01clm"]
+texture = ExtResource("10_01clm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gr5bc"]
+texture = ExtResource("6_egudy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b847t"]
+texture = ExtResource("7_01clm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gr5bc"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_hkdkl")
+sources/2 = SubResource("TileSetAtlasSource_egudy")
+sources/3 = SubResource("TileSetAtlasSource_01clm")
+sources/4 = SubResource("TileSetAtlasSource_gr5bc")
+sources/5 = SubResource("TileSetAtlasSource_b847t")
 
 [node name="testscene" type="Node2D"]
 
-[node name="CustomerManager" parent="." instance=ExtResource("1_jotil")]
-
-[node name="Player" parent="." instance=ExtResource("2_612pj")]
-position = Vector2(571, 569)
-scale = Vector2(1.65049, 1.65049)
-
 [node name="obst" parent="." instance=ExtResource("3_612pj")]
-position = Vector2(38, 523)
+visible = false
+position = Vector2(71, 570)
 scale = Vector2(3.95786, 12.5361)
 
 [node name="obst3" parent="." instance=ExtResource("3_612pj")]
-position = Vector2(1116, 523)
+visible = false
+position = Vector2(1198, 546)
 scale = Vector2(3.95786, 12.5361)
 
 [node name="obst2" parent="." instance=ExtResource("3_612pj")]
-position = Vector2(573, 418)
-scale = Vector2(57.9051, -3.26479)
+visible = false
+position = Vector2(573, 477)
+scale = Vector2(77.5498, -3.26479)
 
 [node name="obst4" parent="." instance=ExtResource("3_612pj")]
-position = Vector2(573, 686)
+position = Vector2(573, 756)
 scale = Vector2(57.5451, -3.26479)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(580, 323)
-rotation = -3.14159
+[node name="oven" parent="." instance=ExtResource("6_b56k5")]
+position = Vector2(237, 477)
+scale = Vector2(1.40963, 1.40963)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 81)
+scale = Vector2(4.95883, 4.95883)
+tile_set = SubResource("TileSet_gr5bc")
+format = 2
+layer_0/tile_data = PackedInt32Array(196608, 3, 0, 196615, 3, 268435456, 131072, 1, 0, 131079, 1, 268435456, 131078, 2, 0, 131077, 2, 0, 131076, 2, 0, 131075, 2, 0, 131074, 2, 0, 196609, 5, 0, 196610, 5, 0, 196611, 5, 0, 196612, 5, 0, 196613, 5, 0, 196614, 4, 0, 262150, 5, 0, 262149, 5, 0, 262148, 5, 0, 262147, 5, 0, 262146, 5, 0, 262145, 4, 0, 262144, 4, 0, 262151, 4, 0)
 
 [node name="podium" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(336, 410)
+position = Vector2(428, 483)
+scale = Vector2(1.0618, 1.0618)
 item = ExtResource("5_scc5w")
 
 [node name="podium2" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(741, 410)
+position = Vector2(833, 483)
+scale = Vector2(1.0618, 1.0618)
 item = ExtResource("6_scc5w")
 
 [node name="podium3" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(553, 410)
+position = Vector2(645, 483)
+scale = Vector2(1.0618, 1.0618)
 
-[node name="oven" parent="." instance=ExtResource("6_b56k5")]
-position = Vector2(133, 394)
+[node name="Player" parent="." instance=ExtResource("2_612pj")]
+position = Vector2(571, 569)
+scale = Vector2(1.86898, 1.86898)
+
+[node name="CustomerManager" parent="." instance=ExtResource("1_jotil")]

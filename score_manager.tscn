@@ -10,8 +10,8 @@ script = ExtResource("1_vublb")
 [node name="StarsUI" parent="." instance=ExtResource("2_dlkr7")]
 
 [node name="hungerbar" parent="." instance=ExtResource("3_t00u6")]
-position = Vector2(420, 31)
-scale = Vector2(1.39148, 1.39148)
+position = Vector2(317, 31)
+scale = Vector2(2.10697, 2.10697)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
