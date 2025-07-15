@@ -11,4 +11,4 @@ id = 2
 texture = ExtResource("3_3hcbx")
 cooked = ExtResource("1_3hcbx")
 picktexture = ExtResource("3_j1gx1")
-metadata/_custom_type_script = ExtResource("1_k8ufd")
+metadata/_custom_type_script = "uid://d21xb116fxl4j"

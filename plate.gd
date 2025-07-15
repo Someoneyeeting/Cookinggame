@@ -4,6 +4,7 @@ class_name Plate
 var PLATE := preload("res://food.tscn")
 var items : Array[ItemRes]
 var has_chicken := false
+var itemcount := 0
 
 func can_add_item(item : ItemRes):
 	if(is_poison()):
@@ -17,7 +18,7 @@ func add_ingridiant(item : ItemRes):
 	if(item.id == 2):
 		has_chicken = true
 	var plate :Sprite2D= PLATE.instantiate()
-	var targpos := $ingridiatns.get_child_count() * -7 / scale.x
+	var targpos := itemcount * -7 / scale.x
 	plate.position.y = targpos - 350
 	var tween = get_tree().create_tween()
 	tween.tween_property(plate,"position",Vector2(0,targpos),0.3)
@@ -28,10 +29,11 @@ func add_ingridiant(item : ItemRes):
 	else:
 		$pick.play()
 	#tween.set_ease(Tween.EASE_OUT)
-	plate.ind = $ingridiatns.get_child_count()
+	plate.ind = itemcount
 	plate.item = item
 	items.push_back(item)
 	$ingridiatns.add_child(plate)
+	itemcount += 1
 
 
 func _physics_process(delta: float) -> void:
@@ -49,9 +51,6 @@ func is_empty():
 func av_color():
 	var clr := Color.WHITE
 	clr.h = 0
-	
-	for i in items:
-		clr.h += i.color.h / items.size()
 	return clr
 	
 func get_count():
@@ -66,10 +65,16 @@ func get_as_ids():
 	return ids
 
 
+func set_items(newitems : Array[ItemRes]):
+	clear()
+	for i in newitems:
+		add_ingridiant(i)
+
 func clear():
 	for i in $ingridiatns.get_children():
 		i.queue_free()
 	items.clear()
+	itemcount = 0
 	has_chicken = false
 
 func is_poison():

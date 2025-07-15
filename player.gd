@@ -49,15 +49,17 @@ func throw(target : Node2D):
 		else:
 			$chicken.play()
 		
-	target.get_thrown(plate.get_count())
+	target.get_thrown(plate.items)
 	if(plate.is_poison()):
 		Partmanager.summon("poison",target.global_position)
 	else:
 		if(target is not Oven):
 			Partmanager.summon("break",target.global_position)
 	
-	
-	plate.clear()
+	if(target is Oven):
+		plate.set_items(target.replace_content(plate.items))
+	else:
+		plate.clear()
 	$break.pitch_scale = randf_range(0.85,1.2)
 	$break.play()
 	draw_throw(target.global_position,plate.av_color())
@@ -66,7 +68,6 @@ func throw(target : Node2D):
 func draw_throw(target : Vector2,clr : Color):
 	$Line2D.points[0] = plate.global_position
 	$Line2D.points[1] = target
-	$Line2D.default_color = clr
 	
 	$Line2D.show()
 	$timers/line.start()
@@ -75,8 +76,8 @@ func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("ui_accept")):
 		pass
 
-func get_thrown(amount : int):
-	Globals._eat(plate.get_as_ids())
+func get_thrown(items : Array[ItemRes]):
+	Globals._eat(items)
 
 func _physics_process(delta: float) -> void:
 	Globals.player = self

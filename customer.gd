@@ -28,7 +28,8 @@ func check_eat(ids):
 		get_tree().create_timer(0.4).timeout.connect(queue_free)
 		
 
-func get_thrown(size : float):
+func get_thrown(items : Array[ItemRes]):
+	var size : int = items.size()
 	#$AudioStreamPlayer2D.play()
 	$outanimation.start()
 	var tween = get_tree().create_tween()
