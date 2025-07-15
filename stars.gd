@@ -6,9 +6,13 @@ var STAR := preload("res://star_sprite.tscn")
 var starcount := 3
 var hypecount := 0
 var totalstarcount := 0
+var hypetarget : Node2D
 
 func _physics_process(delta: float) -> void:
 	totalstarcount = starcount + hypecount
+	if(hypetarget):
+		$mult.global_position.y = hypetarget.global_position.y - 20
+	$mult.text = "x" + str(hypecount + 1)
 func _ready() -> void:
 	for i in range(5):
 		var star = STAR.instantiate()
@@ -65,6 +69,7 @@ func add_hype():
 	$gainhype.play()
 	hypecount += 1
 	$gainhype.pitch_scale = 1 + (hypecount * 0.1)
+	hypetarget = star
 
 
 func lose_hype():
@@ -76,7 +81,9 @@ func lose_hype():
 		tween.tween_property(i,"position:y",4 * -80,0.1).set_trans(Tween.TRANS_CIRC)
 		tween.parallel().tween_property($stars,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
 		tween.parallel().tween_property($hype,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
+
 		tween.finished.connect(i.queue_free)
+		tween.finished.connect(func () : hypetarget = null)
 	
 
 func _death():

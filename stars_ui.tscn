@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://blyxxoxhim1q1"]
+[gd_scene load_steps=8 format=3 uid="uid://blyxxoxhim1q1"]
 
 [ext_resource type="Script" uid="uid://4efxh4gwgo8t" path="res://stars.gd" id="1_r10ar"]
 [ext_resource type="AudioStream" uid="uid://0hjwarmjmjp2" path="res://assets/audio/starcollect.wav" id="2_e6baj"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://r5fu4h48knfl" path="res://assets/audio/crowdaww.wav" id="4_odnl4"]
 [ext_resource type="AudioStream" uid="uid://x15h7hc8mb4u" path="res://assets/audio/star.wav" id="5_caemj"]
 [ext_resource type="AudioStream" uid="uid://dudndb0hgxk4u" path="res://assets/audio/losestar.wav" id="6_hr4jh"]
+[ext_resource type="FontFile" uid="uid://cs57epd2ryrn1" path="res://arapey-regular.ttf" id="7_4qiit"]
 
 [node name="StarsUI" type="Node2D"]
 script = ExtResource("1_r10ar")
@@ -39,3 +40,13 @@ stream = ExtResource("5_caemj")
 
 [node name="losestar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hr4jh")
+
+[node name="mult" type="Label" parent="."]
+offset_left = 40.0
+offset_top = -410.0
+offset_right = 100.0
+offset_bottom = -343.0
+pivot_offset = Vector2(2, 37)
+theme_override_fonts/font = ExtResource("7_4qiit")
+theme_override_font_sizes/font_size = 60
+text = "x3"
