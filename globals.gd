@@ -18,6 +18,9 @@ func _on_mouse_area_entered(area: Area2D) -> void:
 	
 	if(area.is_in_group("targetable")):
 		%target.global_position = area.global_position
+		if(isaiming):
+			$target.play()
+			
 	else:
 		%target.global_position = Vector2(-100,-100)
 

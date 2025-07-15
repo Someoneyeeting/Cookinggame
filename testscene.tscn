@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://b6xss2pyvosu0"]
+[gd_scene load_steps=13 format=4 uid="uid://b6xss2pyvosu0"]
 
 [ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
 [ext_resource type="PackedScene" uid="uid://6nbo85ja31eo" path="res://player.tscn" id="2_612pj"]
@@ -21,6 +21,34 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_gr5bc"]
 tile_size = Vector2i(32, 32)
 sources/6 = SubResource("TileSetAtlasSource_j8njj")
+
+[sub_resource type="Shader" id="Shader_fy0p5"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	vec3 clr = texture(SCREEN_TEXTURE,SCREEN_UV).rgb;
+	if(clr.b > 0.8){
+		COLOR.a = (sin((UV.x + UV.y) * 10. + TIME * 10.) + 1.) * 0.15;
+	}
+	else{
+		COLOR.a = 0.;
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8njj"]
+shader = SubResource("Shader_fy0p5")
 
 [node name="testscene" type="Node2D"]
 
@@ -54,18 +82,25 @@ scale = Vector2(4.95883, 4.95883)
 tile_map_data = PackedByteArray("AAAHAAMABgAAAAEAADAHAAIABgAAAAAAABAGAAIABgABAAAAAAAFAAIABgABAAAAAAAEAAIABgABAAAAAAADAAIABgABAAAAAAACAAMABgACAAEAAAADAAMABgACAAEAAAAEAAMABgACAAEAAAAFAAMABgACAAEAAAAGAAMABgABAAEAAAAGAAQABgABAAEAAAAFAAQABgACAAEAAAAEAAQABgACAAEAAAADAAQABgACAAEAAAACAAQABgACAAEAAAAHAAQABgAAAAEAADABAAMABgAAAAEAAAABAAQABgAAAAEAAAABAAIABgAAAAAAAAA=")
 tile_set = SubResource("TileSet_gr5bc")
 
+[node name="shine" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_j8njj")
+offset_left = 159.0
+offset_top = 458.0
+offset_right = 1269.0
+offset_bottom = 879.0
+
 [node name="podium" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(428, 483)
+position = Vector2(627, 477)
 scale = Vector2(1.31179, 1.31179)
 item = ExtResource("5_scc5w")
 
 [node name="podium2" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(833, 483)
+position = Vector2(1032, 477)
 scale = Vector2(1.31179, 1.31179)
 item = ExtResource("6_scc5w")
 
 [node name="podium3" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(645, 483)
+position = Vector2(844, 477)
 scale = Vector2(1.31179, 1.31179)
 
 [node name="Player" parent="." instance=ExtResource("2_612pj")]
