@@ -62,3 +62,4 @@ func is_matching():
 script = SubResource("GDScript_depl0")
 
 [node name="items" type="Node2D" parent="."]
+z_index = -55

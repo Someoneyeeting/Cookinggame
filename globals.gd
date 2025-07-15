@@ -13,15 +13,15 @@ func _on_mouse_area_entered(area: Area2D) -> void:
 	hovering = area
 	
 	if(area.is_in_group("targetable")):
-		$target.global_position = area.global_position
+		%target.global_position = area.global_position
 	else:
-		$target.global_position = Vector2(-100,-100)
+		%target.global_position = Vector2(-100,-100)
 
 
 func _on_mouse_area_exited(area: Area2D) -> void:
 	if(hovering == area):
 		hovering = null
-	$target.global_position = Vector2(-100,-100)
+	%target.global_position = Vector2(-100,-100)
 
 func _input(event: InputEvent) -> void:
 	if(isaiming):
@@ -52,12 +52,12 @@ func _process(delta: float) -> void:
 		isaiming = false
 		Engine.time_scale = 1
 	
-	$target.visible = isaiming
+	%target.visible = isaiming
 	
 	if(hovering and hovering.is_in_group("targetable")):
-		$target.global_position = hovering.global_position
+		%target.global_position = hovering.global_position
 	
-	$dark.color.a = lerp($dark.color.a, 0.3 if isaiming else 0.,0.08)
+	%dark.color.a = lerp(%dark.color.a, 0.3 if isaiming else 0.,0.08)
 
 func shake(dir : Vector2):
 	$Camera2D.position += dir

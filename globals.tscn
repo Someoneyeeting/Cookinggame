@@ -23,14 +23,18 @@ offset = Vector2(341.019, 525.687)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mouse"]
 shape = SubResource("CircleShape2D_eoq6h")
 
-[node name="dark" type="ColorRect" parent="."]
-offset_left = -24.0
-offset_top = -13.0
-offset_right = 1227.0
-offset_bottom = 685.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="dark" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = -56.0
+offset_top = -73.0
+offset_right = 1309.0
+offset_bottom = 763.0
 color = Color(0, 0, 0, 0)
 
-[node name="target" parent="." instance=ExtResource("3_pw6g4")]
+[node name="target" parent="CanvasLayer" instance=ExtResource("3_pw6g4")]
+unique_name_in_owner = true
 position = Vector2(-113, 56)
 
 [node name="Camera2D" type="Camera2D" parent="."]

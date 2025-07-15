@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://di11wr21q4u5w"]
+
+[ext_resource type="Texture2D" uid="uid://bjf5slnodos26" path="res://icon.svg" id="1_yoar7"]
+
+[sub_resource type="GDScript" id="GDScript_yoar7"]
+script/source = "extends Node2D
+
+
+var mode := 0
+var t :float=0
+
+func _physics_process(delta: float) -> void:
+	var speedfact = 1
+	if(mode == 0):
+		speedfact = 0
+	elif(mode == 1):
+		speedfact = 3
+	elif(mode == 2):
+		speedfact = 5
+		
+	if(mode == 2):
+		$Sprite2D.rotation_degrees = sin(t * 3) * 2
+		$Sprite2D.position.x = randf_range(-1,2)
+	else:
+		$Sprite2D.rotation_degrees = 0
+		$Sprite2D.position.x = 0
+	
+	t += delta * speedfact 
+	
+	$Sprite2D.position.y = sin(t + global_position.x * global_position.x ) * speedfact
+
+func deactivate():
+	mode = 0
+	$Sprite2D.modulate = Color(0.3,0.3,0.3)
+
+func activate():
+	mode = 1
+	$Sprite2D.modulate = Color(1,1,1)
+
+func hype():
+	mode = 2
+	$Sprite2D.modulate = Color(0.3,0.3,1)
+"
+
+[node name="StarSprite" type="Node2D"]
+script = SubResource("GDScript_yoar7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.515625, 0.515625)
+texture = ExtResource("1_yoar7")

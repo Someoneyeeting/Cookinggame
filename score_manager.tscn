@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0sjb0pbvog5w"]
+
+[ext_resource type="Script" uid="uid://c1wingmewfxd4" path="res://score_manager.gd" id="1_vublb"]
+[ext_resource type="PackedScene" uid="uid://blyxxoxhim1q1" path="res://stars_ui.tscn" id="2_dlkr7"]
+
+[node name="ScoreManager" type="Node2D"]
+script = ExtResource("1_vublb")
+
+[node name="StarsUI" parent="." instance=ExtResource("2_dlkr7")]
+position = Vector2(416, 100)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
