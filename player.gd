@@ -7,8 +7,9 @@ class_name Player
 func add_food(pod : Podium):
 	if(pod.global_position.distance_to(global_position) > 200):
 		return
-	plate.add_ingridiant(pod.item)
-	pod.pick_up()
+	if(plate.can_add_item(pod.item)):
+		plate.add_ingridiant(pod.item)
+		pod.pick_up()
 
 func _handle_move():
 	var dir : Vector2 = Vector2.ZERO

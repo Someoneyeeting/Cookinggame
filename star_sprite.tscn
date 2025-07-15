@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://di11wr21q4u5w"]
+[gd_scene load_steps=8 format=3 uid="uid://di11wr21q4u5w"]
 
 [ext_resource type="Texture2D" uid="uid://bjf5slnodos26" path="res://icon.svg" id="1_yoar7"]
 
@@ -8,6 +8,7 @@ script/source = "extends Node2D
 
 var mode := 0
 var t :float=0
+@export var grad : Gradient
 
 func _physics_process(delta: float) -> void:
 	var speedfact = 1
@@ -17,10 +18,15 @@ func _physics_process(delta: float) -> void:
 		speedfact = 3
 	elif(mode == 2):
 		speedfact = 5
-		
+	$Sprite2D.frame = mode
+	
+	$Sprite2D.material.set_shader_parameter(\"hype\",mode == 2);
 	if(mode == 2):
-		$Sprite2D.rotation_degrees = sin(t * 3) * 2
-		$Sprite2D.position.x = randf_range(-1,2)
+		#$Sprite2D.rotation_degrees = sin(t * 3) * 2
+		$Sprite2D.position.x = randf_range(-2,2)
+		$Sprite2D.position.y += randf_range(-2,2)
+		#$Sprite2D.modulate = Color.from_hsv($Sprite2D.modulate.h + 0.01,$Sprite2D.modulate.s,$Sprite2D.modulate.v)
+		var clrval = Time.get_unix_time_from_system()
 	else:
 		$Sprite2D.rotation_degrees = 0
 		$Sprite2D.position.x = 0
@@ -35,16 +41,71 @@ func deactivate():
 
 func activate():
 	mode = 1
-	$Sprite2D.modulate = Color(1,1,1)
+	$Sprite2D.modulate = Color.GOLD
 
 func hype():
 	mode = 2
-	$Sprite2D.modulate = Color(0.3,0.3,1)
+	$Sprite2D.modulate = Color(1,1,1)
 "
+
+[sub_resource type="Gradient" id="Gradient_l6opp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.00574713, 0.368852, 0.770492)
+colors = PackedColorArray(0, 0.185714, 1, 1, 0, 0.675116, 1, 1, 0, 0.328891, 1, 1)
+
+[sub_resource type="Shader" id="Shader_l6opp"]
+code = "shader_type canvas_item;
+
+uniform sampler2D grad : repeat_enable;
+uniform bool hype = false;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if(hype){
+		COLOR *= texture(grad,vec2(UV.x * UV.y * 0.3 + UV.y * UV.x + TIME * 3.,0.));
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l6opp"]
+gradient = SubResource("Gradient_l6opp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fi8ru"]
+resource_local_to_scene = true
+shader = SubResource("Shader_l6opp")
+shader_parameter/grad = SubResource("GradientTexture1D_l6opp")
+shader_parameter/hype = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4m2w3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yoar7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_yoar7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_yoar7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="StarSprite" type="Node2D"]
 script = SubResource("GDScript_yoar7")
+grad = SubResource("Gradient_l6opp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.515625, 0.515625)
-texture = ExtResource("1_yoar7")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_fi8ru")
+scale = Vector2(0.483255, 0.483255)
+sprite_frames = SubResource("SpriteFrames_4m2w3")

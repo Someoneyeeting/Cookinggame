@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://5jam7adsxlun"]
+[gd_scene load_steps=3 format=3 uid="uid://5jam7adsxlun"]
 
 [ext_resource type="Script" uid="uid://bwlrxvke3c52t" path="res://hungerbar.gd" id="1_5ec5r"]
+[ext_resource type="PackedScene" uid="uid://c0sjb0pbvog5w" path="res://score_manager.tscn" id="2_y4dqk"]
 
 [node name="hungerbar" type="Node2D"]
 script = ExtResource("1_5ec5r")
@@ -14,3 +15,5 @@ color = Color(0.210938, 0.210938, 0.210938, 1)
 offset_right = 603.0
 offset_bottom = 26.0
 color = Color(0.632813, 0.601407, 0, 1)
+
+[node name="ScoreManager" parent="." instance=ExtResource("2_y4dqk")]

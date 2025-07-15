@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://di11wr21q4u5w"]
+
+[ext_resource type="Texture2D" uid="uid://bp44dmw6xpnsv" path="res://assets/sprites/star_off.png" id="1_l6opp"]
+[ext_resource type="Texture2D" uid="uid://dq3f447tk8ka6" path="res://assets/sprites/star_on.png" id="2_fi8ru"]
+[ext_resource type="Texture2D" uid="uid://cp7ebhpjvqev7" path="res://assets/sprites/star_hype.png" id="3_xfnq7"]
+
+[sub_resource type="GDScript" id="GDScript_yoar7"]
+script/source = "extends Node2D
+
+
+var mode := 0
+var t :float=0
+@export var grad : Gradient
+
+func _physics_process(delta: float) -> void:
+	var speedfact = 1
+	if(mode == 0):
+		speedfact = 0
+	elif(mode == 1):
+		speedfact = 3
+	elif(mode == 2):
+		speedfact = 5
+	$Sprite2D.frame = mode
+	if(mode == 2):
+		#$Sprite2D.rotation_degrees = sin(t * 3) * 2
+		$Sprite2D.position.x = randf_range(-2,2)
+		$Sprite2D.position.y += randf_range(-2,2)
+		#$Sprite2D.modulate = Color.from_hsv($Sprite2D.modulate.h + 0.01,$Sprite2D.modulate.s,$Sprite2D.modulate.v)
+		$Sprite2D.modulate = grad.sample(t - int(t))
+	else:
+		$Sprite2D.rotation_degrees = 0
+		$Sprite2D.position.x = 0
+	
+	t += delta * speedfact 
+	
+	$Sprite2D.position.y = sin(t + global_position.x * global_position.x ) * speedfact
+
+func deactivate():
+	mode = 0
+	$Sprite2D.modulate = Color(0.3,0.3,0.3)
+
+func activate():
+	mode = 1
+	$Sprite2D.modulate = Color.GOLD
+
+func hype():
+	mode = 2
+	$Sprite2D.modulate = Color(0.3,0.3,1)
+"
+
+[sub_resource type="Gradient" id="Gradient_l6opp"]
+offsets = PackedFloat32Array(0.00574713, 0.310345, 0.729885, 1)
+colors = PackedColorArray(0.160784, 0.211765, 0.435294, 1, 0.254902, 0.65098, 0.964706, 1, 0.45098, 0.937255, 0.968627, 1, 0.160784, 0.211765, 0.435294, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4m2w3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_l6opp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fi8ru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xfnq7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StarSprite" type="Node2D"]
+script = SubResource("GDScript_yoar7")
+grad = SubResource("Gradient_l6opp")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.48397, 2.48397)
+sprite_frames = SubResource("SpriteFrames_4m2w3")

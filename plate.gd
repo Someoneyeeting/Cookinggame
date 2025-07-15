@@ -5,13 +5,15 @@ var PLATE := preload("res://food.tscn")
 var items : Array[ItemRes]
 var has_chicken := false
 
-func add_ingridiant(item : ItemRes):
-	if(is_empty() and (item.id != 0 and item.id != -1)):
-		return
+func can_add_item(item : ItemRes):
 	if(is_poison()):
-		return
+		return false
 	if(not is_empty() and item.id == -1):
-		return
+		return false
+		
+	return true
+
+func add_ingridiant(item : ItemRes):
 	if(item.id == 2):
 		has_chicken = true
 	var plate :Sprite2D= PLATE.instantiate()

@@ -3,7 +3,7 @@ class_name StarUI
 
 signal lose
 var STAR := preload("res://star_sprite.tscn")
-var starcount := 0
+var starcount := 3
 var hypecount := 0
 var totalstarcount := 0
 

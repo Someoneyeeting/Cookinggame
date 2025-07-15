@@ -37,10 +37,10 @@ func _physics_process(delta: float) -> void:
 		var targcolor : Color
 		var targscale : float = 1.
 		if(not is_matching()):
-			targcolor = Color(0.6,0.2,0.2)
+			targcolor = Color(0.4,0.4,0.4)
 			targscale = 1.
 		elif(i < curitem):
-			targcolor = Color(0.4,0.4,0.4)
+			targcolor = Color(0.3,0.3,0.3)
 			targscale = 0.6
 		elif(i == curitem):
 			targcolor = Color(1,1,1)
@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 func is_matching():
 	var curitem = Globals.player.plate.get_count()
 	
-	return curitem <= recp.items.size()
+	return recp.matching_so_far(Globals.player.plate.get_as_ids()) or recp.is_matching(Globals.player.plate.get_as_ids())
 "
 
 [node name="RecipeDisplay" type="Node2D"]

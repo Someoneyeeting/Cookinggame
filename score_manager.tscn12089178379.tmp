@@ -7,6 +7,7 @@
 script = ExtResource("1_vublb")
 
 [node name="StarsUI" parent="." instance=ExtResource("2_dlkr7")]
+position = Vector2(416, 100)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
