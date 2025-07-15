@@ -4,12 +4,25 @@ class_name Player
 @export var move_speed : float = 200
 @export var plate : Plate
 
-func add_food(pod : Podium):
+func add_food(obj):
+	if(obj is Podium):
+		add_food_pod(obj)
+	if(obj is Oven):
+		take_food_oven(obj)
+
+func add_food_pod(pod : Podium):
 	if(pod.global_position.distance_to(global_position) > 200):
 		return
 	if(plate.can_add_item(pod.item)):
 		plate.add_ingridiant(pod.item)
 		pod.pick_up()
+
+func take_food_oven(oven : Oven):
+	if(plate.items.size() > 0):
+		oven.get_thrown(plate.items)
+	else:
+		oven.open()
+	plate.set_items(oven.replace_content(plate.items))
 
 func _handle_move():
 	var dir : Vector2 = Vector2.ZERO

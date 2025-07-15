@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpi66gi61howo"]
+[gd_scene load_steps=12 format=3 uid="uid://dpi66gi61howo"]
 
 [ext_resource type="Script" uid="uid://d0q0qw8vnyl65" path="res://oven.gd" id="1_3n55h"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="1_my181"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://beaf72ax4mrv" path="res://assets/sprites/oven on.png" id="3_7fonb"]
 [ext_resource type="Texture2D" uid="uid://brbbcmhnd2eqx" path="res://assets/sprites/oven open.png" id="4_8j351"]
 [ext_resource type="AudioStream" uid="uid://bon08qh1g8bc0" path="res://assets/audio/oven.wav" id="4_i66py"]
+[ext_resource type="AudioStream" uid="uid://cllwo7l86lbrg" path="res://assets/audio/oven_close.wav" id="6_uyjja"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j351"]
 atlas = ExtResource("3_7fonb")
@@ -66,8 +67,20 @@ target = NodePath("..")
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_my181")
 
+[node name="pickup" type="Area2D" parent="." groups=["podium"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickup"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_my181")
+
 [node name="close" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_i66py")
+stream = ExtResource("6_uyjja")
+volume_db = 10.0
+
+[node name="open" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_uyjja")
+volume_db = 10.0
+pitch_scale = 2.0
 
 [node name="cooking" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_i66py")

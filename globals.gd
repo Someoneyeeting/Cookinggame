@@ -3,39 +3,54 @@ extends Node2D
 signal eat(ids)
 
 var player : Player
-var hovering : Area2D
+var lefthovering : Area2D
+var righthovering : Targetable
 var mouseprevpos := Vector2.ZERO
 var isaiming := false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 func _on_mouse_area_entered(area: Area2D) -> void:
-	hovering = area
+	if(area is Targetable):
+		righthovering = area
+	if(area.is_in_group("podium")):
+		lefthovering = area
 	
 	if(area.is_in_group("targetable")):
 		%target.global_position = area.global_position
 	else:
 		%target.global_position = Vector2(-100,-100)
 
+func toggle_fullscreen():
+	if(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		$mouse/cursor.scale = Vector2(0.025,0.025)
+	elif(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		$mouse/cursor.scale = Vector2(0.015,0.015)
+	
 
 func _on_mouse_area_exited(area: Area2D) -> void:
-	if(hovering == area):
-		hovering = null
+	if(lefthovering == area):
+		lefthovering = null
+	if(righthovering == area):
+		righthovering = null
 	%target.global_position = Vector2(-100,-100)
 
 func _input(event: InputEvent) -> void:
 	if(isaiming):
 		if(event.is_action_released("rightc")):
-			if(hovering):
-				if(hovering.is_in_group("targetable")):
-					player.throw(hovering.target)
+			if(righthovering):
+				player.throw(righthovering.target)
 					
 			isaiming = false
 	else:
 		if(event.is_action_released("leftc")):
-			if(hovering):
-				if(hovering.is_in_group("podium")):
-					player.add_food(hovering.get_parent())
+			if(lefthovering):
+				player.add_food(lefthovering.get_parent())
+	
+	if(event.is_action_pressed("fullscreen")):
+		toggle_fullscreen()
 				
 
 func _process(delta: float) -> void:
@@ -54,8 +69,8 @@ func _process(delta: float) -> void:
 	
 	%target.visible = isaiming
 	
-	if(hovering and hovering.is_in_group("targetable")):
-		%target.global_position = hovering.global_position
+	if(righthovering):
+		%target.global_position = righthovering.global_position
 	
 	%dark.color.a = lerp(%dark.color.a, 0.3 if isaiming else 0.,0.08)
 
