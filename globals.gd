@@ -98,3 +98,9 @@ func _eat(ids):
 	else:
 		eat.emit(ids)
 		change_hunger(10)
+		
+func add_star():
+	$ScoreManager.add_star()
+
+func lose_star():
+	$ScoreManager.lose_star()

@@ -26,6 +26,7 @@ func check_eat(ids):
 		$outanimation.start()
 		$ColorRect.color = Color.BLUE
 		get_tree().create_timer(0.4).timeout.connect(queue_free)
+		Globals.lose_star()
 		
 
 func get_thrown(items : Array[ItemRes]):
@@ -36,6 +37,15 @@ func get_thrown(items : Array[ItemRes]):
 	var dir = Globals.player.global_position - global_position
 	global_rotation = sign(dir.x) * 0.1
 	dir = dir.normalized()
+	
+	var ids = []
+	for i in items:
+		ids.push_back(i.id)
+	if(recipe.is_matching(ids)):
+		Globals.add_star()
+	elif(not recipe.matching_so_far(ids)):
+		Globals.lose_star()
+		
 	global_position -= dir * 60 * (size / 4)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.6).set_trans(Tween.TRANS_CIRC)

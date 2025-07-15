@@ -28,11 +28,11 @@ stream = ExtResource("2_e6baj")
 
 [node name="losehype" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1ekxe")
+volume_db = 10.0
 
 [node name="crowd" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_odnl4")
-volume_db = -10.0
-pitch_scale = 1.1
+volume_db = -4.0
 
 [node name="gainstar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_caemj")
