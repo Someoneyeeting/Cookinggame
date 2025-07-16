@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bdyj043bq4k8a"]
+[gd_scene load_steps=18 format=3 uid="uid://bdyj043bq4k8a"]
 
 [ext_resource type="Script" uid="uid://cywu00c7grb7k" path="res://customer.gd" id="1_7tiyv"]
 [ext_resource type="Resource" uid="uid://t2e4d80gjvjk" path="res://recipes/plates.tres" id="2_co351"]
 [ext_resource type="Script" uid="uid://dpu8i0lr4fal7" path="res://targetable.gd" id="3_eas7q"]
 [ext_resource type="PackedScene" uid="uid://cu8x5k10nnpnb" path="res://recipe_display.tscn" id="3_f7asb"]
+[ext_resource type="AudioStream" uid="uid://rumobbsqoweq" path="res://assets/audio/walkaway.wav" id="3_frhio"]
 [ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://c3rbelrku3jqb" path="res://sweat.png" id="5_gn8fi"]
 [ext_resource type="PackedScene" uid="uid://bka4oyxnt01g6" path="res://customertimer.tscn" id="7_0rcyg"]
@@ -33,6 +34,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-61, -108)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_7tiyv"]
@@ -66,11 +91,56 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_f7asb"]
 resource_name = "out"
 
+[sub_resource type="Animation" id="Animation_0rcyg"]
+resource_name = "walk"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-61, -108), Vector2(-61, -130), Vector2(-61, -108)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ColorRect:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.10472, 0.10472]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("walk")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0343353,
+"start_offset": 0.0,
+"stream": ExtResource("3_frhio")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f7asb"]
 _data = {
 &"RESET": SubResource("Animation_r8ta2"),
 &"enter_line": SubResource("Animation_7tiyv"),
-&"out": SubResource("Animation_f7asb")
+&"out": SubResource("Animation_f7asb"),
+&"walk": SubResource("Animation_0rcyg")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tiyv"]
@@ -112,6 +182,7 @@ pivot_offset = Vector2(60, 109)
 libraries = {
 &"": SubResource("AnimationLibrary_f7asb")
 }
+speed_scale = 1.3
 
 [node name="outanimation" type="Timer" parent="."]
 wait_time = 0.1
@@ -148,10 +219,18 @@ one_shot = true
 position = Vector2(29, 46)
 
 [node name="waittime" type="Timer" parent="."]
-wait_time = 17.0
+wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(8.8, 14.8)
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+volume_db = 1.0
+pitch_scale = 0.3
 
 [connection signal="timeout" from="outanimation" to="." method="_on_outanimation_timeout"]
 [connection signal="timeout" from="pause" to="." method="_on_pause_timeout"]
 [connection signal="timeout" from="waittime" to="." method="_on_waittime_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

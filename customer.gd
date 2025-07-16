@@ -9,6 +9,7 @@ var chicken := preload("res://foods/chicken.tres")
 @onready var waittime :float= $waittime.wait_time
 
 @export var recipe : RecipeRes
+var walkdir := Vector2.ZERO
 
 func set_recipe(recp : RecipeRes):
 	recipe = recp.duplicate()
@@ -39,6 +40,8 @@ func check_eat(ids):
 
 func get_thrown(items : Array[ItemRes]):
 	var size : int = items.size()
+	if(walkdir != Vector2.ZERO):
+		size = 16
 	$outanimation.start()
 	var tween = get_tree().create_tween()
 	var dir = Globals.player.global_position - global_position
@@ -61,13 +64,19 @@ func get_thrown(items : Array[ItemRes]):
 
 func time_out():
 	Globals.lose_star()
-	queue_free()
+	$AnimationPlayer.play("walk")
+	walkdir = Vector2(randf_range(-30,30),-30)
 
 func enter_line():
 	$AnimationPlayer.play("enter_line")
 
 func _physics_process(delta: float) -> void:
 	#$ColorRect.color = lerp($ColorRect.color,Color.WHITE if serving else Color.DARK_GRAY,0.01)
+	
+	if(walkdir != Vector2.ZERO):
+		position += walkdir * 0.3 * Engine.time_scale
+		$walk.volume_db -= 0.4 * Engine.time_scale
+		#$walk.volume_db = randf_range(2.,3.)
 	
 	var playerhas = Globals.player.plate.get_as_ids()
 	if($outanimation.time_left == 0):
@@ -95,3 +104,7 @@ func _on_outanimation_timeout() -> void:
 
 func _on_waittime_timeout() -> void:
 	time_out()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

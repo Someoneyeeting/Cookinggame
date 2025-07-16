@@ -109,3 +109,7 @@ position = Vector2(571, 569)
 scale = Vector2(1.86898, 1.86898)
 
 [node name="CustomerManager" parent="." instance=ExtResource("1_jotil")]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+position = Vector2(665, 306)
+current = true

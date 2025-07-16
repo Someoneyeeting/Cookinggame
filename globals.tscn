@@ -55,7 +55,7 @@ pitch_scale = 2.0
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_lbu14")
-volume_db = -3.0
+volume_db = -80.0
 
 [node name="musicplay" type="Timer" parent="."]
 one_shot = true
