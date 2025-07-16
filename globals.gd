@@ -66,9 +66,13 @@ func _process(delta: float) -> void:
 	if(Input.is_action_pressed("rightc")):
 		isaiming = true
 		Engine.time_scale = 0.4
+		$music.volume_db = lerp($music.volume_db,-10.,0.1)
+		$music.pitch_scale = lerp($music.pitch_scale,0.4,0.1)
 	else:
 		isaiming = false
 		Engine.time_scale = 1
+		$music.volume_db = lerp($music.volume_db,-3.,0.5)
+		$music.pitch_scale = lerp($music.pitch_scale,1.,0.1)
 	
 	%target.visible = isaiming
 	
@@ -113,3 +117,7 @@ func add_star():
 
 func lose_star():
 	$ScoreManager.lose_star()
+
+
+func _on_musicplay_timeout() -> void:
+	$music.play()
