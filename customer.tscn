@@ -130,7 +130,7 @@ stream = ExtResource("4_eas7q")
 
 [node name="RecipeDisplay" parent="." instance=ExtResource("3_f7asb")]
 position = Vector2(0, -54)
-scale = Vector2(1.28028, 1.28028)
+scale = Vector2(1.7, 1.7)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
@@ -148,7 +148,7 @@ one_shot = true
 position = Vector2(29, 46)
 
 [node name="waittime" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 17.0
 one_shot = true
 autostart = true
 

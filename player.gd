@@ -11,7 +11,7 @@ func add_food(obj):
 		take_food_oven(obj)
 
 func add_food_pod(pod : Podium):
-	if(pod.global_position.distance_to(global_position) > 400):
+	if(pod.global_position.distance_to(global_position) > 250):
 		return
 	if(plate.can_add_item(pod.item)):
 		plate.add_ingridiant(pod.item)

@@ -98,10 +98,10 @@ color = Color(0.927686, 0.927686, 0.927686, 1)
 
 [node name="range" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_i3pqv")
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_left = -74.0
+offset_top = -74.0
+offset_right = 74.0
+offset_bottom = 74.0
 pivot_offset = Vector2(100, 100)
 color = Color(0.855469, 0.0468974, 0, 0.215686)
 
@@ -130,6 +130,7 @@ width = 30.0
 
 [node name="plate" parent="." instance=ExtResource("2_onrkg")]
 position = Vector2(30, -11)
+scale = Vector2(1.2, 1.2)
 
 [node name="click" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_i3pqv")]
 target = NodePath("..")
