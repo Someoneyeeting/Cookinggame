@@ -1,6 +1,8 @@
 extends Node2D
 class_name Customer
 
+signal served(recipe : Array[RecipeRes])
+
 var serving := false
 var plate := preload("res://foods/plate.tres")
 var chicken := preload("res://foods/chicken.tres")
@@ -8,15 +10,15 @@ var chicken := preload("res://foods/chicken.tres")
 
 @export var recipe : RecipeRes
 
+func set_recipe(recp : RecipeRes):
+	recipe = recp.duplicate()
+
 func _ready() -> void:
 	recipe = recipe.duplicate()
 	Globals.eat.connect(check_eat)
-	recipe.items.clear()
-	recipe.items.append(plate)
-	for i in range(randi_range(4,7)):
-		recipe.items.append(plate)
 	serving = true
 	z_index = 1
+	served.connect(Globals._served)
 	$RecipeDisplay.set_recp(recipe)
 	
 
@@ -37,7 +39,6 @@ func check_eat(ids):
 
 func get_thrown(items : Array[ItemRes]):
 	var size : int = items.size()
-	#$AudioStreamPlayer2D.play()
 	$outanimation.start()
 	var tween = get_tree().create_tween()
 	var dir = Globals.player.global_position - global_position
@@ -49,6 +50,7 @@ func get_thrown(items : Array[ItemRes]):
 		ids.push_back(i.id)
 	if(recipe.is_matching(ids)):
 		Globals.add_star()
+		served.emit(recipe)
 	elif(not recipe.matching_so_far(ids)):
 		Globals.lose_star()
 		

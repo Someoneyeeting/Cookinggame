@@ -77,6 +77,15 @@ func _process(delta: float) -> void:
 	
 	%dark.color.a = lerp(%dark.color.a, 0.3 if isaiming else 0.,0.08)
 
+func get_served():
+	return $ScoreManager.get_served()
+
+func _served(recp : RecipeRes):
+	increase_served()
+
+func increase_served():
+	$ScoreManager.increase_served()
+
 func shake(dir : Vector2):
 	$Camera2D.position += dir
 	$shake.start()

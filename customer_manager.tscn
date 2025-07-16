@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0lyfd8pu4t2a"]
+[gd_scene load_steps=3 format=3 uid="uid://c0lyfd8pu4t2a"]
 
 [ext_resource type="Script" uid="uid://tb8afmqxqklb" path="res://customer_manager.gd" id="1_uxglp"]
+[ext_resource type="Resource" uid="uid://u2oggdtetu8k" path="res://defaultUnlock.tres" id="2_3gnd4"]
 
 [node name="CustomerManager" type="Node2D"]
 script = ExtResource("1_uxglp")
+recipesUnlock = ExtResource("2_3gnd4")
 
 [node name="customers" type="Node2D" parent="."]
 position = Vector2(60, 0)

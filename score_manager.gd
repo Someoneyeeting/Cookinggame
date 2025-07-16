@@ -2,7 +2,7 @@ extends Node2D
 
 var money : int = 0
 var stars : int = 10
-
+var served : int = 0
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("ui_up")):
@@ -23,3 +23,9 @@ func add_star():
 
 func lose_star():
 	$StarsUI.change_by(-1)
+
+func increase_served():
+	served += 1
+
+func get_served():
+	return served

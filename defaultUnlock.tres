@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="RecipeUnlock" load_steps=9 format=3 uid="uid://u2oggdtetu8k"]
+
+[ext_resource type="Script" uid="uid://byh0p0n6nwwah" path="res://recipes/RecipeRes.gd" id="1_032t1"]
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="2_025mp"]
+[ext_resource type="Script" uid="uid://bepymjtxxbl75" path="res://RecipeUnlock.gd" id="2_xwujw"]
+[ext_resource type="Resource" uid="uid://8orrvogpxwmb" path="res://foods/plate.tres" id="3_1xl8p"]
+[ext_resource type="Resource" uid="uid://bfdiey5ohixnn" path="res://foods/chicken.tres" id="4_1xl8p"]
+
+[sub_resource type="Resource" id="Resource_6ufyh"]
+script = ExtResource("1_032t1")
+items = Array[ExtResource("2_025mp")]([ExtResource("3_1xl8p")])
+metadata/_custom_type_script = "uid://byh0p0n6nwwah"
+
+[sub_resource type="Resource" id="Resource_1t211"]
+script = ExtResource("1_032t1")
+items = Array[ExtResource("2_025mp")]([ExtResource("3_1xl8p"), ExtResource("4_1xl8p")])
+metadata/_custom_type_script = "uid://byh0p0n6nwwah"
+
+[sub_resource type="Resource" id="Resource_eer1s"]
+script = ExtResource("1_032t1")
+items = Array[ExtResource("2_025mp")]([ExtResource("3_1xl8p"), ExtResource("4_1xl8p"), ExtResource("3_1xl8p")])
+metadata/_custom_type_script = "uid://byh0p0n6nwwah"
+
+[resource]
+script = ExtResource("2_xwujw")
+recipes = Dictionary[int, ExtResource("1_032t1")]({
+0: SubResource("Resource_6ufyh"),
+3: SubResource("Resource_1t211"),
+6: SubResource("Resource_eer1s")
+})
+metadata/_custom_type_script = "uid://bepymjtxxbl75"
