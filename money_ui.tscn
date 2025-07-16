@@ -1,29 +1,190 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbqkd7m34xkbp"]
+[gd_scene load_steps=9 format=3 uid="uid://dbqkd7m34xkbp"]
 
 [ext_resource type="FontFile" uid="uid://bvynssw7e2uep" path="res://assets/ByteBounce.ttf" id="1_eci41"]
+[ext_resource type="AudioStream" uid="uid://dl4ld3nmn641c" path="res://assets/audio/redeem.wav" id="2_peni5"]
 
 [sub_resource type="GDScript" id="GDScript_peni5"]
 script/source = "extends Node2D
 
 
 var money := 0
+var added := 0
 
 func set_money(mon : int):
 	money = max(0,mon)
 	$Label.text = \"$ \" + str(money)
+
+func add_money(amount : int):
+	added += amount
+	money += amount
+	%added.text = \"+$\" + str(added)
+	$redeem.start()
+	expand()
+	
+func expand():
+	%added.show()
+	print(%added.visible)
+	%added.scale = Vector2(2.,2.)
+
+func _physics_process(delta: float) -> void:
+	%added.scale = lerp(%added.scale,Vector2(1,1),0.3)
+	$anchor.position.x = $Label.size.x + 20
+	
+
+func redeem():
+	$Label.text = \"$ \" + str(money)
+	added = 0
+
+
+func _on_redeem_timeout() -> void:
+	$AnimationPlayer.play(\"redeem\")
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_eci41"]
+font = ExtResource("1_eci41")
+font_size = 48
+font_color = Color(0.0988138, 0.0922561, 1, 1)
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lvvax"]
 font = ExtResource("1_eci41")
-font_size = 61
+font_size = 70
 outline_size = 25
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_eci41"]
+resource_name = "redeem"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/added:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.121832, 0.2),
+"transitions": PackedFloat32Array(4.14106, 1, 0.153893, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(26, 0), Vector2(26, 0), Vector2(-83, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1323, 0.1385, 0.201047, 0.297893),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-35, 0), Vector2(-35, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("anchor:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.181432),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cash")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_peni5")
+}],
+"times": PackedFloat32Array(0.133333)
+}
+tracks/3/use_blend = true
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1385),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"redeem"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_peni5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/added:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvvax"]
+_data = {
+&"RESET": SubResource("Animation_peni5"),
+&"redeem": SubResource("Animation_eci41")
+}
 
 [node name="MoneyUi" type="Node2D"]
 script = SubResource("GDScript_peni5")
 
+[node name="anchor" type="Node2D" parent="."]
+position = Vector2(78, 9)
+
+[node name="added" type="Label" parent="anchor"]
+unique_name_in_owner = true
+visible = false
+offset_right = 78.0
+offset_bottom = 33.0
+pivot_offset = Vector2(40, 18)
+text = "+$10"
+label_settings = SubResource("LabelSettings_eci41")
+
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 61.0
+offset_bottom = 49.0
 text = "$0"
 label_settings = SubResource("LabelSettings_lvvax")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvvax")
+}
+
+[node name="redeem" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="cash" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="redeem" to="." method="_on_redeem_timeout"]

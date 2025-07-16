@@ -6,23 +6,23 @@ var served : int = 0
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("ui_up")):
-		$StarsUI.change_by(1)
+		%StarsUI.change_by(1)
 	elif(event.is_action_pressed("ui_down")):
-		$StarsUI.change_by(-1)
+		%StarsUI.change_by(-1)
 
 
 func change_hunger(amount : float):
-	$hungerbar.hunger += amount
-	$hungerbar.decrease = -amount
+	%hungerbar.hunger += amount
+	%hungerbar.decrease = -amount
 	
 func set_hunger(amount : float):
-	$hungerbar.hunger = amount
+	%hungerbar.hunger = amount
 
 func add_star():
-	$StarsUI.change_by(1)
+	%StarsUI.change_by(1)
 
 func lose_star():
-	$StarsUI.change_by(-1)
+	%StarsUI.change_by(-1)
 
 func increase_served():
 	served += 1
@@ -31,22 +31,19 @@ func get_served():
 	return served
 
 func get_hunger_level():
-	return int($hungerbar.hunger * 3 / $hungerbar.maxhunger)
+	return int(%hungerbar.hunger * 3 / %hungerbar.maxhunger)
 
 func get_hunger():
-	return $hungerbar.hunger
+	return %hungerbar.hunger
 
 func get_max_hunger():
-	return $hungerbar.maxhunger
+	return %hungerbar.maxhunger
 
 func set_money(money : int):
-	$MoneyUi.set_money(money)
+	%MoneyUi.set_money(money)
 
 func add_money(money : int):
-	if(money > 0):
-		money *= $StarsUI.hypecount
-	$MoneyUi.set_money($MoneyUi.money + money)
-	$MoneyUi.set_money($MoneyUi.money + money)
+	%MoneyUi.add_money(money)
 
 func mult_stars(node : Node2D):
-	$StarsUI.mult_stars(node)
+	%StarsUI.mult_stars(node)
