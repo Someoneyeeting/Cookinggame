@@ -1,15 +1,53 @@
-[gd_scene load_steps=17 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=28 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Material" uid="uid://bt5pu3antuq74" path="res://skew.tres" id="2_b26j0"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://cynjac6kc1ii8" path="res://assets/sprites/player_expression_hungry.png" id="4_ivps1"]
 [ext_resource type="Texture2D" uid="uid://djv5bhorj1iqh" path="res://assets/sprites/player_expression_normal.png" id="4_n7ghd"]
 [ext_resource type="AudioStream" uid="uid://cnsqrjxlklv3k" path="res://assets/audio/chicken_throw.wav" id="5_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://r7wia6rowagv" path="res://assets/audio/chicken_die.wav" id="5_sweqy"]
+[ext_resource type="Texture2D" uid="uid://d0288h7os805s" path="res://assets/sprites/player_expression_content.png" id="6_urp6f"]
 [ext_resource type="AudioStream" uid="uid://bahrftis21h06" path="res://assets/audio/cantpick.wav" id="7_1jxqw"]
 [ext_resource type="Texture2D" uid="uid://bcne7id381ys4" path="res://assets/sprites/player_base.png" id="9_n7ghd"]
+[ext_resource type="AudioStream" uid="uid://bnexffwivjvcl" path="res://assets/audio/player_panic.wav" id="13_urp6f"]
+[ext_resource type="AudioStream" uid="uid://de3ajs2aar3il" path="res://assets/audio/walk.wav" id="14_bwjto"]
+
+[sub_resource type="Curve" id="Curve_n7ghd"]
+_data = [Vector2(0.448529, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nvl01"]
+curve = SubResource("Curve_n7ghd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ivps1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(14.315, 0.97, 1)
+initial_velocity_min = 28.74
+initial_velocity_max = 28.74
+gravity = Vector3(0, 0, 0)
+scale_min = 7.05
+scale_max = 7.05
+scale_curve = SubResource("CurveTexture_nvl01")
+color = Color(0.736755, 0.947839, 1, 0.611765)
+
+[sub_resource type="Curve" id="Curve_ivps1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_urp6f"]
+curve = SubResource("Curve_ivps1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_urp6f"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 3.4
+scale_max = 3.4
+color = Color(1, 1, 1, 0.443137)
+alpha_curve = SubResource("CurveTexture_urp6f")
 
 [sub_resource type="Shader" id="Shader_2hs0m"]
 code = "shader_type canvas_item;
@@ -63,6 +101,23 @@ shader = SubResource("Shader_onrkg")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_bwjto"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ivps1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n7ghd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_urp6f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 34.0
 
@@ -71,6 +126,20 @@ script = ExtResource("1_4flbx")
 move_speed = 400.0
 plate = NodePath("plate")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 13)
+amount = 30
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_ivps1")
+
+[node name="sprint" type="GPUParticles2D" parent="."]
+position = Vector2(0, -3)
+emitting = false
+amount = 5
+texture = ExtResource("9_n7ghd")
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_urp6f")
+
 [node name="reflect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_1jxqw")
 offset_left = -28.0
@@ -78,16 +147,16 @@ offset_top = 14.0
 offset_right = 11.0
 offset_bottom = 46.0
 scale = Vector2(1.41244, 1.41244)
-color = Color(0.598648, 0.681689, 1, 1)
+color = Color(0.722694, 0.759489, 0.900531, 1)
 
 [node name="range" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_i3pqv")
-offset_left = -74.0
+offset_left = -64.0
 offset_top = -74.0
-offset_right = 74.0
-offset_bottom = 74.0
+offset_right = 64.0
+offset_bottom = 64.0
 pivot_offset = Vector2(100, 100)
-color = Color(0.855469, 0.0468974, 0, 0.215686)
+color = Color(0.86, 0.043, 0, 0.156863)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.46767, 1.46767)
@@ -103,6 +172,7 @@ offset_bottom = 6.0
 scale = Vector2(1.41244, 1.41244)
 
 [node name="PlayerBase" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.741176)
 material = ExtResource("2_b26j0")
 position = Vector2(0, 13)
 scale = Vector2(1.42353, 1.42353)
@@ -110,12 +180,13 @@ texture = ExtResource("9_n7ghd")
 offset = Vector2(0, -11)
 
 [node name="Marker2D" type="Marker2D" parent="PlayerBase"]
-position = Vector2(0, -9.13223)
+position = Vector2(0, -7.02479)
 
-[node name="face" type="Sprite2D" parent="."]
-position = Vector2(-3, -7)
-scale = Vector2(1.22803, 1.22803)
-texture = ExtResource("4_n7ghd")
+[node name="face" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -1)
+scale = Vector2(1.19247, 1.42825)
+sprite_frames = SubResource("SpriteFrames_bwjto")
+offset = Vector2(-0.838594, -4.20095)
 
 [node name="timers" type="Node" parent="."]
 
@@ -130,7 +201,6 @@ width = 30.0
 
 [node name="plate" parent="." instance=ExtResource("2_onrkg")]
 position = Vector2(30, -11)
-scale = Vector2(1.2, 1.2)
 
 [node name="click" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_i3pqv")]
 target = NodePath("..")
@@ -151,5 +221,14 @@ volume_db = -2.0
 
 [node name="cantpick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_1jxqw")
+
+[node name="panic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_urp6f")
+volume_db = -15.0
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_bwjto")
+volume_db = -10.0
+pitch_scale = 0.5
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

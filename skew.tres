@@ -21,4 +21,4 @@ void fragment() {
 
 [resource]
 shader = SubResource("Shader_1jxqw")
-shader_parameter/skew = 0.0
+shader_parameter/skew = 0.825

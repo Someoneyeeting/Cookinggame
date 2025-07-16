@@ -107,10 +107,10 @@ func set_hunger(amount : float):
 	
 func _eat(ids):
 	if(ids == [-1]):
-		change_hunger(50)
+		change_hunger(60)
 	else:
 		eat.emit(ids)
-		change_hunger(10)
+		change_hunger(20)
 		
 func add_star():
 	$ScoreManager.add_star()
@@ -121,3 +121,20 @@ func lose_star():
 
 func _on_musicplay_timeout() -> void:
 	$music.play()
+
+func get_hunger_level():
+	return $ScoreManager.get_hunger_level()
+
+func get_hunger():
+	return $ScoreManager.get_hunger()
+
+
+func get_max_hunger():
+	return $ScoreManager.get_max_hunger()
+
+
+func music_loop() -> void:
+	if(randi_range(0,70) == 0):
+		$musicfreedom.play()
+	else:
+		$music.play()

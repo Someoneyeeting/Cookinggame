@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsd34n3og4bsj"]
+[gd_scene load_steps=9 format=3 uid="uid://bsd34n3og4bsj"]
 
 [ext_resource type="Script" uid="uid://hfqbrglml7cf" path="res://globals.gd" id="1_f6yec"]
 [ext_resource type="Texture2D" uid="uid://df0y7an1ba47y" path="res://pngwing.com.png" id="2_ic2bg"]
 [ext_resource type="PackedScene" uid="uid://de32jgkwu06x5" path="res://target.tscn" id="3_pw6g4"]
 [ext_resource type="PackedScene" uid="uid://c0sjb0pbvog5w" path="res://score_manager.tscn" id="4_3o0v4"]
 [ext_resource type="AudioStream" uid="uid://c3p46uh71ed6l" path="res://assets/audio/target.wav" id="5_oes5j"]
-[ext_resource type="AudioStream" uid="uid://csri1qd3otuct" path="res://assets/audio/mamma mia (cool this time).wav" id="6_lbu14"]
+[ext_resource type="AudioStream" uid="uid://csri1qd3otuct" path="res://assets/audio/cooking_hazard.wav" id="6_lbu14"]
+[ext_resource type="AudioStream" uid="uid://dqr4tr7bxebnw" path="res://assets/audio/freedom_hazard.wav" id="7_52l8x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eoq6h"]
 
@@ -53,15 +54,21 @@ stream = ExtResource("5_oes5j")
 volume_db = -15.0
 pitch_scale = 2.0
 
+[node name="musicplay" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_lbu14")
 volume_db = -80.0
 
-[node name="musicplay" type="Timer" parent="."]
-one_shot = true
-autostart = true
+[node name="musicfreedom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_52l8x")
+volume_db = -15.0
 
 [connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
 [connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]
 [connection signal="timeout" from="shake" to="." method="_on_shake_timeout"]
 [connection signal="timeout" from="musicplay" to="." method="_on_musicplay_timeout"]
+[connection signal="finished" from="music" to="." method="music_loop"]
+[connection signal="finished" from="musicfreedom" to="." method="music_loop"]

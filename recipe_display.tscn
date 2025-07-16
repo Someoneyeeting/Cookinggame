@@ -63,7 +63,7 @@ func is_matching():
 
 [node name="RecipeDisplay" type="Node2D"]
 show_behind_parent = true
-z_index = 280
+z_index = 10
 script = SubResource("GDScript_depl0")
 
 [node name="items" type="Node2D" parent="."]

@@ -10,6 +10,8 @@ var chicken := preload("res://foods/chicken.tres")
 
 @export var recipe : RecipeRes
 var walkdir := Vector2.ZERO
+var t : float = 0.
+@onready var headpos : float = $body/CusHead.position.y
 
 func set_recipe(recp : RecipeRes):
 	recipe = recp.duplicate()
@@ -24,18 +26,20 @@ func _ready() -> void:
 	
 
 func check_eat(ids):
+	if(walkdir != Vector2.ZERO):
+		return 
 	if(recipe.is_matching(ids)):
 		#print("yes")
-		Globals.change_hunger(20)
+		Globals.change_hunger(60)
 		$outanimation.start()
-		$ColorRect.color = Color.BLUE
+		$body.modulate = Color.BLUE
 		get_tree().create_timer(0.4).timeout.connect(queue_free)
 		Globals.lose_star()
 	else:
-		if($waittime.time_left <= 0.8):
+		if($waittime.time_left <= 6):
 			time_out()
 		else:
-			$waittime.start(max(0,$waittime.time_left - 0.8))
+			$waittime.start(max(0,$waittime.time_left - 6))
 		
 
 func get_thrown(items : Array[ItemRes]):
@@ -48,16 +52,19 @@ func get_thrown(items : Array[ItemRes]):
 	global_rotation = sign(dir.x) * 0.1
 	dir = dir.normalized()
 	
-	var ids = []
-	for i in items:
-		ids.push_back(i.id)
-	if(recipe.is_matching(ids)):
-		Globals.add_star()
-		served.emit(recipe)
-	elif(not recipe.matching_so_far(ids)):
-		Globals.lose_star()
+	
+	if(walkdir == Vector2.ZERO):
+		var ids = []
+		for i in items:
+			ids.push_back(i.id)
+		if(recipe.is_matching(ids)):
+			Globals.add_star()
+			served.emit(recipe)
+		elif(not recipe.matching_so_far(ids)):
+			Globals.lose_star()
 		
-	global_position -= dir * 60 * (size / 4)
+	global_position -= dir * 70 * (sqrt(size))
+	$waittime.paused = true
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.6).set_trans(Tween.TRANS_CIRC)
 	tween.tween_callback(queue_free)
@@ -71,8 +78,9 @@ func enter_line():
 	$AnimationPlayer.play("enter_line")
 
 func _physics_process(delta: float) -> void:
-	#$ColorRect.color = lerp($ColorRect.color,Color.WHITE if serving else Color.DARK_GRAY,0.01)
-	
+	#$body.modulate = lerp($body.modulate,Color.WHITE if serving else Color.DARK_GRAY,0.01)
+	t += delta
+	$body/CusHead.position.y = headpos +  sin(t * 6) * 4
 	if(walkdir != Vector2.ZERO):
 		position += walkdir * 0.3 * Engine.time_scale
 		$walk.volume_db -= 0.4 * Engine.time_scale
@@ -80,19 +88,20 @@ func _physics_process(delta: float) -> void:
 	
 	var playerhas = Globals.player.plate.get_as_ids()
 	if($outanimation.time_left == 0):
+		pass
 		if(recipe.is_matching(playerhas)):
-			$ColorRect.color = Color.GOLD
+			$RecipeDisplay.hide()
 		elif(recipe.matching_so_far(playerhas)):
-			$ColorRect.color = Color.GREEN
+			$RecipeDisplay.show()
 		else:
-			$ColorRect.color = Color.RED
+			$RecipeDisplay.show()
 	
 	var count = Globals.player.plate.get_count()
 	if(count < 35):
-		$ColorRect.position.x = -61.0
+		$body.position.x = 0
 		$GPUParticles2D.emitting = false
 	else:
-		$ColorRect.position.x = -61.0 + (randf_range(count,-count) - 35) / 32
+		$body.position.x =  (randf_range(count,-count) - 35) / 32
 		$GPUParticles2D.emitting = true
 	
 	$customertimer.set_timer($waittime.time_left / waittime)

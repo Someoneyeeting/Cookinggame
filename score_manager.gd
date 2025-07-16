@@ -29,3 +29,12 @@ func increase_served():
 
 func get_served():
 	return served
+
+func get_hunger_level():
+	return int($hungerbar.hunger * 3 / $hungerbar.maxhunger)
+
+func get_hunger():
+	return $hungerbar.hunger
+
+func get_max_hunger():
+	return $hungerbar.maxhunger
