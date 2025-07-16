@@ -62,8 +62,14 @@ func get_thrown(items : Array[ItemRes]):
 			Globals.add_star()
 			served.emit(recipe)
 			Globals.add_money(10)
+			ScoresManager.shoot($body/CusHead.global_position,dir * -20,10)
+			
 		elif(not recipe.matching_so_far(ids) and ids.size() >= recipe.items.size() / 2):
 			Globals.lose_star()
+		else:
+			Globals.lose_star()
+			Globals.add_money(-10)
+			ScoresManager.shoot($body/CusHead.global_position,dir * -20,-10)
 		
 	global_position -= dir * 70 * (sqrt(size))
 	$waittime.paused = true

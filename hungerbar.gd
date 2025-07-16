@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var hunger :float= 99
+var hunger :float= 150
 var hungerlerp : float = 0.
 var maxhunger :int = 100
 var decrease :float = 0

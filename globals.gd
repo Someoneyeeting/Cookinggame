@@ -144,3 +144,7 @@ func set_money(money : int):
 
 func add_money(money : int):
 	$ScoreManager.add_money(money)
+
+func mult_stars(node : Node2D):
+	await get_tree().create_timer(0.5).timeout
+	$ScoreManager.mult_stars(node)

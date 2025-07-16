@@ -7,24 +7,46 @@
 [sub_resource type="GDScript" id="GDScript_lrf67"]
 script/source = "extends Node2D
 
+var val : int = 0
+var multp : int = 1
 
 func shoot(dir : Vector2,amount : int):
+	val = amount
 	if(amount > 0):
 		$Label.text = \"+$\" + str(amount)
 	else:
 		$Label.text = \"-$\" + str(amount)
 	$Label.position += dir
-	var tween = get_tree().create_tween()
-	tween.tween_property($Label,\"position\",$Label.position + dir / 3,1.2)
-	tween.finished.connect(func () : $blinkDel.activate(1,0.2))
+	var tween = create_tween()
+	tween.tween_property($Label,\"position\",$Label.position + dir,0.3).set_trans(Tween.TRANS_CIRC)
+	if(amount > 0):
+		tween.finished.connect(func () : Globals.mult_stars(self))
+	else:
+		tween.finished.connect(func () : $blinkDel.activate(1,0.2))
+		
 	$AnimationPlayer.play(\"rotate\")
 
 func _ready() -> void:
-	shoot(Vector2(-10,-10) * 2,10)
+	pass
+
+func mult():
+	var tween := get_tree().create_tween()
+	tween.tween_property($Label,\"scale\",$Label.scale + Vector2(1,1) * 0.12,0.3).set_trans(Tween.TRANS_CIRC)
+	$Label.rotation_degrees = randf_range(-10,10)
+	#$Label.scale += Vector2(1,1) * 0.08
+	multp += 1
+	Globals.add_money(val)
+	$Label.text = \"+$\" + str(multp * val)
+
+func finish():
+	$blinkDel.activate(1,0.2)
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_s1363"]
 font_size = 24
+font_color = Color(0.145521, 0.206982, 0.920897, 1)
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_lrf67"]
 resource_name = "rotate"
@@ -101,7 +123,6 @@ _data = {
 }
 
 [node name="scoredisplay" type="Node2D"]
-position = Vector2(619, 268)
 script = SubResource("GDScript_lrf67")
 
 [node name="blinkDel" parent="." instance=ExtResource("3_s1363")]

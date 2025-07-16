@@ -43,4 +43,10 @@ func set_money(money : int):
 	$MoneyUi.set_money(money)
 
 func add_money(money : int):
+	if(money > 0):
+		money *= $StarsUI.hypecount
 	$MoneyUi.set_money($MoneyUi.money + money)
+	$MoneyUi.set_money($MoneyUi.money + money)
+
+func mult_stars(node : Node2D):
+	$StarsUI.mult_stars(node)
