@@ -3,6 +3,7 @@ class_name Player
 
 @export var move_speed : float = 200
 @export var plate : Plate
+@onready var markerpos :Vector2= $PlayerBase/Marker2D.position 
 
 func add_food(obj):
 	if(obj is Podium):
@@ -11,7 +12,7 @@ func add_food(obj):
 		take_food_oven(obj)
 
 func add_food_pod(pod : Podium):
-	if(pod.global_position.distance_to(global_position) > 250):
+	if(pod.global_position.distance_to(global_position) > 170):
 		return
 	if(plate.can_add_item(pod.item)):
 		plate.add_ingridiant(pod.item)
@@ -45,6 +46,8 @@ func _handle_move():
 			Globals.change_hunger(-0.05)
 	
 	$ColorRect.material.set_shader_parameter("skew",velocity.x / 150)
+	$reflect.material.set_shader_parameter("skew",velocity.x / 150)
+	$face.global_position = $PlayerBase/Marker2D.global_position - velocity * 0.03
 	
 	
 	move_and_slide()
@@ -103,7 +106,10 @@ func _physics_process(delta: float) -> void:
 	Globals.player = self
 	_handle_move()
 	
-	if(get_global_mouse_position().distance_to(global_position) < 200):
+	var mpos := markerpos + markerpos.direction_to(get_global_mouse_position() - $PlayerBase.global_position) * 1
+	$PlayerBase/Marker2D.position = lerp($PlayerBase/Marker2D.position,mpos,0.2)
+	#$face.global_position = lerp($face.global_position,$PlayerBase/Marker2D.global_position,0.001)
+	if(get_global_mouse_position().distance_to(global_position) < 170):
 		$range.color.a = lerp($range.color.a,0.0,0.3)
 	else:
 		$range.color.a = lerp($range.color.a,0.2,0.3)

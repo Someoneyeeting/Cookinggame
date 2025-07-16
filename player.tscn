@@ -1,18 +1,24 @@
-[gd_scene load_steps=16 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=17 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Material" uid="uid://bt5pu3antuq74" path="res://skew.tres" id="2_b26j0"]
 [ext_resource type="PackedScene" uid="uid://8wj5cic12r67" path="res://plate.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cyfq1svoocqic" path="res://targetable.tscn" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://djv5bhorj1iqh" path="res://assets/sprites/player_expression_normal.png" id="4_n7ghd"]
 [ext_resource type="AudioStream" uid="uid://cnsqrjxlklv3k" path="res://assets/audio/chicken_throw.wav" id="5_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://r7wia6rowagv" path="res://assets/audio/chicken_die.wav" id="5_sweqy"]
 [ext_resource type="AudioStream" uid="uid://bahrftis21h06" path="res://assets/audio/cantpick.wav" id="7_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://bcne7id381ys4" path="res://assets/sprites/player_base.png" id="9_n7ghd"]
 
 [sub_resource type="Shader" id="Shader_2hs0m"]
 code = "shader_type canvas_item;
 
+
+uniform float skew = 0.0;
+
 void vertex() {
-	// Called for every vertex the material is visible on.
+	VERTEX.x += -skew * (UV.y);
 }
 
 void fragment() {
@@ -31,6 +37,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1jxqw"]
 shader = SubResource("Shader_2hs0m")
+shader_parameter/skew = 0.0
 
 [sub_resource type="Shader" id="Shader_onrkg"]
 code = "shader_type canvas_item;
@@ -56,31 +63,8 @@ shader = SubResource("Shader_onrkg")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 
-[sub_resource type="Shader" id="Shader_1jxqw"]
-code = "shader_type canvas_item;
-
-uniform float skew = 0.0;
-
-void vertex() {
-	VERTEX.x += -skew * (1.- UV.y);
-}
-
-void fragment() {
-	// Called for every pixel the material is visible on.
-}
-
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dw050"]
-shader = SubResource("Shader_1jxqw")
-shader_parameter/skew = 0.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
-radius = 25.0799
+radius = 34.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("plate") groups=["targetable"]]
 script = ExtResource("1_4flbx")
@@ -89,12 +73,12 @@ plate = NodePath("plate")
 
 [node name="reflect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_1jxqw")
-offset_left = -22.0
+offset_left = -28.0
 offset_top = 14.0
-offset_right = 9.0
-offset_bottom = 40.0
+offset_right = 11.0
+offset_bottom = 46.0
 scale = Vector2(1.41244, 1.41244)
-color = Color(0.927686, 0.927686, 0.927686, 1)
+color = Color(0.598648, 0.681689, 1, 1)
 
 [node name="range" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_i3pqv")
@@ -110,12 +94,28 @@ scale = Vector2(1.46767, 1.46767)
 shape = SubResource("CircleShape2D_onrkg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_dw050")
+visible = false
+material = ExtResource("2_b26j0")
 offset_left = -14.0
 offset_top = -14.0
 offset_right = 6.0
 offset_bottom = 6.0
 scale = Vector2(1.41244, 1.41244)
+
+[node name="PlayerBase" type="Sprite2D" parent="."]
+material = ExtResource("2_b26j0")
+position = Vector2(0, 13)
+scale = Vector2(1.42353, 1.42353)
+texture = ExtResource("9_n7ghd")
+offset = Vector2(0, -11)
+
+[node name="Marker2D" type="Marker2D" parent="PlayerBase"]
+position = Vector2(0, -9.13223)
+
+[node name="face" type="Sprite2D" parent="."]
+position = Vector2(-3, -7)
+scale = Vector2(1.22803, 1.22803)
+texture = ExtResource("4_n7ghd")
 
 [node name="timers" type="Node" parent="."]
 
