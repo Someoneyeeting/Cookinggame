@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbqkd7m34xkbp"]
+
+[ext_resource type="FontFile" uid="uid://bvynssw7e2uep" path="res://assets/ByteBounce.ttf" id="1_eci41"]
+
+[sub_resource type="GDScript" id="GDScript_peni5"]
+script/source = "extends Node2D
+
+
+var money := 0
+
+func set_money(mon : int):
+	money = max(0,mon)
+	$Label.text = \"$ \" + str(money)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_lvvax"]
+font = ExtResource("1_eci41")
+font_size = 61
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MoneyUi" type="Node2D"]
+script = SubResource("GDScript_peni5")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "$0"
+label_settings = SubResource("LabelSettings_lvvax")

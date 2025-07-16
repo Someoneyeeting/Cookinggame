@@ -31,6 +31,7 @@ func check_eat(ids):
 	if(recipe.is_matching(ids)):
 		#print("yes")
 		Globals.change_hunger(60)
+		Globals.add_money(-5)
 		$outanimation.start()
 		$body.modulate = Color.BLUE
 		get_tree().create_timer(0.4).timeout.connect(queue_free)
@@ -60,7 +61,8 @@ func get_thrown(items : Array[ItemRes]):
 		if(recipe.is_matching(ids)):
 			Globals.add_star()
 			served.emit(recipe)
-		elif(not recipe.matching_so_far(ids)):
+			Globals.add_money(10)
+		elif(not recipe.matching_so_far(ids) and ids.size() >= recipe.items.size() / 2):
 			Globals.lose_star()
 		
 	global_position -= dir * 70 * (sqrt(size))

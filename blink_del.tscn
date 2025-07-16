@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://rd51lvq0ut6n"]
+
+[sub_resource type="GDScript" id="GDScript_ychia"]
+script/source = "extends Node
+
+
+func activate(time : float = 0.6, speed : float = 0.1):
+	$blink.start(speed)
+	$delete.start(time)
+
+func _on_blink_timeout() -> void:
+	get_parent().visible = not get_parent().visible
+
+
+func _on_delete_timeout() -> void:
+	get_parent().queue_free()
+"
+
+[node name="blinkDel" type="Node"]
+script = SubResource("GDScript_ychia")
+
+[node name="blink" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="delete" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="blink" to="." method="_on_blink_timeout"]
+[connection signal="timeout" from="delete" to="." method="_on_delete_timeout"]

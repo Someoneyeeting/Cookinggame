@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs34nfduhdcer"]
+
+[sub_resource type="GDScript" id="GDScript_urcm6"]
+script/source = "extends Node2D
+
+const DISPLAY := preload(\"res://scoredisplay.tscn\")
+
+func shoot(pos : Vector2,dir : Vector2, amount : int):
+	var display := DISPLAY.instantiate()
+	display.shoot(dir,amount)
+	$scores.add_child(display)
+"
+
+[node name="scoresManager" type="Node2D"]
+script = SubResource("GDScript_urcm6")
+
+[node name="scores" type="Node2D" parent="."]

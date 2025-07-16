@@ -138,3 +138,9 @@ func music_loop() -> void:
 		$musicfreedom.play()
 	else:
 		$music.play()
+
+func set_money(money : int):
+	$ScoreManager.set_money(money)
+
+func add_money(money : int):
+	$ScoreManager.add_money(money)

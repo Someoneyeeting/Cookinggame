@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8cigrakcycmn"]
+
+[ext_resource type="Texture2D" uid="uid://cec4w8g3gg3fw" path="res://assets/sprites/cus_head.png" id="1_lrf67"]
+[ext_resource type="Texture2D" uid="uid://cod11fxoyj3b3" path="res://assets/sprites/blank_face.png" id="2_s1363"]
+[ext_resource type="PackedScene" uid="uid://rd51lvq0ut6n" path="res://blink_del.tscn" id="3_s1363"]
+
+[sub_resource type="GDScript" id="GDScript_lrf67"]
+script/source = "extends Node2D
+
+
+func shoot(dir : Vector2,amount : int):
+	if(amount > 0):
+		$Label.text = \"+$\" + str(amount)
+	else:
+		$Label.text = \"-$\" + str(amount)
+	$Label.position += dir
+	var tween = get_tree().create_tween()
+	tween.tween_property($Label,\"position\",$Label.position + dir / 3,1.2)
+	tween.finished.connect(func () : $blinkDel.activate(1,0.2))
+	$AnimationPlayer.play(\"rotate\")
+
+func _ready() -> void:
+	shoot(Vector2(-10,-10) * 2,10)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_s1363"]
+font_size = 24
+
+[sub_resource type="Animation" id="Animation_lrf67"]
+resource_name = "rotate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CusHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.148651, 1),
+"update": 0,
+"values": [Vector2(-1.19209e-07, 1.90735e-06), Vector2(36, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CusHead:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.148651, 1),
+"update": 0,
+"values": [0.0, 0.637092]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("CusHead/blinkDel")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.766667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.4, 0.1],
+"method": &"activate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s1363"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CusHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.19209e-07, 1.90735e-06)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CusHead:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1v5ss"]
+_data = {
+&"RESET": SubResource("Animation_s1363"),
+&"rotate": SubResource("Animation_lrf67")
+}
+
+[node name="scoredisplay" type="Node2D"]
+position = Vector2(619, 268)
+script = SubResource("GDScript_lrf67")
+
+[node name="blinkDel" parent="." instance=ExtResource("3_s1363")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -31.0
+offset_top = -13.0
+offset_right = 60.0
+offset_bottom = 32.0
+text = "+$111"
+label_settings = SubResource("LabelSettings_s1363")
+
+[node name="CusHead" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1.19209e-07, 1.90735e-06)
+scale = Vector2(2.15385, 2.15385)
+texture = ExtResource("1_lrf67")
+
+[node name="BlankFace" type="Sprite2D" parent="CusHead"]
+position = Vector2(-0.106122, -0.132661)
+scale = Vector2(1.04694, 1.04694)
+texture = ExtResource("2_s1363")
+
+[node name="blinkDel" parent="CusHead" instance=ExtResource("3_s1363")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1v5ss")
+}

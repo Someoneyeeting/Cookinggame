@@ -38,3 +38,9 @@ func get_hunger():
 
 func get_max_hunger():
 	return $hungerbar.maxhunger
+
+func set_money(money : int):
+	$MoneyUi.set_money(money)
+
+func add_money(money : int):
+	$MoneyUi.set_money($MoneyUi.money + money)

@@ -13,7 +13,7 @@ func add_food(obj):
 		take_food_oven(obj)
 
 func add_food_pod(pod : Podium):
-	if(pod.global_position.distance_to(global_position) >= 180):
+	if(pod.global_position.distance_to(global_position) >= 200):
 		return
 	if(plate.can_add_item(pod.item)):
 		plate.add_ingridiant(pod.item)
@@ -144,7 +144,7 @@ func _physics_process(delta: float) -> void:
 	var mpos := markerpos + markerpos.direction_to(get_global_mouse_position() - $PlayerBase.global_position) * 3
 	$PlayerBase/Marker2D.position = lerp($PlayerBase/Marker2D.position,mpos,0.2)
 	#$face.global_position = lerp($face.global_position,$PlayerBase/Marker2D.global_position,0.001)
-	if(get_global_mouse_position().distance_to(global_position) <= 180):
+	if(get_global_mouse_position().distance_to(global_position) <= 200):
 		$range.color.a = lerp($range.color.a,0.0,0.3)
 	else:
 		$range.color.a = lerp($range.color.a,0.13,0.3)
