@@ -3,6 +3,7 @@ class_name StarUI
 
 signal lose
 var STAR := preload("res://star_sprite.tscn")
+var normalcount := 7
 var starcount := 3
 var hypecount := 0
 var totalstarcount := 0
@@ -14,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		$mult.global_position.y = hypetarget.global_position.y - 20
 	$mult.text = "x" + str(hypecount + 1)
 func _ready() -> void:
-	for i in range(5):
+	for i in range(normalcount):
 		var star = STAR.instantiate()
 		star.position.y = i * -80
 		if(i >= starcount):
@@ -48,22 +49,22 @@ func add_stars(amount : int):
 	for i in amount:
 		var ind = starcount
 		starcount += 1
-		if(ind >= 5):
+		if(ind >= normalcount):
 			add_hype()
 			continue
 		$stars.get_children()[ind].activate()
 	
 	if(hypecount == 0):
 		$gainstar.play()
-	starcount = min(starcount,5)
+	starcount = min(starcount,normalcount)
 
 func add_hype():
 	var star = STAR.instantiate()
 	star.position.y = (starcount + hypecount - 2) * -80
 	var tween = get_tree().create_tween()
 	tween.tween_property(star,"position:y",(starcount + hypecount - 1) * -80,0.1).set_trans(Tween.TRANS_CIRC) 
-	tween.parallel().tween_property($hype,"position:y",(hypecount) * 80 / 2,0.1).set_trans(Tween.TRANS_CIRC) 
-	tween.parallel().tween_property($stars,"position:y",(hypecount) * 80 / 2,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.parallel().tween_property($hype,"position:y",(hypecount) * 80 / 1,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.parallel().tween_property($stars,"position:y",(hypecount) * 80 / 1,0.1).set_trans(Tween.TRANS_CIRC) 
 	star.hype()
 	
 	$mult.show()
@@ -88,7 +89,7 @@ func lose_hype():
 	tween1.finished.connect($mult.hide)
 	for i in $hype.get_children():
 		var tween = get_tree().create_tween()
-		tween.tween_property(i,"position:y",4 * -80,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(i,"position:y",(normalcount - 1) * -80,0.1).set_trans(Tween.TRANS_CIRC)
 		tween.parallel().tween_property($stars,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
 		tween.parallel().tween_property($hype,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
 
@@ -102,9 +103,8 @@ func _death():
 
 func mult_stars(node : Node2D):
 	for i in range(hypecount):
-		if($hype.get_child_count() <= i):
-			break
 		node.mult()
-		$hype.get_children()[i].expand()
-		await get_tree().create_timer(0.05).timeout
+		if(i < $hype.get_child_count()):
+			$hype.get_children()[i].expand()
+			await get_tree().create_timer(0.01).timeout
 	node.finish()

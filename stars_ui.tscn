@@ -54,6 +54,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_r10ar")
 
 [node name="mult" type="Label" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_cbk7k")
 offset_left = 50.0
 offset_top = -410.0

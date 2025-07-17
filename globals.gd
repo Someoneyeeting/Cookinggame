@@ -156,3 +156,6 @@ func add_money(money : int):
 func mult_stars(node : Node2D):
 	await get_tree().create_timer(0.5).timeout
 	%ScoreManager.mult_stars(node)
+
+func add_actual_money(amount : int):
+	%ScoreManager.add_actual_money(amount)

@@ -47,3 +47,10 @@ func add_money(money : int):
 
 func mult_stars(node : Node2D):
 	%StarsUI.mult_stars(node)
+
+func add_actual_money(amount : int):
+	print(amount)
+	if(amount > 0):
+		%MoneyUi.add_actual_money(amount * (%StarsUI.hypecount + 1))
+	else:
+		%MoneyUi.add_actual_money(amount)

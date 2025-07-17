@@ -17,6 +17,7 @@ func shoot(dir : Vector2,amount : int):
 	else:
 		$Label.text = \"-$\" + str(amount)
 	$Label.position += dir
+	#Globals.add_actual_money(amount)
 	var tween = create_tween()
 	tween.tween_property($Label,\"position\",$Label.position + dir,0.3).set_trans(Tween.TRANS_CIRC)
 	if(amount > 0):

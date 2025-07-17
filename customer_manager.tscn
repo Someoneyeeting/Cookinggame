@@ -8,12 +8,11 @@ script = ExtResource("1_uxglp")
 recipesUnlock = ExtResource("2_3gnd4")
 
 [node name="customers" type="Node2D" parent="."]
-position = Vector2(60, 0)
 
 [node name="newcustomer" type="Timer" parent="."]
 autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(136, 302)
+position = Vector2(181, 302)
 
 [connection signal="timeout" from="newcustomer" to="." method="_on_newcustomer_timeout"]

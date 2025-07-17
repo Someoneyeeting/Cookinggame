@@ -21,7 +21,9 @@ func new_customer():
 	if(Globals.get_served() in recipesUnlock.recipes):
 		recipes.append(recipesUnlock.recipes[Globals.get_served()])
 	var ind : int = -1
-	for i in range(5):
+	var inds = [0,1,2,3,4]
+	inds.shuffle()
+	for i in inds:
 		if(not line[i]):
 			line[i] = true
 			ind = i
@@ -31,11 +33,18 @@ func new_customer():
 		return
 	
 	var customer :Customer= CUSTOMER.instantiate()
-	customer.global_position = $Marker2D.global_position
-	customer.global_position.x += ind * 220
+	var pos : Vector2 = $Marker2D.global_position
+	pos.x += ind * 220
 	if(ind % 2 == 1):
-		customer.global_position.y -= 30
+		pos.y -= 30
+	
+	customer.walkin(pos)
+	customer.global_position = pos + Vector2(0,-500)
 	#customer.global_position.y -= $customers.get_child_count() * 10
+	
+	customer.ind = ind
+	customer.out.connect(customer_out)
+	
 	customerind += 1
 	customerind %= 3
 	customer.enter_line()
@@ -43,6 +52,9 @@ func new_customer():
 	customer.set_recipe(recipes[randi_range(0,recipes.size() - 1)])
 	customer.z_index = -waiting.size()
 	$customers.add_child(customer)
+
+func customer_out(ind : int):
+	line[ind] = false
 
 func _physics_process(delta: float) -> void:
 	pass

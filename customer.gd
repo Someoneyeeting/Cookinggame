@@ -36,7 +36,7 @@ func check_eat(ids):
 		Globals.add_money(-5)
 		$outanimation.start()
 		$body.modulate = Color.BLUE
-		get_tree().create_timer(0.4).timeout.connect(queue_free)
+		get_tree().create_timer(0.4).timeout.connect(_out)
 		Globals.lose_star()
 	else:
 		if($waittime.time_left <= 6):
@@ -77,7 +77,16 @@ func get_thrown(items : Array[ItemRes]):
 	$waittime.paused = true
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.6).set_trans(Tween.TRANS_CIRC)
-	tween.tween_callback(queue_free)
+	tween.tween_callback(_out)
+
+func walkin(pos : Vector2):
+	$AnimationPlayer.play("walk")
+	var tween := create_tween()
+	tween.tween_property(self,"global_position",pos,0.5)
+	tween.finished.connect(start)
+
+func start():
+	$AnimationPlayer.stop()
 
 func time_out():
 	Globals.lose_star()
@@ -85,14 +94,15 @@ func time_out():
 	walkdir = Vector2(randf_range(-30,30),-30)
 
 func enter_line():
-	$AnimationPlayer.play("enter_line")
+	pass
+	#$AnimationPlayer.play("enter_line")
 
 func _physics_process(delta: float) -> void:
 	#$body.modulate = lerp($body.modulate,Color.WHITE if serving else Color.DARK_GRAY,0.01)
 	t += delta
 	if(walkdir != Vector2.ZERO):
 		position += walkdir * 0.3 * Engine.time_scale
-		$walk.volume_db -= 0.4 * Engine.time_scale
+		#$walk.volume_db -= 0.4 * Engine.time_scale
 		#$walk.volume_db = randf_range(2.,3.)
 	
 	var playerhas = Globals.player.plate.get_as_ids()
@@ -136,5 +146,9 @@ func _on_waittime_timeout() -> void:
 	time_out()
 
 
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+func _out():
+	out.emit(ind)
 	queue_free()
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	_out()
