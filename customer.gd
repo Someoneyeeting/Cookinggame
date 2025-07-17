@@ -3,6 +3,7 @@ class_name Customer
 
 signal served(recipe : Array[RecipeRes])
 signal out(ind : int)
+signal shot
 
 var ind : int
 var serving := false
@@ -10,7 +11,7 @@ var plate := preload("res://foods/plate.tres")
 var chicken := preload("res://foods/chicken.tres")
 @onready var waittime :float= $waittime.wait_time
 @export var recipe : RecipeRes
-@export var is_freezeing : bool = false
+@export var is_freezed : bool = false
 
 var walkdir := Vector2.ZERO
 var t : float = 0.
@@ -22,8 +23,9 @@ func set_recipe(recp : RecipeRes):
 	recipe = recp.duplicate()
 
 func _ready() -> void:
-	if(is_freezeing):
+	if(is_freezed):
 		$waittime.paused = true
+		$customertimer.hide()
 	recipe = recipe.duplicate()
 	Globals.eat.connect(check_eat)
 	serving = true
@@ -51,6 +53,7 @@ func check_eat(ids):
 		
 
 func get_thrown(items : Array[ItemRes]):
+	shot.emit()
 	var size : int = items.size()
 	if(walkdir != Vector2.ZERO):
 		size = 16

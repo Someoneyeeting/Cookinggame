@@ -15,7 +15,7 @@ func shoot(dir : Vector2,amount : int):
 	if(amount > 0):
 		$Label.text = \"+$\" + str(amount)
 	else:
-		$Label.text = \"-$\" + str(amount)
+		$Label.text = \"-$\" + str(abs(amount))
 	$Label.position += dir
 	#Globals.add_actual_money(amount)
 	var tween = create_tween()

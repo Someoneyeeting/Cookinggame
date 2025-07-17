@@ -6,6 +6,7 @@ var CUSTOMER := preload("res://customer.tscn")
 
 var waiting :Array[Customer]= []
 var cserving :Array[Customer]= []
+var is_intro := true
 
 var line :Array[bool]= [false,false,false,false,false]
 
@@ -61,14 +62,20 @@ func new_customer():
 
 func customer_out(ind : int):
 	line[ind] = false
-	$CanvasLayer/controls.hide()
-	print("hide")
 
 func _physics_process(delta: float) -> void:
 	$CanvasLayer/ColorRect.material.set_shader_parameter("pos",Globals.player.global_position / Vector2(1280,720))
+	
+	if(is_intro):
+		Globals.set_hunger(50)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	$customers/Customer.global_position = get_ind_pos(2)
 	$customers/Customer.global_position.y -= 300
 	$customers/Customer.walkin(get_ind_pos(2))
+
+
+func _on_customer_shot() -> void:
+	$CanvasLayer/controls.hide()
+	
