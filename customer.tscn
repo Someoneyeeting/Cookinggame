@@ -52,7 +52,7 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_crw8f"]
 resource_local_to_scene = true
 shader = SubResource("Shader_fi8ru")
-shader_parameter/strength = 2.905
+shader_parameter/strength = 1.0
 
 [sub_resource type="Animation" id="Animation_r8ta2"]
 length = 0.001
@@ -166,7 +166,7 @@ y_sort_enabled = true
 script = ExtResource("1_7tiyv")
 
 [node name="RecipeDisplay" parent="." instance=ExtResource("3_f7asb")]
-position = Vector2(0, -82)
+position = Vector2(66, 0.999992)
 scale = Vector2(1.63416, 1.63416)
 
 [node name="body" type="Node2D" parent="."]
@@ -231,7 +231,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="customertimer" parent="." instance=ExtResource("7_0rcyg")]
-position = Vector2(39, 63)
+position = Vector2(-59, 63)
 scale = Vector2(1.30806, 1.30806)
 
 [node name="waittime" type="Timer" parent="."]

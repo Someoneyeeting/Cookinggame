@@ -99,19 +99,19 @@ func _physics_process(delta: float) -> void:
 	if($outanimation.time_left == 0):
 		pass
 		if(recipe.is_matching(playerhas)):
-			$RecipeDisplay.hide()
+			#$RecipeDisplay.hide()
 			$body/CusHead.position.y = headpos - 13 + randf_range(-1,1)
 			$body/CusHead.frame = 1
 			$body/CusHead.rotation += delta
 			%glow.material.set_shader_parameter("strength",randf_range(0.5,0.8))
 		elif(recipe.matching_so_far(playerhas)):
-			$RecipeDisplay.show()
+			#$RecipeDisplay.show()
 			$body/CusHead.position.y = headpos +  sin(t * 6) * 4
 			$body/CusHead.frame = 0
 			$body/CusHead.rotation = 0
 			%glow.material.set_shader_parameter("strength",0.)
 		else:
-			$RecipeDisplay.show()
+			#$RecipeDisplay.show()
 			$body/CusHead.position.y = headpos
 			$body/CusHead.frame = 0
 			$body/CusHead.rotation = 0

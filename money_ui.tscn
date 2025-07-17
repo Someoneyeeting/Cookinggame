@@ -17,7 +17,10 @@ func set_money(mon : int):
 func add_money(amount : int):
 	added += amount
 	money += amount
-	%added.text = \"+$\" + str(added)
+	if(amount > 0):
+		%added.text = \"+$\" + str(added)
+	else:
+		%added.text = \"-$\" + str(-added)
 	$redeem.start()
 	expand()
 	
@@ -78,18 +81,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("anchor/added:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_eci41"]
@@ -175,16 +166,15 @@ position = Vector2(78, 9)
 
 [node name="added" type="Label" parent="anchor"]
 unique_name_in_owner = true
-offset_left = -82.9904
-offset_right = -4.99043
+visible = false
+offset_right = 78.0
 offset_bottom = 33.0
 pivot_offset = Vector2(40, 18)
 text = "+$10"
 label_settings = SubResource("LabelSettings_eci41")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -35.0
-offset_right = 26.0
+offset_right = 61.0
 offset_bottom = 49.0
 text = "$0"
 label_settings = SubResource("LabelSettings_lvvax")

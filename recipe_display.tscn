@@ -22,7 +22,7 @@ func set_recp(rec : RecipeRes) -> void:
 	
 func _physics_process(delta: float) -> void:
 	var curitem = Globals.player.plate.get_count()
-	if(is_matching() and curitem >= 1):
+	if(is_matching() and curitem >= 0):
 		$items.position.y = lerp($items.position.y,20. * (curitem - 1),0.3)
 		#print(curitem)
 	else:

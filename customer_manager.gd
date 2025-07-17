@@ -32,7 +32,7 @@ func new_customer():
 	
 	var customer :Customer= CUSTOMER.instantiate()
 	customer.global_position = $Marker2D.global_position
-	customer.global_position.x += ind * 230
+	customer.global_position.x += ind * 220
 	if(ind % 2 == 1):
 		customer.global_position.y -= 30
 	#customer.global_position.y -= $customers.get_child_count() * 10

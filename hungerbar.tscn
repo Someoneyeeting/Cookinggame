@@ -56,7 +56,7 @@ gradient = SubResource("Gradient_y4dqk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_clw42"]
 shader = SubResource("Shader_y4dqk")
-shader_parameter/val = 0.305
+shader_parameter/val = 1.22
 shader_parameter/grad = SubResource("GradientTexture1D_clw42")
 shader_parameter/decrease = 0.125
 
@@ -66,33 +66,33 @@ script = ExtResource("1_5ec5r")
 [node name="base" type="ColorRect" parent="."]
 offset_left = -2.0
 offset_top = -2.0
-offset_right = 316.0
+offset_right = 356.0
 offset_bottom = 19.0
 pivot_offset = Vector2(156.5, 13)
 color = Color(0, 0, 0, 1)
 
 [node name="background" type="ColorRect" parent="."]
-offset_right = 314.0
+offset_right = 353.0
 offset_bottom = 17.0
 color = Color(0.160567, 0.160567, 0.160567, 1)
 
 [node name="bar" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_clw42")
-offset_right = 313.0
+offset_right = 353.0
 offset_bottom = 17.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 94.0
+offset_left = 103.0
 offset_top = -1.0
-offset_right = 96.0
+offset_right = 105.0
 offset_bottom = 19.0
 pivot_offset = Vector2(1, 0)
 color = Color(0, 0, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 190.0
+offset_left = 208.0
 offset_top = -1.0
-offset_right = 192.0
+offset_right = 210.0
 offset_bottom = 19.0
 pivot_offset = Vector2(1, 0)
 color = Color(0, 0, 0, 1)
