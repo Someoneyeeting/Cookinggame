@@ -1,13 +1,29 @@
-[gd_scene load_steps=13 format=4 uid="uid://b6xss2pyvosu0"]
+[gd_scene load_steps=15 format=4 uid="uid://b6xss2pyvosu0"]
 
 [ext_resource type="PackedScene" uid="uid://c0lyfd8pu4t2a" path="res://customer_manager.tscn" id="1_jotil"]
 [ext_resource type="PackedScene" uid="uid://6nbo85ja31eo" path="res://player.tscn" id="2_612pj"]
 [ext_resource type="PackedScene" uid="uid://bfrxi0adyk11w" path="res://obst.tscn" id="3_612pj"]
 [ext_resource type="Texture2D" uid="uid://ck3tnolnehjmd" path="res://assets/sprites/tileset.png" id="3_fy0p5"]
 [ext_resource type="PackedScene" uid="uid://cts1uyl7lbf1g" path="res://podium.tscn" id="4_asog6"]
+[ext_resource type="Resource" uid="uid://dcgg2fgrfhuap" path="res://foods/salad.tres" id="5_j8njj"]
 [ext_resource type="Resource" uid="uid://tt1jd2gvppb2" path="res://foods/live_chicken.tres" id="5_scc5w"]
 [ext_resource type="PackedScene" uid="uid://dpi66gi61howo" path="res://oven.tscn" id="6_b56k5"]
-[ext_resource type="Resource" uid="uid://c2tkft0bdjcie" path="res://foods/poison.tres" id="6_scc5w"]
+[ext_resource type="Resource" uid="uid://bxypgqx8p13c3" path="res://foods/raw_beef.tres" id="6_hkdkl"]
+
+[sub_resource type="GDScript" id="GDScript_j8njj"]
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	Globals.unhide_stuff.connect(unhide)
+
+func unhide():
+	$salad.modulate = Color.WHITE
+	$salad.modulate = Color.WHITE
+	$beef.modulate = Color.WHITE
+	$chicken.modulate = Color.WHITE
+	$Layer0/oven.modulate = Color.WHITE
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8njj"]
 texture = ExtResource("3_fy0p5")
@@ -53,6 +69,7 @@ void fragment() {
 shader = SubResource("Shader_fy0p5")
 
 [node name="testscene" type="Node2D"]
+script = SubResource("GDScript_j8njj")
 
 [node name="Layer0" type="TileMapLayer" parent="."]
 z_index = -55
@@ -63,7 +80,8 @@ tile_map_data = PackedByteArray("AAAHAAMABgAAAAEAADAHAAIABgACAAAAAAAGAAIABgABAAA
 tile_set = SubResource("TileSet_gr5bc")
 
 [node name="oven" parent="Layer0" instance=ExtResource("6_b56k5")]
-position = Vector2(80.0592, 79.8576)
+modulate = Color(0, 0, 0, 1)
+position = Vector2(79.8575, 79.8576)
 scale = Vector2(0.284267, 0.284267)
 
 [node name="obst" parent="Layer0" instance=ExtResource("3_612pj")]
@@ -93,23 +111,27 @@ offset_top = 458.0
 offset_right = 1269.0
 offset_bottom = 879.0
 
-[node name="podium" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(566, 477)
+[node name="plate" parent="." instance=ExtResource("4_asog6")]
+position = Vector2(581, 477)
 scale = Vector2(1.31179, 1.31179)
-item = ExtResource("5_scc5w")
 
-[node name="podium2" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(971, 477)
-scale = Vector2(1.31179, 1.31179)
-item = ExtResource("6_scc5w")
-
-[node name="podium3" parent="." instance=ExtResource("4_asog6")]
+[node name="salad" parent="." instance=ExtResource("4_asog6")]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(783, 477)
 scale = Vector2(1.31179, 1.31179)
+item = ExtResource("5_j8njj")
 
-[node name="podium4" parent="." instance=ExtResource("4_asog6")]
+[node name="beef" parent="." instance=ExtResource("4_asog6")]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(971, 477)
+scale = Vector2(1.31179, 1.31179)
+item = ExtResource("6_hkdkl")
+
+[node name="chicken" parent="." instance=ExtResource("4_asog6")]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(125, 591)
 scale = Vector2(1.31179, 1.31179)
+item = ExtResource("5_scc5w")
 
 [node name="Player" parent="." instance=ExtResource("2_612pj")]
 position = Vector2(578, 604)

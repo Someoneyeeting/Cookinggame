@@ -8,7 +8,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_dpcng"]
 font = ExtResource("4_1jsy1")
-font_size = 50
+font_size = 30
 font_color = Color(0, 0, 0, 1)
 
 [node name="ScoreManager" type="Node2D"]
@@ -25,11 +25,10 @@ position = Vector2(345, 743)
 scale = Vector2(1.7631, 1.7631)
 
 [node name="Label" type="Label" parent="hungerbar"]
-visible = false
-offset_left = 97.1421
-offset_top = -37.1778
-offset_right = 285.142
-offset_bottom = 14.8222
+offset_left = 18.1499
+offset_top = -3.9703
+offset_right = 145.15
+offset_bottom = 31.0297
 text = "hunger"
 label_settings = SubResource("LabelSettings_dpcng")
 

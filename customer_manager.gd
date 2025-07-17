@@ -7,12 +7,14 @@ var CUSTOMER := preload("res://customer.tscn")
 var waiting :Array[Customer]= []
 var cserving :Array[Customer]= []
 var is_intro := true
+var lock_hunger := true
+var intro := 0
 
 var line :Array[bool]= [false,false,false,false,false]
 
 var customerind = 0
 
-var recipes : Array[RecipeRes] = []
+var recipes : Array[RecipeRes] = [load("res://recipes/one_plate.tres")]
 
 func _ready():
 	$CanvasLayer/ColorRect.show()
@@ -63,12 +65,32 @@ func new_customer():
 func customer_out(ind : int):
 	line[ind] = false
 
+func three_intro_customer():
+	lock_hunger = false
+	
+	$customers/Customer2.global_position = get_ind_pos(0)
+	$customers/Customer2.global_position.y -= 300
+	$customers/Customer2.walkin(get_ind_pos(0))
+	await get_tree().create_timer(0.4).timeout
+	
+	$customers/Customer3.global_position = get_ind_pos(2)
+	$customers/Customer3.global_position.y -= 300
+	$customers/Customer3.walkin(get_ind_pos(2))
+	await get_tree().create_timer(0.4).timeout
+	
+	$customers/Customer4.global_position = get_ind_pos(4)
+	$customers/Customer4.global_position.y -= 300
+	$customers/Customer4.walkin(get_ind_pos(4))
+	await get_tree().create_timer(0.4).timeout
+
 func _physics_process(delta: float) -> void:
 	$CanvasLayer/ColorRect.material.set_shader_parameter("pos",Globals.player.global_position / Vector2(1280,720))
 	
-	if(is_intro):
-		Globals.set_hunger(50)
+	if(lock_hunger):
+		Globals.set_hunger(65)
 
+func _play_music():
+	$music.play()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	$customers/Customer.global_position = get_ind_pos(2)
@@ -76,6 +98,20 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	$customers/Customer.walkin(get_ind_pos(2))
 
 
-func _on_customer_shot() -> void:
-	$CanvasLayer/controls.hide()
+func _on_customer_shot(ind : int = 0) -> void:
+	intro += 1
+	if(intro == 1):
+		$CanvasLayer/controls.hide()
+		await get_tree().create_timer(1.3).timeout
+		Globals.unhide_stuff.emit()
+		await get_tree().create_timer(0.6).timeout
+		Globals.show_hunger()
+		await get_tree().create_timer(1.5).timeout
+		three_intro_customer()
+	if(intro == 4):
+		is_intro = false
+		$music.stop()
+		await get_tree().create_timer(1).timeout
+		$newcustomer.start()
+		Globals.start_music()
 	

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemRes" load_steps=3 format=3 uid="uid://dcgg2fgrfhuap"]
+
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_t383p"]
+[ext_resource type="Texture2D" uid="uid://dqlnvxsw4sg74" path="res://assets/sprites/salad.png" id="2_qxplb"]
+
+[resource]
+script = ExtResource("1_t383p")
+id = 3
+texture = ExtResource("2_qxplb")
+metadata/_custom_type_script = "uid://d21xb116fxl4j"

@@ -1,6 +1,7 @@
 extends Node2D
 
 signal eat(ids)
+signal unhide_stuff
 
 var player : Player
 var lefthovering : Area2D
@@ -32,6 +33,9 @@ func toggle_fullscreen():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		$mouse/cursor.scale = Vector2(0.015,0.015)
 	
+
+func start_music():
+	$musicplay.start()
 
 func _on_mouse_area_exited(area: Area2D) -> void:
 	if(lefthovering == area):
@@ -159,3 +163,6 @@ func mult_stars(node : Node2D):
 
 func add_actual_money(amount : int):
 	%ScoreManager.add_actual_money(amount)
+
+func show_hunger():
+	%ScoreManager.show_hunger()

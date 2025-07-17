@@ -57,15 +57,14 @@ pitch_scale = 2.0
 
 [node name="musicplay" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_lbu14")
-volume_db = -80.0
+volume_db = -6.0
 
 [node name="musicfreedom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_52l8x")
-volume_db = -15.0
+volume_db = -6.0
 
 [connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
 [connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]
