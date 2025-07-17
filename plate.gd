@@ -38,7 +38,7 @@ func add_ingridiant(item : ItemRes):
 
 func _physics_process(delta: float) -> void:
 	if(Globals.isaiming):
-		position.y = lerp(position.y,40.,0.6)
+		position.y = lerp(position.y,20.,0.6)
 	else:
 		position.y = lerp(position.y,0.,0.6)
 

@@ -110,7 +110,9 @@ func _on_customer_shot(ind : int = 0) -> void:
 		three_intro_customer()
 	if(intro == 4):
 		is_intro = false
-		$music.stop()
+		var tween = get_tree().create_tween()
+		tween.tween_property($music,"volume_db",-70,2.)
+		await tween.finished
 		await get_tree().create_timer(1).timeout
 		$newcustomer.start()
 		Globals.start_music()

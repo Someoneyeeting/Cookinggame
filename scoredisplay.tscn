@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8cigrakcycmn"]
+[gd_scene load_steps=10 format=3 uid="uid://b8cigrakcycmn"]
 
 [ext_resource type="Texture2D" uid="uid://cec4w8g3gg3fw" path="res://assets/sprites/cus_head.png" id="1_lrf67"]
+[ext_resource type="FontFile" uid="uid://bvynssw7e2uep" path="res://assets/ByteBounce.ttf" id="2_1v5ss"]
 [ext_resource type="Texture2D" uid="uid://cod11fxoyj3b3" path="res://assets/sprites/blank_face.png" id="2_s1363"]
 [ext_resource type="PackedScene" uid="uid://rd51lvq0ut6n" path="res://blink_del.tscn" id="3_s1363"]
 
@@ -44,7 +45,8 @@ func finish():
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_s1363"]
-font_size = 24
+font = ExtResource("2_1v5ss")
+font_size = 40
 font_color = Color(0.356863, 0.686275, 0.941176, 1)
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
