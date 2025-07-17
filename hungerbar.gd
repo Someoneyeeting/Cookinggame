@@ -14,6 +14,8 @@ func _ready() -> void:
 	$ColorRect2.position.x = $background.size.x * 0.666666
 
 func _physics_process(delta: float) -> void:
+	if(hunger == 0):
+		Globals.lose()
 	#$bar.size.x = lerp($bar.size.x,lerp(0,ogsize,hunger / 160),0.4)
 	decreaselerp = lerp(decreaselerp,sqrt(decrease / 2.),0.5)
 	decrease = max(decrease,0.)

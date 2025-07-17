@@ -64,6 +64,15 @@ stream = ExtResource("6_lbu14")
 [node name="musicfreedom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_52l8x")
 
+[node name="death" type="Label" parent="."]
+visible = false
+offset_left = 505.0
+offset_top = 230.0
+offset_right = 545.0
+offset_bottom = 253.0
+scale = Vector2(2.12367, 5.43483)
+text = "death"
+
 [connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
 [connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]
 [connection signal="timeout" from="shake" to="." method="_on_shake_timeout"]

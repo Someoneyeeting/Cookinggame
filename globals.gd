@@ -166,3 +166,6 @@ func add_actual_money(amount : int):
 
 func show_hunger():
 	%ScoreManager.show_hunger()
+
+func lose():
+	$death.show()

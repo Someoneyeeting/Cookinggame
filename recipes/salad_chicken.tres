@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RecipeRes" load_steps=6 format=3 uid="uid://bqqw3qbu04ehe"]
+
+[ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="1_prljd"]
+[ext_resource type="Script" uid="uid://byh0p0n6nwwah" path="res://recipes/RecipeRes.gd" id="2_32kup"]
+[ext_resource type="Resource" uid="uid://8orrvogpxwmb" path="res://foods/plate.tres" id="2_hobvl"]
+[ext_resource type="Resource" uid="uid://dcgg2fgrfhuap" path="res://foods/salad.tres" id="3_w5al1"]
+[ext_resource type="Resource" uid="uid://bfdiey5ohixnn" path="res://foods/chicken.tres" id="4_rps2i"]
+
+[resource]
+script = ExtResource("2_32kup")
+items = Array[ExtResource("1_prljd")]([ExtResource("2_hobvl"), ExtResource("3_w5al1"), ExtResource("4_rps2i")])
+metadata/_custom_type_script = "uid://byh0p0n6nwwah"
