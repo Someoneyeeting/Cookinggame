@@ -9,16 +9,21 @@ var serving := false
 var plate := preload("res://foods/plate.tres")
 var chicken := preload("res://foods/chicken.tres")
 @onready var waittime :float= $waittime.wait_time
-
 @export var recipe : RecipeRes
+@export var is_freezeing : bool = false
+
 var walkdir := Vector2.ZERO
 var t : float = 0.
 @onready var headpos : float = $body/CusHead.position.y
+
+
 
 func set_recipe(recp : RecipeRes):
 	recipe = recp.duplicate()
 
 func _ready() -> void:
+	if(is_freezeing):
+		$waittime.paused = true
 	recipe = recipe.duplicate()
 	Globals.eat.connect(check_eat)
 	serving = true
@@ -77,7 +82,7 @@ func get_thrown(items : Array[ItemRes]):
 	$waittime.paused = true
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(self,"global_position",global_position - dir * 100 * (size / 30),0.6).set_trans(Tween.TRANS_CIRC)
-	tween.tween_callback(_out)
+	tween.finished.connect(_out)
 
 func walkin(pos : Vector2):
 	$AnimationPlayer.play("walk")
@@ -102,6 +107,8 @@ func _physics_process(delta: float) -> void:
 	t += delta
 	if(walkdir != Vector2.ZERO):
 		position += walkdir * 0.3 * Engine.time_scale
+		if(position.y < -30):
+			_out()
 		#$walk.volume_db -= 0.4 * Engine.time_scale
 		#$walk.volume_db = randf_range(2.,3.)
 	
@@ -149,6 +156,3 @@ func _on_waittime_timeout() -> void:
 func _out():
 	out.emit(ind)
 	queue_free()
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	_out()

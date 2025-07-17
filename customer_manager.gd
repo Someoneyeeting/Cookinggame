@@ -13,9 +13,18 @@ var customerind = 0
 
 var recipes : Array[RecipeRes] = []
 
+func _ready():
+	$CanvasLayer/ColorRect.show()
 
 func _on_newcustomer_timeout() -> void:
 	new_customer()
+
+func get_ind_pos(ind : int):
+	var pos = $Marker2D.global_position
+	pos.x += ind * 220
+	if(ind % 2 == 1):
+		pos.y -= 30
+	return pos
 
 func new_customer():
 	if(Globals.get_served() in recipesUnlock.recipes):
@@ -33,10 +42,7 @@ func new_customer():
 		return
 	
 	var customer :Customer= CUSTOMER.instantiate()
-	var pos : Vector2 = $Marker2D.global_position
-	pos.x += ind * 220
-	if(ind % 2 == 1):
-		pos.y -= 30
+	var pos : Vector2 = get_ind_pos(ind)
 	
 	customer.walkin(pos)
 	customer.global_position = pos + Vector2(0,-500)
@@ -55,6 +61,14 @@ func new_customer():
 
 func customer_out(ind : int):
 	line[ind] = false
+	$CanvasLayer/controls.hide()
+	print("hide")
 
 func _physics_process(delta: float) -> void:
-	pass
+	$CanvasLayer/ColorRect.material.set_shader_parameter("pos",Globals.player.global_position / Vector2(1280,720))
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	$customers/Customer.global_position = get_ind_pos(2)
+	$customers/Customer.global_position.y -= 300
+	$customers/Customer.walkin(get_ind_pos(2))

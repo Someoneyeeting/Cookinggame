@@ -21,8 +21,8 @@ scale = Vector2(0.678614, 0.678614)
 
 [node name="hungerbar" parent="." instance=ExtResource("3_t00u6")]
 unique_name_in_owner = true
-position = Vector2(345, 676)
-scale = Vector2(1.66766, 1.66766)
+position = Vector2(345, 743)
+scale = Vector2(1.7631, 1.7631)
 
 [node name="Label" type="Label" parent="hungerbar"]
 visible = false

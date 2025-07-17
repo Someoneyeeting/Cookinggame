@@ -36,7 +36,7 @@ void vertex() {
 void fragment() {
 	vec3 clr = texture(SCREEN_TEXTURE,SCREEN_UV).rgb;
 	if(clr.b > 0.8){
-		COLOR.a = (sin((UV.x + UV.y) * 10. + TIME * 10.) + 1.) * 0.15;
+		COLOR.a = (sin((UV.x + UV.y) * 5. + TIME * 4.) + 1.) * 0.27;
 	}
 	else{
 		COLOR.a = 0.;
@@ -54,26 +54,6 @@ shader = SubResource("Shader_fy0p5")
 
 [node name="testscene" type="Node2D"]
 
-[node name="obst" parent="." instance=ExtResource("3_612pj")]
-visible = false
-position = Vector2(186, 607)
-scale = Vector2(3.95786, 12.5361)
-
-[node name="obst3" parent="." instance=ExtResource("3_612pj")]
-visible = false
-position = Vector2(1227, 593)
-scale = Vector2(3.95786, 12.5361)
-
-[node name="obst2" parent="." instance=ExtResource("3_612pj")]
-visible = false
-position = Vector2(573, 477)
-scale = Vector2(77.5498, -3.26479)
-
-[node name="obst4" parent="." instance=ExtResource("3_612pj")]
-visible = false
-position = Vector2(633, 756)
-scale = Vector2(57.5451, -3.26479)
-
 [node name="Layer0" type="TileMapLayer" parent="."]
 z_index = -55
 use_parent_material = true
@@ -85,6 +65,26 @@ tile_set = SubResource("TileSet_gr5bc")
 [node name="oven" parent="Layer0" instance=ExtResource("6_b56k5")]
 position = Vector2(80.0592, 79.8576)
 scale = Vector2(0.284267, 0.284267)
+
+[node name="obst" parent="Layer0" instance=ExtResource("3_612pj")]
+visible = false
+position = Vector2(40.1304, 107.888)
+scale = Vector2(0.798144, 2.52804)
+
+[node name="obst3" parent="Layer0" instance=ExtResource("3_612pj")]
+visible = false
+position = Vector2(247.841, 105.065)
+scale = Vector2(0.798144, 2.52804)
+
+[node name="obst2" parent="Layer0" instance=ExtResource("3_612pj")]
+visible = false
+position = Vector2(116.761, 76.8326)
+scale = Vector2(15.6387, -0.658379)
+
+[node name="obst4" parent="Layer0" instance=ExtResource("3_612pj")]
+visible = false
+position = Vector2(128.861, 137.936)
+scale = Vector2(11.6046, -0.658379)
 
 [node name="shine" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_j8njj")
