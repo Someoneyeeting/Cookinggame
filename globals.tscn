@@ -40,14 +40,15 @@ color = Color(0, 0, 0, 0)
 unique_name_in_owner = true
 position = Vector2(-113, 56)
 
+[node name="ScoreManager" parent="CanvasLayer" instance=ExtResource("4_3o0v4")]
+unique_name_in_owner = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
 [node name="shake" type="Timer" parent="."]
 wait_time = 0.06
 one_shot = true
-
-[node name="ScoreManager" parent="." instance=ExtResource("4_3o0v4")]
 
 [node name="target" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_oes5j")
@@ -60,7 +61,7 @@ autostart = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_lbu14")
-volume_db = -80.0
+volume_db = -3.0
 
 [node name="musicfreedom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_52l8x")

@@ -23,12 +23,12 @@ func add_money(amount : int):
 	
 func expand():
 	%added.show()
-	print(%added.visible)
+	%added.position.x = 0
 	%added.scale = Vector2(2.,2.)
 
 func _physics_process(delta: float) -> void:
 	%added.scale = lerp(%added.scale,Vector2(1,1),0.3)
-	$anchor.position.x = $Label.size.x + 20
+	$anchor.position.x = $Label.size.x + 25
 	
 
 func redeem():
@@ -43,7 +43,7 @@ func _on_redeem_timeout() -> void:
 [sub_resource type="LabelSettings" id="LabelSettings_eci41"]
 font = ExtResource("1_eci41")
 font_size = 48
-font_color = Color(0.0988138, 0.0922561, 1, 1)
+font_color = Color(0.356863, 0.686275, 0.941176, 1)
 outline_size = 11
 outline_color = Color(0, 0, 0, 1)
 
@@ -52,75 +52,6 @@ font = ExtResource("1_eci41")
 font_size = 70
 outline_size = 25
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_eci41"]
-resource_name = "redeem"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("anchor/added:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.121832, 0.2),
-"transitions": PackedFloat32Array(4.14106, 1, 0.153893, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(26, 0), Vector2(26, 0), Vector2(-83, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Label:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1323, 0.1385, 0.201047, 0.297893),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-35, 0), Vector2(-35, 0), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("anchor:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.181432),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "audio"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("cash")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("2_peni5")
-}],
-"times": PackedFloat32Array(0.133333)
-}
-tracks/3/use_blend = true
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.1385),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"redeem"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_peni5"]
 length = 0.001
@@ -148,6 +79,87 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("anchor/added:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_eci41"]
+resource_name = "redeem"
+length = 0.641
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anchor/added:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.121832, 0.2),
+"transitions": PackedFloat32Array(4.14106, 1, 0.153893, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(26, 0), Vector2(26, 0), Vector2(-83, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1323, 0.1385, 0.201047, 0.297893),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-35, 0), Vector2(-35, 0), Vector2(0, 0)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.30157,
+"start_offset": 0.0,
+"stream": ExtResource("2_peni5")
+}],
+"times": PackedFloat32Array(0.133333)
+}
+tracks/2/use_blend = false
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1385),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"redeem"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("anchor/added:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.181432),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvvax"]
 _data = {
@@ -163,15 +175,16 @@ position = Vector2(78, 9)
 
 [node name="added" type="Label" parent="anchor"]
 unique_name_in_owner = true
-visible = false
-offset_right = 78.0
+offset_left = -82.9904
+offset_right = -4.99043
 offset_bottom = 33.0
 pivot_offset = Vector2(40, 18)
 text = "+$10"
 label_settings = SubResource("LabelSettings_eci41")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 61.0
+offset_left = -35.0
+offset_right = 26.0
 offset_bottom = 49.0
 text = "$0"
 label_settings = SubResource("LabelSettings_lvvax")

@@ -94,7 +94,7 @@ func throw(target : Node2D):
 		Globals.shake(Vector2(10,10))
 	else:
 		Globals.shake(dir * 20)
-		Globals.change_hunger(-10)
+		Globals.change_hunger(-5)
 		
 	if(plate.has_chicken):
 		if(target is Oven):

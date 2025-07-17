@@ -102,6 +102,8 @@ func _death():
 
 func mult_stars(node : Node2D):
 	for i in range(hypecount):
+		if($hype.get_child_count() <= i):
+			break
 		node.mult()
 		$hype.get_children()[i].expand()
 		await get_tree().create_timer(0.05).timeout

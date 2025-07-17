@@ -1,15 +1,58 @@
-[gd_scene load_steps=20 format=3 uid="uid://bdyj043bq4k8a"]
+[gd_scene load_steps=24 format=3 uid="uid://bdyj043bq4k8a"]
 
 [ext_resource type="Script" uid="uid://cywu00c7grb7k" path="res://customer.gd" id="1_7tiyv"]
 [ext_resource type="Script" uid="uid://dpu8i0lr4fal7" path="res://targetable.gd" id="3_eas7q"]
 [ext_resource type="PackedScene" uid="uid://cu8x5k10nnpnb" path="res://recipe_display.tscn" id="3_f7asb"]
 [ext_resource type="AudioStream" uid="uid://rumobbsqoweq" path="res://assets/audio/walkaway.wav" id="3_frhio"]
+[ext_resource type="Texture2D" uid="uid://clt8bbj56ay4j" path="res://assets/sprites/meh.png" id="4_5sdco"]
 [ext_resource type="AudioStream" uid="uid://dkmj8vjd5msyh" path="res://plate.wav" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://cutlow2guu7bx" path="res://assets/sprites/cus_body.png" id="4_sll7s"]
+[ext_resource type="Texture2D" uid="uid://dybt7xoiqoex6" path="res://assets/sprites/correct_order.png" id="5_aive0"]
 [ext_resource type="Texture2D" uid="uid://c3rbelrku3jqb" path="res://sweat.png" id="5_gn8fi"]
-[ext_resource type="Texture2D" uid="uid://cod11fxoyj3b3" path="res://assets/sprites/blank_face.png" id="6_crw8f"]
 [ext_resource type="PackedScene" uid="uid://bka4oyxnt01g6" path="res://customertimer.tscn" id="7_0rcyg"]
 [ext_resource type="Texture2D" uid="uid://cec4w8g3gg3fw" path="res://assets/sprites/cus_head.png" id="10_crw8f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xnek4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5sdco")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aive0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_crw8f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Shader" id="Shader_fi8ru"]
+code = "shader_type canvas_item;
+
+uniform float strength = 1.;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR.a = 0.5 - distance(UV,vec2(0.5,0.5));
+	COLOR.a *= strength;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crw8f"]
+resource_local_to_scene = true
+shader = SubResource("Shader_fi8ru")
+shader_parameter/strength = 2.905
 
 [sub_resource type="Animation" id="Animation_r8ta2"]
 length = 0.001
@@ -130,20 +173,29 @@ scale = Vector2(1.63416, 1.63416)
 position = Vector2(0, -13)
 scale = Vector2(1.68128, 1.68128)
 
-[node name="CusBody" type="Sprite2D" parent="body"]
-position = Vector2(1.78814e-07, 24)
-scale = Vector2(2.11111, 2.11111)
-texture = ExtResource("4_sll7s")
-
-[node name="CusHead" type="Sprite2D" parent="body"]
+[node name="CusHead" type="AnimatedSprite2D" parent="body"]
 position = Vector2(1, -19)
 scale = Vector2(2.15385, 2.15385)
-texture = ExtResource("10_crw8f")
+sprite_frames = SubResource("SpriteFrames_xnek4")
 
 [node name="BlankFace" type="Sprite2D" parent="body/CusHead"]
 position = Vector2(-0.106122, -0.132661)
 scale = Vector2(1.04694, 1.04694)
-texture = ExtResource("6_crw8f")
+
+[node name="glow" type="ColorRect" parent="body/CusHead"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("ShaderMaterial_crw8f")
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 20.0
+offset_bottom = 22.0
+color = Color(0.778335, 0.562054, 0.143468, 1)
+
+[node name="CusBody" type="Sprite2D" parent="body"]
+position = Vector2(1.78814e-07, 24)
+scale = Vector2(2.11111, 2.11111)
+texture = ExtResource("4_sll7s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

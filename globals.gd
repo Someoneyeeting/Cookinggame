@@ -62,7 +62,8 @@ func _process(delta: float) -> void:
 	$mouse/cursor.rotation = lerp_angle($mouse/cursor.rotation,mousemovedir.angle() + 3.14/2,0.6 * mousemovedir.length() / 30)
 	$mouse/cursor.rotation = lerp_angle($mouse/cursor.rotation,0,0.2)
 	mouseprevpos = $mouse.global_position
-	
+
+
 	if(Input.is_action_pressed("rightc")):
 		isaiming = true
 		Engine.time_scale = 0.4
@@ -80,15 +81,22 @@ func _process(delta: float) -> void:
 		%target.global_position = righthovering.global_position
 	
 	%dark.color.a = lerp(%dark.color.a, 0.3 if isaiming else 0.,0.08)
+	
+	if(not lefthovering or not righthovering):
+		for i in $mouse.get_overlapping_areas():
+			if(i is Targetable and not righthovering):
+				righthovering = i
+			elif(i.is_in_group("podium") and not lefthovering):
+				lefthovering = i
 
 func get_served():
-	return $ScoreManager.get_served()
+	return %ScoreManager.get_served()
 
 func _served(recp : RecipeRes):
 	increase_served()
 
 func increase_served():
-	$ScoreManager.increase_served()
+	%ScoreManager.increase_served()
 
 func shake(dir : Vector2):
 	$Camera2D.position += dir
@@ -100,10 +108,10 @@ func _on_shake_timeout() -> void:
 
 
 func change_hunger(amount : float):
-	$ScoreManager.change_hunger(amount)
+	%ScoreManager.change_hunger(amount)
 	
 func set_hunger(amount : float):
-	$ScoreManager.set_hunger(amount)
+	%ScoreManager.set_hunger(amount)
 	
 func _eat(ids):
 	if(ids == [-1]):
@@ -113,24 +121,24 @@ func _eat(ids):
 		change_hunger(20)
 		
 func add_star():
-	$ScoreManager.add_star()
+	%ScoreManager.add_star()
 
 func lose_star():
-	$ScoreManager.lose_star()
+	%ScoreManager.lose_star()
 
 
 func _on_musicplay_timeout() -> void:
 	$music.play()
 
 func get_hunger_level():
-	return $ScoreManager.get_hunger_level()
+	return %ScoreManager.get_hunger_level()
 
 func get_hunger():
-	return $ScoreManager.get_hunger()
+	return %ScoreManager.get_hunger()
 
 
 func get_max_hunger():
-	return $ScoreManager.get_max_hunger()
+	return %ScoreManager.get_max_hunger()
 
 
 func music_loop() -> void:
@@ -140,11 +148,11 @@ func music_loop() -> void:
 		$music.play()
 
 func set_money(money : int):
-	$ScoreManager.set_money(money)
+	%ScoreManager.set_money(money)
 
 func add_money(money : int):
-	$ScoreManager.add_money(money)
+	%ScoreManager.add_money(money)
 
 func mult_stars(node : Node2D):
 	await get_tree().create_timer(0.5).timeout
-	$ScoreManager.mult_stars(node)
+	%ScoreManager.mult_stars(node)

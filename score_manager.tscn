@@ -8,20 +8,17 @@
 [node name="ScoreManager" type="Node2D"]
 script = ExtResource("1_vublb")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="StarsUI" parent="CanvasLayer" instance=ExtResource("2_dlkr7")]
+[node name="StarsUI" parent="." instance=ExtResource("2_dlkr7")]
 unique_name_in_owner = true
-position = Vector2(99, 523)
+position = Vector2(38, 483)
 scale = Vector2(0.678614, 0.678614)
 
-[node name="hungerbar" parent="CanvasLayer" instance=ExtResource("3_t00u6")]
+[node name="hungerbar" parent="." instance=ExtResource("3_t00u6")]
 unique_name_in_owner = true
-position = Vector2(4.00003, 693)
-rotation = -1.5708
-scale = Vector2(2.10697, 2.10697)
+position = Vector2(345, 676)
+scale = Vector2(1.66766, 1.66766)
 
-[node name="MoneyUi" parent="CanvasLayer" instance=ExtResource("4_431jr")]
+[node name="MoneyUi" parent="." instance=ExtResource("4_431jr")]
 unique_name_in_owner = true
 position = Vector2(567, 12)
 

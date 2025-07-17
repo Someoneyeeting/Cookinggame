@@ -44,9 +44,36 @@ func finish():
 
 [sub_resource type="LabelSettings" id="LabelSettings_s1363"]
 font_size = 24
-font_color = Color(0.145521, 0.206982, 0.920897, 1)
+font_color = Color(0.356863, 0.686275, 0.941176, 1)
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_s1363"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CusHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.19209e-07, 1.90735e-06)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CusHead:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_lrf67"]
 resource_name = "rotate"
@@ -87,33 +114,6 @@ tracks/2/keys = {
 "args": [0.4, 0.1],
 "method": &"activate"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_s1363"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CusHead:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1.19209e-07, 1.90735e-06)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CusHead:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1v5ss"]

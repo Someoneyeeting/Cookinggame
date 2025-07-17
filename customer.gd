@@ -2,7 +2,9 @@ extends Node2D
 class_name Customer
 
 signal served(recipe : Array[RecipeRes])
+signal out(ind : int)
 
+var ind : int
 var serving := false
 var plate := preload("res://foods/plate.tres")
 var chicken := preload("res://foods/chicken.tres")
@@ -88,7 +90,6 @@ func enter_line():
 func _physics_process(delta: float) -> void:
 	#$body.modulate = lerp($body.modulate,Color.WHITE if serving else Color.DARK_GRAY,0.01)
 	t += delta
-	$body/CusHead.position.y = headpos +  sin(t * 6) * 4
 	if(walkdir != Vector2.ZERO):
 		position += walkdir * 0.3 * Engine.time_scale
 		$walk.volume_db -= 0.4 * Engine.time_scale
@@ -99,10 +100,22 @@ func _physics_process(delta: float) -> void:
 		pass
 		if(recipe.is_matching(playerhas)):
 			$RecipeDisplay.hide()
+			$body/CusHead.position.y = headpos - 13 + randf_range(-1,1)
+			$body/CusHead.frame = 1
+			$body/CusHead.rotation += delta
+			%glow.material.set_shader_parameter("strength",randf_range(0.5,0.8))
 		elif(recipe.matching_so_far(playerhas)):
 			$RecipeDisplay.show()
+			$body/CusHead.position.y = headpos +  sin(t * 6) * 4
+			$body/CusHead.frame = 0
+			$body/CusHead.rotation = 0
+			%glow.material.set_shader_parameter("strength",0.)
 		else:
 			$RecipeDisplay.show()
+			$body/CusHead.position.y = headpos
+			$body/CusHead.frame = 0
+			$body/CusHead.rotation = 0
+			%glow.material.set_shader_parameter("strength",0.)
 	
 	var count = Globals.player.plate.get_count()
 	if(count < 35):

@@ -9,10 +9,13 @@ func shoot(pos : Vector2,dir : Vector2, amount : int):
 	var display := DISPLAY.instantiate()
 	display.global_position = pos
 	display.shoot(dir,amount)
-	$scores.add_child(display)
+	%scores.add_child(display)
 "
 
 [node name="scoresManager" type="Node2D"]
 script = SubResource("GDScript_urcm6")
 
-[node name="scores" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="scores" type="Node2D" parent="CanvasLayer"]
+unique_name_in_owner = true
