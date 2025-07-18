@@ -41,11 +41,11 @@ func _handle_move():
 		$walk.stop()
 	else:
 		var sprint = Input.is_action_pressed("sprint")
-		velocity = lerp(velocity,dir * move_speed * (1.3 if sprint else 1),0.12)
+		velocity = lerp(velocity,dir * move_speed * (1.7 if sprint else 1),0.12)
 		if(not $walk.playing):
 			$walk.play()
 		if(sprint):
-			Globals.change_hunger(-0.1)
+			Globals.change_hunger(-0.2)
 		else:
 			Globals.change_hunger(-0.05)
 		$sprint.emitting = sprint

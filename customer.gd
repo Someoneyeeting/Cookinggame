@@ -28,7 +28,6 @@ func _ready() -> void:
 		$customertimer.hide()
 	recipe = recipe.duplicate()
 	Globals.eat.connect(check_eat)
-	serving = true
 	z_index = 1
 	served.connect(Globals._served)
 	$RecipeDisplay.set_recp(recipe)
@@ -37,6 +36,8 @@ func _ready() -> void:
 func check_eat(ids):
 	if(walkdir != Vector2.ZERO):
 		return 
+	if(not serving):
+		return
 	if(recipe.is_matching(ids)):
 		#print("yes")
 		Globals.change_hunger(60)
@@ -95,15 +96,13 @@ func walkin(pos : Vector2):
 
 func start():
 	$AnimationPlayer.stop()
+	serving = true
+	$waittime.start()
 
 func time_out():
 	Globals.lose_star()
 	$AnimationPlayer.play("walk")
 	walkdir = Vector2(randf_range(-30,30),-30)
-
-func enter_line():
-	pass
-	#$AnimationPlayer.play("enter_line")
 
 func _physics_process(delta: float) -> void:
 	#$body.modulate = lerp($body.modulate,Color.WHITE if serving else Color.DARK_GRAY,0.01)

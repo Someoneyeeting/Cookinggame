@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsd34n3og4bsj"]
+[gd_scene load_steps=10 format=3 uid="uid://bsd34n3og4bsj"]
 
 [ext_resource type="Script" uid="uid://hfqbrglml7cf" path="res://globals.gd" id="1_f6yec"]
 [ext_resource type="Texture2D" uid="uid://df0y7an1ba47y" path="res://pngwing.com.png" id="2_ic2bg"]
 [ext_resource type="PackedScene" uid="uid://de32jgkwu06x5" path="res://target.tscn" id="3_pw6g4"]
 [ext_resource type="PackedScene" uid="uid://c0sjb0pbvog5w" path="res://score_manager.tscn" id="4_3o0v4"]
+[ext_resource type="PackedScene" uid="uid://bm8qdrgni3yuu" path="res://losescreen.tscn" id="5_61u0x"]
 [ext_resource type="AudioStream" uid="uid://c3p46uh71ed6l" path="res://assets/audio/target.wav" id="5_oes5j"]
 [ext_resource type="AudioStream" uid="uid://csri1qd3otuct" path="res://assets/audio/cooking_hazard.wav" id="6_lbu14"]
 [ext_resource type="AudioStream" uid="uid://dqr4tr7bxebnw" path="res://assets/audio/freedom_hazard.wav" id="7_52l8x"]
@@ -13,18 +14,6 @@
 [node name="Globals" type="Node2D"]
 z_index = 170
 script = ExtResource("1_f6yec")
-
-[node name="mouse" type="Area2D" parent="."]
-
-[node name="cursor" type="Sprite2D" parent="mouse"]
-z_index = 4096
-position = Vector2(-5.96046e-08, 2.38419e-07)
-scale = Vector2(0.0250131, 0.0250131)
-texture = ExtResource("2_ic2bg")
-offset = Vector2(341.019, 525.687)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="mouse"]
-shape = SubResource("CircleShape2D_eoq6h")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -43,6 +32,23 @@ position = Vector2(-113, 56)
 [node name="ScoreManager" parent="CanvasLayer" instance=ExtResource("4_3o0v4")]
 unique_name_in_owner = true
 
+[node name="losescreen" parent="CanvasLayer" instance=ExtResource("5_61u0x")]
+unique_name_in_owner = true
+visible = false
+
+[node name="mouse" type="Area2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="cursor" type="Sprite2D" parent="CanvasLayer/mouse"]
+z_index = 4096
+position = Vector2(-5.96046e-08, 2.38419e-07)
+scale = Vector2(0.0250131, 0.0250131)
+texture = ExtResource("2_ic2bg")
+offset = Vector2(341.019, 525.687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/mouse"]
+shape = SubResource("CircleShape2D_eoq6h")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
@@ -56,6 +62,7 @@ volume_db = -15.0
 pitch_scale = 2.0
 
 [node name="musicplay" type="Timer" parent="."]
+wait_time = 1.6
 one_shot = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
@@ -73,8 +80,8 @@ offset_bottom = 253.0
 scale = Vector2(2.12367, 5.43483)
 text = "death"
 
-[connection signal="area_entered" from="mouse" to="." method="_on_mouse_area_entered"]
-[connection signal="area_exited" from="mouse" to="." method="_on_mouse_area_exited"]
+[connection signal="area_entered" from="CanvasLayer/mouse" to="." method="_on_mouse_area_entered"]
+[connection signal="area_exited" from="CanvasLayer/mouse" to="." method="_on_mouse_area_exited"]
 [connection signal="timeout" from="shake" to="." method="_on_shake_timeout"]
 [connection signal="timeout" from="musicplay" to="." method="_on_musicplay_timeout"]
 [connection signal="finished" from="music" to="." method="music_loop"]

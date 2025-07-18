@@ -16,6 +16,8 @@ script/source = "extends Node2D
 
 func _ready() -> void:
 	Globals.unhide_stuff.connect(unhide)
+	if(not Globals.isintro):
+		unhide()
 
 func unhide():
 	$salad.modulate = Color.WHITE

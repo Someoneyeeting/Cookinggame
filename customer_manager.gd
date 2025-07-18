@@ -6,7 +6,6 @@ var CUSTOMER := preload("res://customer.tscn")
 
 var waiting :Array[Customer]= []
 var cserving :Array[Customer]= []
-var is_intro := true
 var lock_hunger := true
 var intro := 0
 
@@ -18,6 +17,14 @@ var recipes : Array[RecipeRes] = [load("res://recipes/one_plate.tres")]
 
 func _ready():
 	$CanvasLayer/ColorRect.show()
+	if(not Globals.isintro):
+		$AnimationPlayer.stop()
+		$newcustomer.start()
+		$CanvasLayer.hide()
+		lock_hunger = false
+		Globals.show_hunger()
+		for i in $customers.get_children():
+			i.queue_free()
 
 func _on_newcustomer_timeout() -> void:
 	new_customer()
@@ -56,7 +63,6 @@ func new_customer():
 	
 	customerind += 1
 	customerind %= 3
-	customer.enter_line()
 	waiting.append(customer)
 	customer.set_recipe(recipes[randi_range(0,recipes.size() - 1)])
 	customer.z_index = -waiting.size()
@@ -87,7 +93,7 @@ func _physics_process(delta: float) -> void:
 	$CanvasLayer/ColorRect.material.set_shader_parameter("pos",Globals.player.global_position / Vector2(1280,720))
 	
 	if(lock_hunger):
-		Globals.set_hunger(65)
+		Globals.set_hunger(40)
 
 func _play_music():
 	$music.play()
@@ -109,7 +115,7 @@ func _on_customer_shot(ind : int = 0) -> void:
 		await get_tree().create_timer(1.5).timeout
 		three_intro_customer()
 	if(intro == 4):
-		is_intro = false
+		Globals.isintro = false
 		var tween = get_tree().create_tween()
 		tween.tween_property($music,"volume_db",-70,2.)
 		await tween.finished

@@ -12,7 +12,11 @@ var added := 0
 
 func set_money(mon : int):
 	money = max(0,mon)
-	#$Label.text = \"$ \" + str(money)
+	if(money >= 0):
+		$Label.text = \"$\" + str(money)
+	else:
+		$Label.text = \"-$ \" + str(-money)
+		
 
 func add_actual_money(amount : int):
 	money += amount
@@ -38,7 +42,10 @@ func _physics_process(delta: float) -> void:
 	
 
 func redeem():
-	$Label.text = \"$\" + str(money)
+	if(money >= 0):
+		$Label.text = \"$\" + str(money)
+	else:
+		$Label.text = \"-$ \" + str(-money)
 	added = 0
 
 

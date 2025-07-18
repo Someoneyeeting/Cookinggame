@@ -3,8 +3,8 @@ class_name StarUI
 
 signal lose
 var STAR := preload("res://star_sprite.tscn")
-var normalcount := 7
-var starcount := 3
+var normalcount := 6
+var starcount := 5
 var hypecount := 0
 var totalstarcount := 0
 var hypetarget : Node2D
@@ -98,8 +98,7 @@ func lose_hype():
 	
 
 func _death():
-	$death.show()
-	lose.emit()
+	Globals.lose()
 
 func mult_stars(node : Node2D):
 	for i in range(hypecount):

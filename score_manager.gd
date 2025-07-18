@@ -24,6 +24,10 @@ func change_hunger(amount : float):
 func set_hunger(amount : float):
 	%hungerbar.hunger = amount
 
+func set_stars(amount : int):
+	%StarsUI.starcount = amount
+	%StarsUI.hypecount = 0
+
 func add_star():
 	%StarsUI.change_by(1)
 

@@ -8,6 +8,7 @@ var lefthovering : Area2D
 var righthovering : Targetable
 var mouseprevpos := Vector2.ZERO
 var isaiming := false
+var isintro := true
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -28,10 +29,10 @@ func _on_mouse_area_entered(area: Area2D) -> void:
 func toggle_fullscreen():
 	if(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		$mouse/cursor.scale = Vector2(0.025,0.025)
+		%mouse/cursor.scale = Vector2(0.025,0.025)
 	elif(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		$mouse/cursor.scale = Vector2(0.015,0.015)
+		%mouse/cursor.scale = Vector2(0.015,0.015)
 	
 
 func start_music():
@@ -45,6 +46,8 @@ func _on_mouse_area_exited(area: Area2D) -> void:
 	%target.global_position = Vector2(-100,-100)
 
 func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed("restart")):
+		reset()
 	if(isaiming):
 		if(event.is_action_released("rightc")):
 			if(righthovering):
@@ -62,10 +65,10 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	var mousemovedir = get_global_mouse_position() - mouseprevpos
-	$mouse.global_position = get_global_mouse_position()
-	$mouse/cursor.rotation = lerp_angle($mouse/cursor.rotation,mousemovedir.angle() + 3.14/2,0.6 * mousemovedir.length() / 30)
-	$mouse/cursor.rotation = lerp_angle($mouse/cursor.rotation,0,0.2)
-	mouseprevpos = $mouse.global_position
+	%mouse.global_position = get_global_mouse_position()
+	%mouse/cursor.rotation = lerp_angle(%mouse/cursor.rotation,mousemovedir.angle() + 3.14/2,0.6 * mousemovedir.length() / 30)
+	%mouse/cursor.rotation = lerp_angle(%mouse/cursor.rotation,0,0.2)
+	mouseprevpos = %mouse.global_position
 
 
 	if(Input.is_action_pressed("rightc")):
@@ -87,7 +90,7 @@ func _process(delta: float) -> void:
 	%dark.color.a = lerp(%dark.color.a, 0.3 if isaiming else 0.,0.08)
 	
 	if(not lefthovering or not righthovering):
-		for i in $mouse.get_overlapping_areas():
+		for i in %mouse.get_overlapping_areas():
 			if(i is Targetable and not righthovering):
 				righthovering = i
 			elif(i.is_in_group("podium") and not lefthovering):
@@ -168,4 +171,17 @@ func show_hunger():
 	%ScoreManager.show_hunger()
 
 func lose():
-	$death.show()
+	%losescreen.show()
+	$music.stop()
+	$musicfreedom.stop()
+
+func restart():
+	reset()
+
+func reset():
+	start_music()
+	isintro = false
+	set_hunger(60)
+	%ScoreManager.set_stars(5)
+	%losescreen.hide()
+	get_tree().reload_current_scene()
