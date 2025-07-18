@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://byci7oy4740py" path="res://losescreen.gd" id="1_g3uia"]
 
 [node name="losescreen" type="Node2D"]
+process_mode = 2
 script = ExtResource("1_g3uia")
 
 [node name="background" type="ColorRect" parent="."]

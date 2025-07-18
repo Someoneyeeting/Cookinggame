@@ -18,13 +18,22 @@ func _ready() -> void:
 	Globals.unhide_stuff.connect(unhide)
 	if(not Globals.isintro):
 		unhide()
+	else:
+		hide_stuff()
 
 func unhide():
-	$salad.modulate = Color.WHITE
-	$salad.modulate = Color.WHITE
-	$beef.modulate = Color.WHITE
-	$chicken.modulate = Color.WHITE
-	$Layer0/oven.modulate = Color.WHITE
+	$salad.enable()
+	$salad.enable()
+	$beef.enable()
+	$chicken.enable()
+	$Layer0/oven.enable()
+
+func hide_stuff():
+	$salad.disable()
+	$salad.disable()
+	$beef.disable()
+	$chicken.disable()
+	$Layer0/oven.disable()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8njj"]

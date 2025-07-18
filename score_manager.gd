@@ -18,9 +18,13 @@ func show_hunger():
 	tween.set_ease(Tween.EASE_OUT)
 
 func change_hunger(amount : float):
+	%hungerbar.hunger = max(0,%hungerbar.hunger)
 	%hungerbar.hunger += amount
-	%hungerbar.decrease = -amount
-	
+	if(amount < 0):
+		%hungerbar.decrease = -amount
+	else:
+		%hungerbar.decrease = 0
+
 func set_hunger(amount : float):
 	%hungerbar.hunger = amount
 

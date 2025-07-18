@@ -1,15 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsd34n3og4bsj"]
+[gd_scene load_steps=9 format=3 uid="uid://bsd34n3og4bsj"]
 
 [ext_resource type="Script" uid="uid://hfqbrglml7cf" path="res://globals.gd" id="1_f6yec"]
-[ext_resource type="Texture2D" uid="uid://df0y7an1ba47y" path="res://pngwing.com.png" id="2_ic2bg"]
 [ext_resource type="PackedScene" uid="uid://de32jgkwu06x5" path="res://target.tscn" id="3_pw6g4"]
 [ext_resource type="PackedScene" uid="uid://c0sjb0pbvog5w" path="res://score_manager.tscn" id="4_3o0v4"]
+[ext_resource type="PackedScene" uid="uid://bap17lcn4hdjs" path="res://mouse.tscn" id="5_43c2w"]
 [ext_resource type="PackedScene" uid="uid://bm8qdrgni3yuu" path="res://losescreen.tscn" id="5_61u0x"]
 [ext_resource type="AudioStream" uid="uid://c3p46uh71ed6l" path="res://assets/audio/target.wav" id="5_oes5j"]
 [ext_resource type="AudioStream" uid="uid://csri1qd3otuct" path="res://assets/audio/cooking_hazard.wav" id="6_lbu14"]
 [ext_resource type="AudioStream" uid="uid://dqr4tr7bxebnw" path="res://assets/audio/freedom_hazard.wav" id="7_52l8x"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_eoq6h"]
 
 [node name="Globals" type="Node2D"]
 z_index = 170
@@ -36,18 +34,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 visible = false
 
-[node name="mouse" type="Area2D" parent="CanvasLayer"]
+[node name="mouse" parent="CanvasLayer" instance=ExtResource("5_43c2w")]
 unique_name_in_owner = true
-
-[node name="cursor" type="Sprite2D" parent="CanvasLayer/mouse"]
-z_index = 4096
-position = Vector2(-5.96046e-08, 2.38419e-07)
-scale = Vector2(0.0250131, 0.0250131)
-texture = ExtResource("2_ic2bg")
-offset = Vector2(341.019, 525.687)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/mouse"]
-shape = SubResource("CircleShape2D_eoq6h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

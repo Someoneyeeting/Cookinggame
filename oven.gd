@@ -3,9 +3,22 @@ class_name Oven
 
 var rot :float= 0.0
 var content : Array[ItemRes]
+var disabled := false
 func get_thrown(items : Array[ItemRes]):
 	start_cooking()
 
+
+func disable():
+	disabled = true
+	modulate = Color.BLACK
+	$pickup/CollisionShape2D.disabled = true
+	$Targetable/CollisionShape2D.disabled = true
+
+func enable():
+	disabled = false
+	modulate = Color.WHITE
+	$pickup/CollisionShape2D.disabled = false
+	$Targetable/CollisionShape2D.disabled = false
 
 func start_cooking():
 	$close.play()
