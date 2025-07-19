@@ -160,9 +160,9 @@ func _physics_process(delta: float) -> void:
 	$Line2D.points[0] =  lerp($Line2D.points[0],$Line2D.points[1],0.4)
 	
 	if(showglow and Globals.isaiming):
-		$CanvasLayer.show()
+		%glow.color.a = lerp(%glow.color.a,1.,0.3)
 	else:
-		$CanvasLayer.hide()
+		%glow.color.a = lerp(%glow.color.a,0.,0.6)
 
 
 func _on_line_timeout() -> void:

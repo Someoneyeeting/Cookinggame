@@ -98,6 +98,15 @@ text = "shift"
 label_settings = SubResource("LabelSettings_kq3yo")
 justification_flags = 162
 
+[node name="Label2" type="Label" parent="shift"]
+offset_left = -14.0
+offset_top = -6.0
+offset_right = 26.0
+offset_bottom = 17.0
+text = "shift"
+label_settings = SubResource("LabelSettings_kq3yo")
+justification_flags = 162
+
 [node name="Mouse" type="Sprite2D" parent="."]
 position = Vector2(40, 22)
 texture = ExtResource("4_ff64o")
@@ -106,3 +115,12 @@ texture = ExtResource("4_ff64o")
 position = Vector2(55, 22)
 texture = ExtResource("4_ff64o")
 flip_h = true
+
+[node name="Label" type="Label" parent="Mouse2"]
+offset_left = 13.0
+offset_top = -8.0
+offset_right = 53.0
+offset_bottom = 15.0
+rotation = 1.57079
+text = "aim"
+label_settings = SubResource("LabelSettings_kq3yo")
