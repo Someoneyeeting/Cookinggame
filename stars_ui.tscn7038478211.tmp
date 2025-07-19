@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://blyxxoxhim1q1"]
+
+[ext_resource type="Script" uid="uid://4efxh4gwgo8t" path="res://stars.gd" id="1_r10ar"]
+[ext_resource type="AudioStream" uid="uid://0hjwarmjmjp2" path="res://assets/audio/starcollect.wav" id="2_e6baj"]
+[ext_resource type="AudioStream" uid="uid://bb3j2v4wcwh4i" path="res://assets/audio/losehype.wav" id="3_1ekxe"]
+[ext_resource type="AudioStream" uid="uid://r5fu4h48knfl" path="res://assets/audio/crowdaww.wav" id="4_odnl4"]
+[ext_resource type="AudioStream" uid="uid://x15h7hc8mb4u" path="res://assets/audio/star.wav" id="5_caemj"]
+[ext_resource type="AudioStream" uid="uid://dudndb0hgxk4u" path="res://assets/audio/losestar.wav" id="6_hr4jh"]
+[ext_resource type="FontFile" uid="uid://bvynssw7e2uep" path="res://assets/ByteBounce.ttf" id="7_4qiit"]
+
+[sub_resource type="Shader" id="Shader_l6opp"]
+code = "shader_type canvas_item;
+
+uniform sampler2D grad : repeat_enable;
+uniform bool hype = false;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if(hype){
+		COLOR *= texture(grad,vec2(UV.x * UV.y * 0.3 + UV.y * UV.x + TIME * 3.,0.));
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="Gradient" id="Gradient_l6opp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.00574713, 0.368852, 0.770492)
+colors = PackedColorArray(0, 0.185714, 1, 1, 0, 0.675116, 1, 1, 0, 0.328891, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l6opp"]
+gradient = SubResource("Gradient_l6opp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbk7k"]
+resource_local_to_scene = true
+shader = SubResource("Shader_l6opp")
+shader_parameter/grad = SubResource("GradientTexture1D_l6opp")
+shader_parameter/hype = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_4qiit"]
+font = ExtResource("7_4qiit")
+font_size = 70
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="StarsUI" type="Node2D"]
+script = ExtResource("1_r10ar")
+
+[node name="mult" type="Label" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_cbk7k")
+offset_left = 50.0
+offset_top = -410.0
+offset_right = 111.0
+offset_bottom = -343.0
+pivot_offset = Vector2(2, 37)
+text = "x3"
+label_settings = SubResource("LabelSettings_4qiit")
+
+[node name="hype" type="Node2D" parent="."]
+
+[node name="stars" type="Node2D" parent="."]
+
+[node name="death" type="Label" parent="."]
+visible = false
+offset_left = 230.0
+offset_top = 183.0
+offset_right = 275.0
+offset_bottom = 206.0
+scale = Vector2(3.37199, 3.37199)
+text = "death"
+
+[node name="gainhype" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_e6baj")
+
+[node name="losehype" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1ekxe")
+volume_db = 10.0
+
+[node name="crowd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_odnl4")
+volume_db = -4.0
+
+[node name="gainstar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_caemj")
+
+[node name="losestar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hr4jh")

@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.rotation_degrees = 0
 	
 	if(ispanic):
-		$Sprite2D.position.x = sin(position.y + t * 40) * 5
+		$Sprite2D.position.x = sin(position.y + t * 12) * 5
 		modulate = Color(0.6,0.1,0.1)
 	else:
 		$Sprite2D.position.y = 0

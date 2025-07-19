@@ -14,6 +14,7 @@ func _physics_process(delta: float) -> void:
 	if(hypetarget):
 		$mult.global_position.y = hypetarget.global_position.y - 20
 	$mult.text = "x" + str(hypecount + 1)
+	
 func _ready() -> void:
 	for i in range(normalcount):
 		var star = STAR.instantiate()
@@ -43,6 +44,9 @@ func lose_stars(amount : int):
 			break
 		$stars.get_children()[ind].deactivate()
 	starcount = max(starcount,0)
+	if(starcount <= 1):
+		for i in $stars.get_children():
+			i.panic()
 
 func add_stars(amount : int):
 	$death.hide()
@@ -53,10 +57,13 @@ func add_stars(amount : int):
 			add_hype()
 			continue
 		$stars.get_children()[ind].activate()
-	
 	if(hypecount == 0):
 		$gainstar.play()
 	starcount = min(starcount,normalcount)
+	if(starcount > 1):
+		for i in $stars.get_children():
+			i.unpanic()
+
 
 func add_hype():
 	var star = STAR.instantiate()
