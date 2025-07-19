@@ -47,10 +47,10 @@ func check_eat(ids):
 		get_tree().create_timer(0.4).timeout.connect(_out)
 		Globals.lose_star()
 	else:
-		if($waittime.time_left <= 6):
+		if($waittime.time_left <= 10):
 			time_out()
 		else:
-			$waittime.start(max(0,$waittime.time_left - 6))
+			$waittime.start(max(0,$waittime.time_left - 10))
 		
 
 func get_thrown(items : Array[ItemRes]):
@@ -71,12 +71,10 @@ func get_thrown(items : Array[ItemRes]):
 			ids.push_back(i.id)
 		if(recipe.is_matching(ids)):
 			Globals.add_star()
-			served.emit(recipe)
+			if(not is_freezed):
+				served.emit(recipe)
 			Globals.add_money(10)
 			ScoresManager.shoot($body/CusHead.global_position,dir * -20,10)
-			
-		elif(not recipe.matching_so_far(ids) and ids.size() >= recipe.items.size() / 2):
-			Globals.lose_star()
 		else:
 			Globals.lose_star()
 			Globals.add_money(-10)

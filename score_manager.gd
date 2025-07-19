@@ -18,7 +18,6 @@ func show_hunger():
 	tween.set_ease(Tween.EASE_OUT)
 
 func change_hunger(amount : float):
-	%hungerbar.hunger = max(0,%hungerbar.hunger)
 	%hungerbar.hunger += amount
 	if(amount < 0):
 		%hungerbar.decrease = -amount
@@ -29,8 +28,7 @@ func set_hunger(amount : float):
 	%hungerbar.hunger = amount
 
 func set_stars(amount : int):
-	%StarsUI.starcount = amount
-	%StarsUI.hypecount = 0
+	%StarsUI.change_by(%StarsUI.starcount - %StarsUI.totalstarcount - %StarsUI.hypecount)
 
 func add_star():
 	%StarsUI.change_by(1)
@@ -68,3 +66,6 @@ func add_actual_money(amount : int):
 		%MoneyUi.add_actual_money(amount * (%StarsUI.hypecount + 1))
 	else:
 		%MoneyUi.add_actual_money(amount)
+
+func clear_money():
+	$MoneyUi.clear()

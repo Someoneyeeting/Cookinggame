@@ -14,14 +14,13 @@ func _ready() -> void:
 	$ColorRect2.position.x = $background.size.x * 0.666666
 
 func _physics_process(delta: float) -> void:
-	if(hunger == 0):
+	if(hunger <= -8):
 		Globals.lose()
 	#$bar.size.x = lerp($bar.size.x,lerp(0,ogsize,hunger / 160),0.4)
 	decreaselerp = lerp(decreaselerp,sqrt(decrease / 2.),0.5)
 	decrease = max(decrease,0.)
 	decrease = lerp(decrease,delta * 0.5,0.1)
 	hunger -= delta * 0.5
-	hunger = clamp(hunger,0,maxhunger)
 	hungerlerp = lerp(hungerlerp,hunger,0.3)
 	
 	$bar.material.set_shader_parameter("val",hungerlerp/maxhunger)

@@ -55,9 +55,11 @@ one_shot = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_lbu14")
+volume_db = -15.0
 
 [node name="musicfreedom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_52l8x")
+volume_db = -15.0
 
 [node name="death" type="Label" parent="."]
 visible = false

@@ -18,6 +18,12 @@ func set_money(mon : int):
 		$Label.text = \"-$ \" + str(-money)
 		
 
+func clear():
+	added = 0
+	%added.hide()
+	%added.position.x = 0
+	$redeem.stop()
+
 func add_actual_money(amount : int):
 	money += amount
 
@@ -32,9 +38,9 @@ func add_money(amount : int):
 	expand()
 	
 func expand():
-	%added.show()
 	%added.position.x = 0
 	%added.scale = Vector2(2.,2.)
+	%added.show()
 
 func _physics_process(delta: float) -> void:
 	%added.scale = lerp(%added.scale,Vector2(1,1),0.3)
@@ -47,6 +53,7 @@ func redeem():
 	else:
 		$Label.text = \"-$ \" + str(-money)
 	added = 0
+	%added.position.x = 0
 
 
 func _on_redeem_timeout() -> void:

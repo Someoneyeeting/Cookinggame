@@ -41,13 +41,13 @@ func _handle_move():
 		$walk.stop()
 	else:
 		var sprint = Input.is_action_pressed("sprint")
-		velocity = lerp(velocity,dir * move_speed * (1.7 if sprint else 1),0.12)
+		velocity = lerp(velocity,dir * move_speed * (1.7 if sprint else 0.7),0.12)
 		if(not $walk.playing):
 			$walk.play()
 		if(sprint):
 			Globals.change_hunger(-0.2)
 		else:
-			Globals.change_hunger(-0.05)
+			Globals.change_hunger(-0.09)
 		$sprint.emitting = sprint
 	
 	$walk.volume_db = lerp(-40,-20,velocity.length() / 350)
@@ -94,7 +94,7 @@ func throw(target : Node2D):
 		Globals.shake(Vector2(10,10))
 	else:
 		Globals.shake(dir * 20)
-		Globals.change_hunger(-5)
+		Globals.change_hunger(-15)
 		
 	if(plate.has_chicken):
 		if(target is Oven):

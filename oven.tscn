@@ -79,7 +79,7 @@ volume_db = 10.0
 
 [node name="open" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_uyjja")
-volume_db = 10.0
+volume_db = 24.0
 pitch_scale = 2.0
 
 [node name="cooking" type="AudioStreamPlayer2D" parent="."]

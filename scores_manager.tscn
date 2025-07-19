@@ -10,6 +10,10 @@ func shoot(pos : Vector2,dir : Vector2, amount : int):
 	display.global_position = pos
 	display.shoot(dir,amount)
 	%scores.add_child(display)
+
+func clear():
+	for i in %scores.get_children():
+		i.queue_free()
 "
 
 [node name="scoresManager" type="Node2D"]

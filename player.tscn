@@ -210,10 +210,10 @@ shape = SubResource("CircleShape2D_hqtel")
 
 [node name="break" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_hqtel")
+volume_db = -6.0
 
 [node name="chicken" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_2hs0m")
-volume_db = 3.0
 
 [node name="chicken_echo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_sweqy")
