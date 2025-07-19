@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=30 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Material" uid="uid://bt5pu3antuq74" path="res://skew.tres" id="2_b26j0"]
@@ -121,6 +121,31 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 35.0143
 
+[sub_resource type="Shader" id="Shader_fi8ru"]
+code = "shader_type canvas_item;
+
+uniform float strength = 1.;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR.a = 0.5 - distance(UV,vec2(0.5,0.5));
+	COLOR.a *= strength;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwjto"]
+resource_local_to_scene = true
+shader = SubResource("Shader_fi8ru")
+shader_parameter/strength = 1.3
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("plate") groups=["targetable"]]
 script = ExtResource("1_4flbx")
 move_speed = 400.0
@@ -230,5 +255,17 @@ volume_db = -15.0
 stream = ExtResource("14_bwjto")
 volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="glow" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("ShaderMaterial_bwjto")
+offset_left = -67.0
+offset_top = -65.0
+offset_right = 67.0
+offset_bottom = 69.0
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

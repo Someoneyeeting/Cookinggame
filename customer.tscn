@@ -29,7 +29,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Shader" id="Shader_fi8ru"]
+[sub_resource type="Shader" id="Shader_crw8f"]
 code = "shader_type canvas_item;
 
 uniform float strength = 1.;
@@ -51,7 +51,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_crw8f"]
 resource_local_to_scene = true
-shader = SubResource("Shader_fi8ru")
+shader = SubResource("Shader_crw8f")
 shader_parameter/strength = 1.0
 
 [sub_resource type="Animation" id="Animation_r8ta2"]

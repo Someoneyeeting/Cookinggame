@@ -72,7 +72,6 @@ func customer_out(ind : int):
 	line[ind] = false
 
 func three_intro_customer():
-	lock_hunger = false
 	
 	$customers/Customer2.global_position = get_ind_pos(0)
 	$customers/Customer2.global_position.y -= 300
@@ -88,12 +87,13 @@ func three_intro_customer():
 	$customers/Customer4.global_position.y -= 300
 	$customers/Customer4.walkin(get_ind_pos(4))
 	await get_tree().create_timer(0.4).timeout
+	lock_hunger = false
 
 func _physics_process(delta: float) -> void:
 	$CanvasLayer/ColorRect.material.set_shader_parameter("pos",Globals.player.global_position / Vector2(1280,720))
 	
 	if(lock_hunger):
-		Globals.set_hunger(40)
+		Globals.set_hunger(65)
 
 func _play_music():
 	$music.play()
@@ -114,7 +114,10 @@ func _on_customer_shot(ind : int = 0) -> void:
 		Globals.show_hunger()
 		await get_tree().create_timer(1.5).timeout
 		three_intro_customer()
-	if(intro == 4):
+	elif(intro == 3):
+		Globals.player.show_glow()
+	elif(intro == 4):
+		Globals.player.hide_glow()
 		Globals.isintro = false
 		var tween = get_tree().create_tween()
 		tween.tween_property($music,"volume_db",-70,2.)

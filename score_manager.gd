@@ -14,8 +14,7 @@ func show_hunger():
 	var tween = get_tree().create_tween()
 	tween.tween_property($hungerbar,"position:y",671.0,2.).set_trans(Tween.TRANS_CIRC)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property($hungerbar/Label,"modulate:a",0,4).set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property($hungerbar/Label,"modulate:a",0,10)
 
 func change_hunger(amount : float):
 	%hungerbar.hunger += amount

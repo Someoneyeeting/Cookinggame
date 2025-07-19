@@ -4,6 +4,7 @@ class_name Player
 @export var move_speed : float = 200
 @export var plate : Plate
 @onready var markerpos :Vector2= $PlayerBase/Marker2D.position 
+var showglow := false
 var t : float = 0
 
 func add_food(obj):
@@ -135,7 +136,14 @@ func get_thrown(items : Array[ItemRes]):
 		ids.push_back(i.id)
 	Globals._eat(ids)
 
+func show_glow():
+	showglow = true
+
+func hide_glow():
+	showglow = false
+
 func _physics_process(delta: float) -> void:
+	%glow.global_position = global_position - %glow.size / 2
 	Globals.player = self
 	_handle_move()
 	
@@ -150,6 +158,11 @@ func _physics_process(delta: float) -> void:
 		$range.color.a = lerp($range.color.a,0.13,0.3)
 	
 	$Line2D.points[0] =  lerp($Line2D.points[0],$Line2D.points[1],0.4)
+	
+	if(showglow and Globals.isaiming):
+		$CanvasLayer.show()
+	else:
+		$CanvasLayer.hide()
 
 
 func _on_line_timeout() -> void:

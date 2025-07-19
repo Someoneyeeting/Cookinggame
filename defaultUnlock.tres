@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RecipeUnlock" load_steps=10 format=3 uid="uid://u2oggdtetu8k"]
+[gd_resource type="Resource" script_class="RecipeUnlock" load_steps=13 format=3 uid="uid://u2oggdtetu8k"]
 
 [ext_resource type="Script" uid="uid://byh0p0n6nwwah" path="res://recipes/RecipeRes.gd" id="1_032t1"]
 [ext_resource type="Script" uid="uid://d21xb116fxl4j" path="res://foods/itemRes.gd" id="2_025mp"]
@@ -8,6 +8,9 @@
 [ext_resource type="Resource" uid="uid://c3xbkcxagpgjv" path="res://recipes/salad.tres" id="3_7bumw"]
 [ext_resource type="Resource" uid="uid://c88wtt1w0u2i0" path="res://recipes/two_plates.tres" id="4_ose16"]
 [ext_resource type="Resource" uid="uid://cy8rb5vr54ju7" path="res://foods/steak.tres" id="7_e3ldv"]
+[ext_resource type="Resource" uid="uid://143cejvvnvxv" path="res://recipes/simple_chicken.tres" id="8_ose16"]
+[ext_resource type="Resource" uid="uid://bqqw3qbu04ehe" path="res://recipes/salad_chicken.tres" id="9_e3ldv"]
+[ext_resource type="Resource" uid="uid://dji6kwwbpc0mq" path="res://recipes/chicken_livechicken.tres" id="10_e3ldv"]
 
 [sub_resource type="Resource" id="Resource_0u0gt"]
 script = ExtResource("1_032t1")
@@ -20,6 +23,9 @@ recipes = Dictionary[int, ExtResource("1_032t1")]({
 0: ExtResource("2_eer1s"),
 3: ExtResource("3_7bumw"),
 5: SubResource("Resource_0u0gt"),
-6: ExtResource("4_ose16")
+6: ExtResource("4_ose16"),
+10: ExtResource("8_ose16"),
+13: ExtResource("9_e3ldv"),
+16: ExtResource("10_e3ldv")
 })
 metadata/_custom_type_script = "uid://bepymjtxxbl75"

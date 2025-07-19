@@ -16,10 +16,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if(hunger <= -8):
 		Globals.lose()
+	if(Globals.isintro):
+		hunger = max(2,hunger)
 	#$bar.size.x = lerp($bar.size.x,lerp(0,ogsize,hunger / 160),0.4)
 	decreaselerp = lerp(decreaselerp,sqrt(decrease / 2.),0.5)
 	decrease = max(decrease,0.)
 	decrease = lerp(decrease,delta * 0.5,0.1)
+	hunger = min(hunger,maxhunger)
 	hunger -= delta * 0.5
 	hungerlerp = lerp(hungerlerp,hunger,0.3)
 	
