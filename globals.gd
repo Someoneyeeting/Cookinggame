@@ -95,7 +95,11 @@ func get_served():
 	return %ScoreManager.get_served()
 
 func _served(recp : RecipeRes):
-	increase_served()
+	if(not isintro):
+		increase_served()
+
+func reset_serverd():
+	%ScoreManager.served = 0
 
 func increase_served():
 	%ScoreManager.increase_served()
@@ -180,9 +184,11 @@ func reset():
 	set_hunger(70)
 	%ScoreManager.set_stars(5)
 	%ScoreManager.set_money(0)
+	%ScoreManager.reset()
 	%losescreen.hide()
 	$music.stop()
 	$musicfreedom.stop()
 	ScoresManager.clear()
 	%ScoreManager.clear_money()
+	reset_serverd()
 	get_tree().reload_current_scene()

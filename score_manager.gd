@@ -66,5 +66,8 @@ func add_actual_money(amount : int):
 	else:
 		%MoneyUi.add_actual_money(amount)
 
+func reset():
+	%StarsUI.reset()
+
 func clear_money():
 	$MoneyUi.clear()

@@ -8,12 +8,16 @@ var starcount := 5
 var hypecount := 0
 var totalstarcount := 0
 var hypetarget : Node2D
+var isclosed := false
 
 func _physics_process(delta: float) -> void:
 	totalstarcount = starcount + hypecount
 	if(hypetarget):
 		$mult.global_position.x = hypetarget.global_position.x - 20
 	$mult.text = "x" + str(hypecount + 1)
+	if(not isclosed):
+		for i in range(normalcount):
+			$letters.get_children()[i].global_position = $stars.get_children()[i].global_position - $letters.get_children()[i].size / 4
 	
 func _ready() -> void:
 	for i in range(normalcount):
@@ -114,7 +118,17 @@ func lose_hype():
 	
 
 func _death():
-	Globals.lose()
+	isclosed = true
+	for i in range(normalcount):
+		$stars.get_children()[i].die()
+		$letters.show()
+		
+	#Globals.lose()
+
+func reset():
+	for i in $stars.get_children():
+		i.reset()
+	$letters.hide()
 
 func mult_stars(node : Node2D):
 	for i in range(hypecount):

@@ -11,9 +11,11 @@ var intro := 0
 
 var line :Array[bool]= [false,false,false,false,false]
 
-var customerind = 0
 
-var recipes : Array[RecipeRes] = [load("res://recipes/one_plate.tres")]
+var recipes : Array[RecipeRes] = []
+
+func reset():
+	recipes.clear()
 
 func _ready():
 	$CanvasLayer/ColorRect.show()
@@ -61,8 +63,6 @@ func new_customer():
 	customer.ind = ind
 	customer.out.connect(customer_out)
 	
-	customerind += 1
-	customerind %= 3
 	waiting.append(customer)
 	customer.set_recipe(recipes[randi_range(0,recipes.size() - 1)])
 	customer.z_index = -waiting.size()

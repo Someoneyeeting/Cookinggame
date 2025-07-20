@@ -66,6 +66,51 @@ label_settings = SubResource("LabelSettings_4qiit")
 
 [node name="hype" type="Node2D" parent="."]
 
+[node name="letters" type="Node2D" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="letters"]
+offset_right = 31.0
+offset_bottom = 49.0
+scale = Vector2(1.57634, 1.57634)
+text = "C"
+label_settings = SubResource("LabelSettings_4qiit")
+
+[node name="Label2" type="Label" parent="letters"]
+offset_right = 18.0
+offset_bottom = 49.0
+scale = Vector2(1.57634, 1.57634)
+text = "l"
+label_settings = SubResource("LabelSettings_4qiit")
+
+[node name="Label3" type="Label" parent="letters"]
+offset_right = 31.0
+offset_bottom = 49.0
+scale = Vector2(1.57634, 1.57634)
+text = "o"
+label_settings = SubResource("LabelSettings_4qiit")
+
+[node name="Label4" type="Label" parent="letters"]
+offset_right = 31.0
+offset_bottom = 49.0
+scale = Vector2(1.57634, 1.57634)
+text = "s"
+label_settings = SubResource("LabelSettings_4qiit")
+
+[node name="Label5" type="Label" parent="letters"]
+offset_right = 31.0
+offset_bottom = 49.0
+scale = Vector2(1.57634, 1.57634)
+text = "e"
+label_settings = SubResource("LabelSettings_4qiit")
+
+[node name="Label6" type="Label" parent="letters"]
+offset_right = 31.0
+offset_bottom = 49.0
+scale = Vector2(1.57634, 1.57634)
+text = "d"
+label_settings = SubResource("LabelSettings_4qiit")
+
 [node name="stars" type="Node2D" parent="."]
 
 [node name="death" type="Label" parent="."]

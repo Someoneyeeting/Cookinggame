@@ -15,8 +15,14 @@ var t :float=0
 var clr : Color = Color.WHITE
 @export var goldclr : Color 
 var ispanic := false
+var isclosed := false
+var v :Vector2= Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
+	if(isclosed):
+		$Sprite2D.global_position += v
+		v.y += delta * 40
+		return
 	var speedfact = 1
 	if(mode == 0):
 		speedfact = 0
@@ -79,6 +85,18 @@ func hype():
 	%glow.show()
 	%glow.color = Color(\"002fff\")
 	%glow.material.set_shader_parameter(\"strength\",1.4)
+
+func die():
+	isclosed = true
+	v.y = -10
+	v.x = randf_range(-5,5)
+	rotation_degrees = randf_range(-20,20)
+
+func reset():
+	isclosed = false
+	v = Vector2.ZERO
+	rotation_degrees = 0
+	$Sprite2D.position = Vector2.ZERO
 
 func jump():
 	$AnimationPlayer.play(\"jump\")
