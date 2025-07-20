@@ -53,6 +53,9 @@ func get_max_hunger():
 func set_money(money : int):
 	%MoneyUi.set_money(money)
 
+func get_money():
+	return %MoneyUi.money
+
 func add_money(money : int):
 	%MoneyUi.add_money(money)
 

@@ -3,9 +3,22 @@ class_name Podium
 
 @export var item : ItemRes
 var disabled := false
+var v : float = 0
 
 func _ready() -> void:
+	Globals.walkaway.connect(walkaway)
 	$Sprite2D.texture = item.texture
+
+func _physics_process(delta: float) -> void:
+	if(v != 0):
+		position.y += v
+
+func walkaway():
+	v = -8
+	$walk.play()
+	#$walk.play()
+	
+	
 
 func disable():
 	disabled = true

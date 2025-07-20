@@ -61,10 +61,11 @@ void vertex() {
 }
 
 void fragment() {
-	COLOR.a = UV.y - 0.1;
+	COLOR.a = 1. - UV.y - 0.2;
 	float dist = distance(0.5,UV.x);
-	COLOR.a *= (0.5 - dist) * 1. + UV.y - .76;
-	
+	if(dist * 5. + 1. - UV.y - 2.56 > 0.){
+		COLOR.a *= (0.5 - dist) * 5. + 1. - UV.y - 2.56;
+	}
 }
 
 //void light() {

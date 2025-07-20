@@ -1,38 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm8qdrgni3yuu"]
+[gd_scene load_steps=7 format=3 uid="uid://bm8qdrgni3yuu"]
 
 [ext_resource type="Script" uid="uid://byci7oy4740py" path="res://losescreen.gd" id="1_g3uia"]
+[ext_resource type="FontFile" uid="uid://bvynssw7e2uep" path="res://assets/ByteBounce.ttf" id="2_ak1a4"]
 [ext_resource type="AudioStream" uid="uid://wxml5ch1dw81" path="res://assets/audio/Safety Last.wav" id="2_n7u8t"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_u5ksb"]
+font = ExtResource("2_ak1a4")
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak1a4"]
+bg_color = Color(0.228454, 0.228454, 0.228454, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5ksb"]
+bg_color = Color(0.153778, 0.153778, 0.153778, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="losescreen" type="Node2D"]
-process_mode = 3
-z_index = 2725
+process_mode = 2
+z_index = 3140
 script = ExtResource("1_g3uia")
 
 [node name="background" type="ColorRect" parent="."]
-offset_left = -19.0
-offset_top = -7.0
-offset_right = 1285.0
-offset_bottom = 740.0
+offset_left = -87.0
+offset_top = -46.0
+offset_right = 1353.0
+offset_bottom = 779.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="."]
-offset_left = 117.0
-offset_top = 113.0
-offset_right = 437.0
-offset_bottom = 136.0
+offset_left = 423.0
+offset_top = 120.0
+offset_right = 574.0
+offset_bottom = 148.0
 scale = Vector2(3.18305, 3.18305)
-text = "very epic and very finished lose screeen"
+text = "chef died"
+label_settings = SubResource("LabelSettings_u5ksb")
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 856.0
-offset_top = 551.0
-offset_right = 1176.0
-offset_bottom = 574.0
-rotation = 0.274191
-scale = Vector2(2.65953, 2.65953)
-text = "<--- press here pls"
+[node name="Label3" type="Label" parent="."]
+offset_left = 131.0
+offset_top = 331.0
+offset_right = 837.0
+offset_bottom = 359.0
+scale = Vector2(1.86881, 1.86881)
+pivot_offset = Vector2(175.304, 12.2524)
+text = "the resturant will now lose money you monster"
+label_settings = SubResource("LabelSettings_u5ksb")
+horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = 498.0
 offset_top = 478.0
 offset_right = 812.0
@@ -46,12 +69,15 @@ offset_top = 472.0
 offset_right = 556.0
 offset_bottom = 503.0
 scale = Vector2(4.91207, 4.91207)
+theme_override_fonts/font = ExtResource("2_ak1a4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ak1a4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_u5ksb")
 action_mode = 0
-text = "restard"
+text = "Restart"
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_n7u8t")
-volume_db = -28.0
-pitch_scale = 0.85
+volume_db = -6.0
+pitch_scale = 0.87
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -171,11 +171,11 @@ func lose():
 	isdead = true
 	$walk.stop()
 	$panic.stop()
-	$reflect.material.set_shader_parameter("skew",0)
 	$sprint.emitting = false
 	$GPUParticles2D.emitting = false
 	await get_tree().create_timer(1).timeout
 	rotation_degrees = 100
+	$reflect.hide()
 	$death.play()
 
 func _on_line_timeout() -> void:

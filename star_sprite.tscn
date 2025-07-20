@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	
 	$Sprite2D.modulate = lerp($Sprite2D.modulate,clr,0.5)
 	
-	$Sprite2D.position.x = sin(t * speedfact  + global_position.x * global_position.x ) * speedfact
+	$Sprite2D.position.y = sin(t * speedfact  + global_position.x * global_position.x ) * speedfact
 
 func deactivate():
 	mode = 0

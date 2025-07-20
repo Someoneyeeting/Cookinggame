@@ -3,6 +3,7 @@ extends Node2D
 signal eat(ids)
 signal unhide_stuff
 signal closed
+signal walkaway
 
 var player : Player
 var lefthovering : Area2D
@@ -171,7 +172,7 @@ func show_hunger():
 	%ScoreManager.show_hunger()
 
 func lose():
-	if(player.isdead):
+	if(player.isdead or isintro):
 		return
 	$music.stop()
 	$musicfreedom.stop()
@@ -184,10 +185,13 @@ func lose():
 func restart():
 	reset()
 
+func get_money():
+	return %ScoreManager.get_money()
+
 func reset():
 	start_music()
 	isintro = false
-	set_hunger(70)
+	set_hunger(85)
 	%ScoreManager.reset()
 	%ScoreManager.set_money(0)
 	%ScoreManager.reset()

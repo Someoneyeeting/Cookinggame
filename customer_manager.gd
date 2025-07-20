@@ -76,6 +76,12 @@ func new_customer():
 
 func customer_out(ind : int):
 	line[ind] = false
+	if($newcustomer.paused and not Globals.isintro and $customers.get_child_count() <= 1):
+		print("yeah")
+		await get_tree().create_timer(2).timeout
+		Globals.walkaway.emit()
+		await get_tree().create_timer(4).timeout
+		Globals.lose()
 
 func three_intro_customer():
 	
@@ -120,10 +126,11 @@ func _on_customer_shot(ind : int = 0) -> void:
 		Globals.show_hunger()
 		await get_tree().create_timer(1.5).timeout
 		three_intro_customer()
-	elif(intro == 3):
+	elif(intro == 1):
 		Globals.player.show_glow()
 	elif(intro == 4):
 		Globals.player.hide_glow()
+		Globals.set_hunger(80)
 		Globals.isintro = false
 		var tween = get_tree().create_tween()
 		tween.tween_property($music,"volume_db",-70,2.)

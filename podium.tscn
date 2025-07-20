@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cts1uyl7lbf1g"]
+[gd_scene load_steps=11 format=3 uid="uid://cts1uyl7lbf1g"]
 
 [ext_resource type="Texture2D" uid="uid://cre1nvg2axkc1" path="res://80188e8a8488c4773c0ec41842a3c830_t-removebg-preview.png" id="1_hqaaq"]
 [ext_resource type="Script" uid="uid://dbkgpfxpw1ftp" path="res://podium.gd" id="1_pxmsk"]
 [ext_resource type="Resource" uid="uid://8orrvogpxwmb" path="res://foods/plate.tres" id="2_wuh2m"]
 [ext_resource type="Texture2D" uid="uid://blwfeyull8o50" path="res://assets/sprites/plate.png" id="4_wuh2m"]
+[ext_resource type="AudioStream" uid="uid://rumobbsqoweq" path="res://assets/audio/walkaway.wav" id="5_bs587"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqaaq"]
 radius = 43.0116
@@ -122,6 +123,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_q23nx")
 }
 speed_scale = 0.7
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_bs587")
+volume_db = 1.0
+pitch_scale = 0.3
 
 [connection signal="mouse_entered" from="click" to="." method="_on_click_mouse_entered"]
 [connection signal="mouse_exited" from="click" to="." method="_on_click_mouse_exited"]
