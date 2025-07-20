@@ -43,6 +43,8 @@ func set_star_count(amount : int):
 		add_stars(1)
 
 func lose_stars(amount : int):
+	if(isclosed):
+		return
 	if(hypecount > 0):
 		lose_hype()
 		totalstarcount = starcount + hypecount
@@ -60,7 +62,11 @@ func lose_stars(amount : int):
 		for i in $stars.get_children():
 			i.panic()
 	totalstarcount = starcount + hypecount
+	
+
 func add_stars(amount : int):
+	if(isclosed):
+		return
 	$death.hide()
 	for i in amount:
 		var ind = starcount
@@ -119,6 +125,7 @@ func lose_hype():
 
 func _death():
 	isclosed = true
+	Globals.closed.emit()
 	for i in range(normalcount):
 		$stars.get_children()[i].die()
 		$letters.show()

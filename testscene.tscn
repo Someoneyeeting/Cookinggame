@@ -27,6 +27,7 @@ func unhide():
 	$beef.enable()
 	$chicken.enable()
 	$Layer0/oven.enable()
+	$Layer0/oven2.enable()
 
 func hide_stuff():
 	$salad.disable()
@@ -34,6 +35,7 @@ func hide_stuff():
 	$beef.disable()
 	$chicken.disable()
 	$Layer0/oven.disable()
+	$Layer0/oven2.disable()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8njj"]
@@ -95,6 +97,11 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(79.8575, 79.8576)
 scale = Vector2(0.284267, 0.284267)
 
+[node name="oven2" parent="Layer0" instance=ExtResource("6_b56k5")]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(207.307, 79.8576)
+scale = Vector2(0.284267, 0.284267)
+
 [node name="obst" parent="Layer0" instance=ExtResource("3_612pj")]
 visible = false
 position = Vector2(40.1304, 107.888)
@@ -123,18 +130,18 @@ offset_right = 1269.0
 offset_bottom = 879.0
 
 [node name="plate" parent="." instance=ExtResource("4_asog6")]
-position = Vector2(581, 477)
+position = Vector2(527, 475)
 scale = Vector2(1.31179, 1.31179)
 
 [node name="salad" parent="." instance=ExtResource("4_asog6")]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(783, 477)
+position = Vector2(763, 478)
 scale = Vector2(1.31179, 1.31179)
 item = ExtResource("5_j8njj")
 
 [node name="beef" parent="." instance=ExtResource("4_asog6")]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(971, 477)
+position = Vector2(1157, 590)
 scale = Vector2(1.31179, 1.31179)
 item = ExtResource("6_hkdkl")
 

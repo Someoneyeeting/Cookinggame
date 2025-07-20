@@ -2,6 +2,7 @@ extends Node2D
 
 signal eat(ids)
 signal unhide_stuff
+signal closed
 
 var player : Player
 var lefthovering : Area2D

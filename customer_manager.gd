@@ -12,12 +12,14 @@ var intro := 0
 var line :Array[bool]= [false,false,false,false,false]
 
 
+var lastrecp := -1
 var recipes : Array[RecipeRes] = []
 
 func reset():
 	recipes.clear()
 
 func _ready():
+	Globals.closed.connect(closed)
 	$CanvasLayer/ColorRect.show()
 	if(not Globals.isintro):
 		$AnimationPlayer.stop()
@@ -27,6 +29,9 @@ func _ready():
 		Globals.show_hunger()
 		for i in $customers.get_children():
 			i.queue_free()
+
+func closed():
+	$newcustomer.paused = true
 
 func _on_newcustomer_timeout() -> void:
 	new_customer()
@@ -39,8 +44,9 @@ func get_ind_pos(ind : int):
 	return pos
 
 func new_customer():
-	if(Globals.get_served() in recipesUnlock.recipes):
+	if(Globals.get_served() in recipesUnlock.recipes and lastrecp != Globals.get_served()):
 		recipes.append(recipesUnlock.recipes[Globals.get_served()])
+		lastrecp = Globals.get_served()
 	var ind : int = -1
 	var inds = [0,1,2,3,4]
 	inds.shuffle()
