@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://6nbo85ja31eo"]
+[gd_scene load_steps=31 format=3 uid="uid://6nbo85ja31eo"]
 
 [ext_resource type="Script" uid="uid://do5kaaf2lbpys" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Material" uid="uid://bt5pu3antuq74" path="res://skew.tres" id="2_b26j0"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bcne7id381ys4" path="res://assets/sprites/player_base.png" id="9_n7ghd"]
 [ext_resource type="AudioStream" uid="uid://bnexffwivjvcl" path="res://assets/audio/player_panic.wav" id="13_urp6f"]
 [ext_resource type="AudioStream" uid="uid://de3ajs2aar3il" path="res://assets/audio/walk.wav" id="14_bwjto"]
+[ext_resource type="AudioStream" uid="uid://6msfvw52cyu1" path="res://explosion.wav" id="15_606se"]
 
 [sub_resource type="Curve" id="Curve_n7ghd"]
 _data = [Vector2(0.448529, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -60,11 +61,10 @@ void vertex() {
 }
 
 void fragment() {
-	COLOR.a = 1. - UV.y - 0.2;
+	COLOR.a = UV.y - 0.1;
 	float dist = distance(0.5,UV.x);
-	if(dist * 5. + 1. - UV.y - 2.56 > 0.){
-		COLOR.a *= (0.5 - dist) * 5. + 1. - UV.y - 2.56;
-	}
+	COLOR.a *= (0.5 - dist) * 1. + UV.y - .76;
+	
 }
 
 //void light() {
@@ -74,6 +74,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1jxqw"]
+resource_local_to_scene = true
 shader = SubResource("Shader_2hs0m")
 shader_parameter/skew = 0.0
 
@@ -265,5 +266,9 @@ offset_top = -41.0
 offset_right = 43.0
 offset_bottom = 45.0
 color = Color(1, 1, 1, 0)
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_606se")
+volume_db = 9.369
 
 [connection signal="timeout" from="timers/line" to="." method="_on_line_timeout"]

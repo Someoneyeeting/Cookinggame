@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdyj043bq4k8a"]
+[gd_scene load_steps=26 format=3 uid="uid://bdyj043bq4k8a"]
 
 [ext_resource type="Script" uid="uid://cywu00c7grb7k" path="res://customer.gd" id="1_7tiyv"]
 [ext_resource type="Script" uid="uid://dpu8i0lr4fal7" path="res://targetable.gd" id="3_eas7q"]
@@ -53,6 +53,34 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource("Shader_crw8f")
 shader_parameter/strength = 1.0
+
+[sub_resource type="Shader" id="Shader_2hs0m"]
+code = "shader_type canvas_item;
+
+
+uniform float skew = 0.0;
+
+void vertex() {
+	VERTEX.x += -skew * (UV.y);
+}
+
+void fragment() {
+	COLOR.a = UV.y - 0.1;
+	float dist = distance(0.5,UV.x);
+	COLOR.a *= (0.5 - dist) * 1. + UV.y - .76;
+	
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5sdco"]
+resource_local_to_scene = true
+shader = SubResource("Shader_2hs0m")
+shader_parameter/skew = 0.0
 
 [sub_resource type="Animation" id="Animation_r8ta2"]
 length = 0.001
@@ -196,6 +224,14 @@ color = Color(0.778335, 0.562054, 0.143468, 1)
 position = Vector2(1.78814e-07, 24)
 scale = Vector2(2.11111, 2.11111)
 texture = ExtResource("4_sll7s")
+
+[node name="CusBody2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5sdco")
+position = Vector2(3.00674e-07, 109)
+rotation = 3.14159
+scale = Vector2(3.54937, 3.54937)
+texture = ExtResource("4_sll7s")
+flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

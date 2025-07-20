@@ -171,9 +171,14 @@ func show_hunger():
 	%ScoreManager.show_hunger()
 
 func lose():
-	%losescreen.lose()
+	if(player.isdead):
+		return
 	$music.stop()
 	$musicfreedom.stop()
+	player.lose()
+	await get_tree().create_timer(3).timeout
+	
+	%losescreen.lose()
 	get_tree().paused = true
 
 func restart():
@@ -183,7 +188,7 @@ func reset():
 	start_music()
 	isintro = false
 	set_hunger(70)
-	%ScoreManager.set_stars(5)
+	%ScoreManager.reset()
 	%ScoreManager.set_money(0)
 	%ScoreManager.reset()
 	%losescreen.hide()

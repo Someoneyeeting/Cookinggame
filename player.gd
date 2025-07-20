@@ -6,6 +6,7 @@ class_name Player
 @onready var markerpos :Vector2= $PlayerBase/Marker2D.position 
 var showglow := false
 var t : float = 0
+var isdead := false
 
 func add_food(obj):
 	if(obj is Podium):
@@ -143,8 +144,10 @@ func hide_glow():
 	showglow = false
 
 func _physics_process(delta: float) -> void:
-	%glow.global_position = global_position - %glow.size / 2
 	Globals.player = self
+	if(isdead):
+		return
+	%glow.global_position = global_position - %glow.size / 2
 	_handle_move()
 	
 	t += delta
@@ -164,6 +167,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		%glow.color.a = lerp(%glow.color.a,0.,0.6)
 
+func lose():
+	isdead = true
+	$walk.stop()
+	$panic.stop()
+	$reflect.material.set_shader_parameter("skew",0)
+	$sprint.emitting = false
+	$GPUParticles2D.emitting = false
+	await get_tree().create_timer(1).timeout
+	rotation_degrees = 100
+	$death.play()
 
 func _on_line_timeout() -> void:
 	$Line2D.hide()

@@ -110,7 +110,7 @@ func lose_hype():
 	$losehype.play()
 	$crowd.play()
 	var tween1 = get_tree().create_tween()
-	tween1.tween_property($mult,"position:y",$stars.position.x - 10,0.1).set_trans(Tween.TRANS_CIRC)
+	tween1.tween_propeFrty($mult,"position:y",$stars.position.x - 10,0.1).set_trans(Tween.TRANS_CIRC)
 	#tween1.set_ease(Tween.EASE_IN)
 	tween1.finished.connect($mult.hide)
 	for i in $hype.get_children():
@@ -133,6 +133,7 @@ func _death():
 	#Globals.lose()
 
 func reset():
+	isclosed = false
 	for i in $stars.get_children():
 		i.reset()
 	$letters.hide()
