@@ -12,13 +12,13 @@ var hypetarget : Node2D
 func _physics_process(delta: float) -> void:
 	totalstarcount = starcount + hypecount
 	if(hypetarget):
-		$mult.global_position.y = hypetarget.global_position.y - 20
+		$mult.global_position.x = hypetarget.global_position.x - 20
 	$mult.text = "x" + str(hypecount + 1)
 	
 func _ready() -> void:
 	for i in range(normalcount):
 		var star = STAR.instantiate()
-		star.position.y = i * -80
+		star.position.x = i * 80
 		if(i >= starcount):
 			star.deactivate()
 		else:
@@ -26,14 +26,22 @@ func _ready() -> void:
 		$stars.add_child(star)
 
 func change_by(amount : int):
-	if(amount > 0):
-		add_stars(amount)
 	if(amount < 0):
 		lose_stars(-amount)
+	else:
+		add_stars(amount)
+
+func set_star_count(amount : int):
+	totalstarcount = starcount + hypecount
+	while(totalstarcount > amount):
+		lose_stars(1)
+	while(totalstarcount < amount):
+		add_stars(1)
 
 func lose_stars(amount : int):
 	if(hypecount > 0):
 		lose_hype()
+		totalstarcount = starcount + hypecount
 		return
 	$losestar.play()
 	for i in amount:
@@ -47,7 +55,7 @@ func lose_stars(amount : int):
 	if(starcount <= 1):
 		for i in $stars.get_children():
 			i.panic()
-
+	totalstarcount = starcount + hypecount
 func add_stars(amount : int):
 	$death.hide()
 	for i in amount:
@@ -64,19 +72,20 @@ func add_stars(amount : int):
 		for i in $stars.get_children():
 			i.unpanic()
 
+	totalstarcount = starcount + hypecount
 
 func add_hype():
 	var star = STAR.instantiate()
-	star.position.y = (starcount + hypecount - 2) * -80
+	star.position.x = (starcount + hypecount - 2) * 80
 	var tween = get_tree().create_tween()
-	tween.tween_property(star,"position:y",(starcount + hypecount - 1) * -80,0.1).set_trans(Tween.TRANS_CIRC) 
-	tween.parallel().tween_property($hype,"position:y",(hypecount) * 80 / 1,0.1).set_trans(Tween.TRANS_CIRC) 
-	tween.parallel().tween_property($stars,"position:y",(hypecount) * 80 / 1,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.tween_property(star,"position:x",(starcount + hypecount - 1) * 80,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.parallel().tween_property($hype,"position:x",(hypecount) * -80 / 1,0.1).set_trans(Tween.TRANS_CIRC) 
+	tween.parallel().tween_property($stars,"position:x",(hypecount) * -80 / 1,0.1).set_trans(Tween.TRANS_CIRC) 
 	star.hype()
 	
 	$mult.show()
 	var tween1 = get_tree().create_tween()
-	tween1.tween_property($mult,"position:x",50,0.2).set_trans(Tween.TRANS_CIRC)
+	tween1.tween_property($mult,"position:y",50,0.2).set_trans(Tween.TRANS_CIRC)
 	tween1.parallel().tween_property($mult,"rotation_degrees",randf_range(-30,30),0.1).set_trans(Tween.TRANS_BOUNCE)
 	
 	$hype.add_child(star)
@@ -91,14 +100,14 @@ func lose_hype():
 	$losehype.play()
 	$crowd.play()
 	var tween1 = get_tree().create_tween()
-	tween1.tween_property($mult,"position:x",$stars.position.x - 10,0.1).set_trans(Tween.TRANS_CIRC)
+	tween1.tween_property($mult,"position:y",$stars.position.x - 10,0.1).set_trans(Tween.TRANS_CIRC)
 	#tween1.set_ease(Tween.EASE_IN)
 	tween1.finished.connect($mult.hide)
 	for i in $hype.get_children():
 		var tween = get_tree().create_tween()
-		tween.tween_property(i,"position:y",(normalcount - 1) * -80,0.1).set_trans(Tween.TRANS_CIRC)
-		tween.parallel().tween_property($stars,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
-		tween.parallel().tween_property($hype,"position:y",0,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(i,"position:x",(normalcount - 1) * 80,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.parallel().tween_property($stars,"position:x",0,0.1).set_trans(Tween.TRANS_CIRC)
+		tween.parallel().tween_property($hype,"position:x",0,0.1).set_trans(Tween.TRANS_CIRC)
 
 		tween.finished.connect(i.queue_free)
 		tween.finished.connect(func () : hypetarget = null)

@@ -15,7 +15,7 @@ func set_money(mon : int):
 	if(money >= 0):
 		$Label.text = \"$\" + str(money)
 	else:
-		$Label.text = \"-$ \" + str(-money)
+		$Label.text = \"-$\" + str(-money)
 		
 
 func clear():
@@ -51,7 +51,7 @@ func redeem():
 	if(money >= 0):
 		$Label.text = \"$\" + str(money)
 	else:
-		$Label.text = \"-$ \" + str(-money)
+		$Label.text = \"-$\" + str(-money)
 	added = 0
 	%added.position.x = 0
 

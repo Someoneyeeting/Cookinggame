@@ -179,6 +179,7 @@ func reset():
 	isintro = false
 	set_hunger(70)
 	%ScoreManager.set_stars(5)
+	%ScoreManager.set_money(0)
 	%losescreen.hide()
 	$music.stop()
 	$musicfreedom.stop()

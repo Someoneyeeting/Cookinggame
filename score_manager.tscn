@@ -16,7 +16,7 @@ script = ExtResource("1_vublb")
 
 [node name="StarsUI" parent="." instance=ExtResource("2_dlkr7")]
 unique_name_in_owner = true
-position = Vector2(38, 483)
+position = Vector2(499, 77)
 scale = Vector2(0.678614, 0.678614)
 
 [node name="hungerbar" parent="." instance=ExtResource("3_t00u6")]
@@ -34,7 +34,8 @@ label_settings = SubResource("LabelSettings_dpcng")
 
 [node name="MoneyUi" parent="." instance=ExtResource("4_431jr")]
 unique_name_in_owner = true
-position = Vector2(567, 12)
+position = Vector2(587, 9)
+scale = Vector2(0.775588, 0.775588)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

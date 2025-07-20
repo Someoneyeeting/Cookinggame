@@ -29,18 +29,18 @@ func _physics_process(delta: float) -> void:
 	$Sprite2D.material.set_shader_parameter(\"hype\",mode == 2);
 	if(mode == 2):
 		#$Sprite2D.rotation_degrees = sin(t * 3) * 2
-		$Sprite2D.position.x = randf_range(-2,2)
-		$Sprite2D.position.y += randf_range(-10,10)
+		$Sprite2D.position.y = randf_range(-2,2)
+		$Sprite2D.position.x += randf_range(-10,10)
 		#$Sprite2D.modulate = Color.from_hsv($Sprite2D.modulate.h + 0.01,$Sprite2D.modulate.s,$Sprite2D.modulate.v)
 		var clrval = Time.get_unix_time_from_system()
 	else:
 		$Sprite2D.rotation_degrees = 0
 	
 	if(ispanic):
-		$Sprite2D.position.x = sin(position.y + t * 40) * 5
+		$Sprite2D.position.y = sin(position.x + t * 40) * 5
 		modulate = Color(0.6,0.1,0.1)
 	else:
-		$Sprite2D.position.y = 0
+		$Sprite2D.position.x = 0
 		modulate = Color.WHITE
 		
 	if(mode == 1):
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	
 	$Sprite2D.modulate = lerp($Sprite2D.modulate,clr,0.5)
 	
-	$Sprite2D.position.y = sin(t * speedfact  + global_position.y * global_position.y ) * speedfact
+	$Sprite2D.position.x = sin(t * speedfact  + global_position.x * global_position.x ) * speedfact
 
 func deactivate():
 	mode = 0
